@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3106"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="tvkillIcon.png"
+   inkscape:export-filename="/home/sebastian/Schreibtisch/TVKILLiconMAX.png"
+   inkscape:export-xdpi="720"
+   inkscape:export-ydpi="720">
+  <defs
+     id="defs3108" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.5"
+     inkscape:cx="-7.9090909"
+     inkscape:cy="32"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     showborder="true"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3111">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1"
+       id="path3116"
+       sodipodi:cx="32"
+       sodipodi:cy="32"
+       sodipodi:rx="32"
+       sodipodi:ry="32"
+       d="M 64,32 A 32,32 0 1 1 0,32 32,32 0 1 1 64,32 z" />
+    <g
+       id="g3933"
+       transform="matrix(1,0,0,0.97513243,0.36363637,4.9892183)">
+      <a
+         id="a3930">
+        <rect
+           style="fill:#ffffff;fill-opacity:1"
+           id="rect3139"
+           width="25.090906"
+           height="1.2727273"
+           x="18.909092"
+           y="45.818184" />
+      </a>
+    </g>
+    <rect
+       style="fill:#ffffff;fill-opacity:1"
+       id="rect3141"
+       width="3.227"
+       height="3.7232327"
+       x="30.363636"
+       y="46.476673" />
+    <a
+       id="a3926"
+       style="stroke-width:1.75;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(1.1077197,0,0,0.97513243,-3.1449274,4.2619456)">
+      <rect
+         y="11.454545"
+         x="9.818182"
+         height="31.272726"
+         width="43.818176"
+         id="rect3919"
+         style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.75;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </a>
+    <path
+       sodipodi:type="star"
+       style="fill:#ff0000;fill-opacity:0.96405227;stroke:#ffffff;stroke-width:1.75;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       id="path3960"
+       sodipodi:sides="6"
+       sodipodi:cx="24"
+       sodipodi:cy="24.727274"
+       sodipodi:r1="13.02001"
+       sodipodi:r2="6.5100045"
+       sodipodi:arg1="0.6267429"
+       sodipodi:arg2="1.1503417"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0.2"
+       d="m 33.057741,31.371535 -6.363719,-0.652841 -2.165458,9.317881 -4.16482,-11.508031 -7.738804,3.044519 5.34832,-6.182635 -5.38354,-10.364705 6.44948,2.643402 7.373462,-4.109877 -1.048461,6.426773 12.952001,1.460084 -5.348236,1.551286 z"
+       inkscape:transform-center-x="1.4991169"
+       inkscape:transform-center-y="1.2400064"
+       transform="matrix(1.0646354,-0.38421461,0.46923735,0.87173048,-4.7617795,16.999997)" />
+  </g>
+</svg>
