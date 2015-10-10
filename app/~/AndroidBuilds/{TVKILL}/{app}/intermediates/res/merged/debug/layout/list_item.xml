@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/designation"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:textStyle="italic" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="OFF"
+            android:id="@+id/individualOff"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+
+</LinearLayout><!-- From: file:/nas/sebastian/AndroidStudioProjects/TVKILL/app/src/main/res/layout/list_item.xml -->

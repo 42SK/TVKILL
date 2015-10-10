@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="killred">#ff3d00</color>
+    <color name="startgreen">#76ff03</color>
+    <color name="stopred">#ff3d00</color>
+
+    <color name="primary">#212121</color>
+    <color name="primary_dark">#000000</color>
+    <color name="background">#303030</color>
+    <color name="cards">#424242</color>
+    <color name="help_fab">#616161</color>
+</resources>
