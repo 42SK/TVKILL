@@ -9,6 +9,10 @@ The app basicly transmits a variety of off-patterns for different TVs successive
 ##Feedback
 If you have any suggestions or questions regarding our app, feel free to contact us!
 contact.redirectapps@gmail.com
+
+You may also use the issues-page to subbmit bug reports and feature requests:  
+https://github.com/42SK/TVKILL/issues
 ##Licence
 This application is open-source.  
-Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html
+Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html  
+Copyright 2015 Sebastian Kappes
