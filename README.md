@@ -1,7 +1,7 @@
 #TVKILL - Universal IR-Remote
 
 **TVKILL** is a mobile application for Android that enables you to turn-off TVs, using your device's built-in IR-blaster.  
-The app basicly transmits a variety of off-patterns for different TVs successively, which will cause most TVs to turn-off.
+The app basicly transmits a variety of off-patterns for different TVs successively, which will cause most TVs to power down.
 
 **TVKILL** is available on Google Play  
 [![Play Store Badge](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.redirectapps.tvkill)
