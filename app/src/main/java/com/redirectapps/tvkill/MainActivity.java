@@ -114,23 +114,42 @@ public class MainActivity extends Activity {
     }
 
 
-    //This method is called when the OFF-button is clicked. It initiates the transmission and displays a progress Dialog
-    public void off(View v) {
+    //This method initiates the transmission and displays a progress Dialog
+    public static void kill(Context c) {
+
         if (repetitiveModeRunning) {
             //Show the repetitiveModeActiveDialog
-            repetitiveModeActiveDialog(this);
+            repetitiveModeActiveDialog(c);
         }else {
-            //Show a progress dialog and transmit all patterns
-            final Context c = this;
-            final ProgressDialog transmittingInfo = getProgressDialog(this);
-            Thread transmit = new Thread() {
-                public void run() {
-                    Brand.killAll(c);
-                    transmittingInfo.dismiss();
-                }
-            };
+            final Context context = c;
+            Thread transmit;
+
+            try {
+                //Show a progress dialog and transmit all patterns
+                final ProgressDialog transmittingInfo = getProgressDialog(c);
+                transmit = new Thread() {
+                    public void run() {
+                        Brand.killAll(context);
+                        transmittingInfo.dismiss();
+                    }
+                };
+            }catch (android.view.WindowManager.BadTokenException e)  {
+                //Transmit all patterns without displaying a progress dialog
+                transmit = new Thread() {
+                    public void run() {
+                        Brand.killAll(context);
+                    }
+                };
+            }
+
             transmit.start();
+
         }
+    }
+
+    //This method is called when the OFF-button is clicked. It simply calls the kill-method.
+    public void off(View v){
+        kill(this);
     }
 
     //This method returns a ProgressDialog

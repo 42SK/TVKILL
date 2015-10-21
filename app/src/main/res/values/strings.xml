@@ -7,8 +7,12 @@
     <string name="menu_specific_devices">Brands</string>
 
     <!-- Transmission progress-dialog -->
-    <string name="pd_transmission_in_progress">Transmitting pattern</string>
+    <string name="pd_transmission_in_progress">Transmitting patterns</string>
     <string name="pd_please_wait">Please wait…</string>
+
+    <!-- Transmission toast -->
+    <string name="toast_transmission_initiated">Transmitting patterns…</string>
+    <string name="toast_transmission_completed">Transmission completed!</string>
 
     <!-- Blaster Found toast -->
     <string name="toast_found">IR blaster found</string>

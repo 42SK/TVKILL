@@ -50,6 +50,14 @@
 
         <service android:name=".RepetitiveModeService" />
 
+        <receiver android:name=".OffWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/off_widget_provider_info" />
+        </receiver>
+
     </application>
 
 </manifest>
