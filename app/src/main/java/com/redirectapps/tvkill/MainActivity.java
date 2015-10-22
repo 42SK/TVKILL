@@ -149,9 +149,8 @@ public class MainActivity extends Activity {
                 transmit.start();
             }
 
-
-
         }
+
     }
 
     //This method is called when the OFF-button is clicked. It simply calls the kill-method.
