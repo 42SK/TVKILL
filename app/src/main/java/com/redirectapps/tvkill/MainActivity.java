@@ -133,16 +133,23 @@ public class MainActivity extends Activity {
                         transmittingInfo.dismiss();
                     }
                 };
+                transmit.start();
             }catch (android.view.WindowManager.BadTokenException e)  {
-                //Transmit all patterns without displaying a progress dialog
+                //Show a toast instead of a progress dialog and transmit all patterns
+                final Toast start = Toast.makeText(context, R.string.toast_transmission_initiated, Toast.LENGTH_LONG);
+                final Toast complete = Toast.makeText(context,R.string.toast_transmission_completed,Toast.LENGTH_SHORT);
+                start.show();
                 transmit = new Thread() {
                     public void run() {
                         Brand.killAll(context);
+                        start.cancel();
+                        complete.show();
                     }
                 };
+                transmit.start();
             }
 
-            transmit.start();
+
 
         }
     }

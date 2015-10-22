@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 public class OffWidgetProvider extends AppWidgetProvider {
 
@@ -36,18 +35,9 @@ public class OffWidgetProvider extends AppWidgetProvider {
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                //Display a toast
-                Toast start = Toast.makeText(context, R.string.toast_transmission_initiated, Toast.LENGTH_LONG);
-                start.show();
-
                 //Transmit the patterns
                 MainActivity.kill(context);
 
-                //Cancel the previous toast
-                start.cancel();
-
-                //Display a new toast
-                Toast.makeText(context,R.string.toast_transmission_completed,Toast.LENGTH_SHORT).show();
             }
         };
         context.getApplicationContext().registerReceiver(kill, new IntentFilter("kill"));
