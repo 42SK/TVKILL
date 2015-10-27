@@ -41,6 +41,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     public static boolean repetitiveModeRunning;
+    public static int repetitiveModeBrand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

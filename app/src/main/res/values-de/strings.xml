@@ -28,4 +28,5 @@
     <string name="depth_summary">Wenn diese Option aktiviert ist, werden für jeden Hersteller zusätzliche IR-Patterns gesendet, was die Sendezeit sowie die Wahrscheinlichkeit, dass ein Fernseher ausgeschaltet wird, erhöht.</string>
     <string name="toast_transmission_completed">Alle Patterns wurden gesendet!</string>
     <string name="toast_transmission_initiated">Patterns werden geseendet…</string>
+    <string name="allBrands">Alle Hersteller</string>
 </resources>

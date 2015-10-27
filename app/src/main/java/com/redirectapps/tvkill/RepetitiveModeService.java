@@ -40,6 +40,7 @@ public class RepetitiveModeService extends IntentService {
     NotificationCompat.Builder NotificationBuilder;
     int NotificationID = 1;
     BroadcastReceiver stopReceiver;
+    int selectedBrand = MainActivity.repetitiveModeBrand;
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -84,9 +85,19 @@ public class RepetitiveModeService extends IntentService {
         //Notify the user that the service has started
         Toast.makeText(getApplicationContext(),R.string.toast_mode_started,Toast.LENGTH_LONG).show();
 
-        //Send all Patterns until this service is stopped
+        //Send Patterns until this service is stopped
+        if (selectedBrand == 0)
         while (run) {
+            //Send Patterns for all Brands
             Brand.killAll(this);
+        }
+        else {
+            Brand.getAllBrands();
+            Brand b = Brand.getAllBrands()[selectedBrand-1];
+            while (run) {
+                //Send the patterns of the selected brand
+                b.kill(this);
+            }
         }
 
 

@@ -26,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/repetitive_mode_button"
             android:layout_width="100dp"
@@ -36,5 +37,18 @@
             app:backgroundTint="@color/startgreen"
             app:borderWidth="0dp"/>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginBottom="66dp">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repetitiveBrandChooser"
+            android:layout_centerInParent="true"
+            android:saveEnabled="true" />
+    </RelativeLayout>
 
 </RelativeLayout>

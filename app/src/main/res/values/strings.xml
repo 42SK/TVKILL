@@ -23,6 +23,9 @@
     <string name="ok">OK</string>
     <string name="blaster_dialog_more_blaster_url" translatable="false">http://www.slashgear.com/which-phones-let-me-control-any-tv-24338249/</string>
 
+    <!-- Repetitive-Mode spinner items-->
+    <string name="allBrands">All Brands</string>
+
     <!-- Repetitive-Mode started/stopped toast -->
     <string name="toast_mode_started">Repetitive-Mode started</string>
     <string name="toast_mode_stopped">Repetitive-Mode stopped</string>
