@@ -67,7 +67,7 @@ public class Brand{
     private static void wait(Context c) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
         try {
-            Thread.sleep(preferences.getLong("delay", 0));
+            Thread.sleep(Long.parseLong(preferences.getString("delay","0")));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
