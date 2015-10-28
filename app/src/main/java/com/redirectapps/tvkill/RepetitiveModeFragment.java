@@ -28,7 +28,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 
-public class RepetitiveModeFragment extends Fragment {
+public class RepetitiveModeFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     @Nullable
     @Override
@@ -54,17 +54,24 @@ public class RepetitiveModeFragment extends Fragment {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Attach the Adapter to the spinner
         spinner.setAdapter(arrayAdapter);
-
-        //Update the repetitiveModeBrand in MainActivity when the user selects an option
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.repetitiveModeBrand=position;
-            }
-        });
+        //Attach the onItemSelectedListener
+        spinner.setOnItemSelectedListener(this);
 
         return view;
     }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Update the repetitiveModeBrand in MainActivity when the user selects an option
+        MainActivity.repetitiveModeBrand=position;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
 
     @Override
     public void onResume() {
