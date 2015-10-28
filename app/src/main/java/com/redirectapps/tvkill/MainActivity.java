@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -186,13 +187,16 @@ public class MainActivity extends Activity {
     //This method switches the design of the repetitive-mode-button
     public void setRepetitiveButton (Boolean running) {
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.repetitive_mode_button);
+        Spinner spinner = (Spinner) findViewById(R.id.repetitiveBrandChooser);
         if (running) {
             button.setImageDrawable(new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(),R.drawable.ic_stop_black_48dp)));
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.stopred)));
+            spinner.setEnabled(false);
         }
         else {
             button.setImageDrawable(new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(),R.drawable.ic_play_arrow_black_48dp)));
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.startgreen)));
+            spinner.setEnabled(true);
         }
     }
 
