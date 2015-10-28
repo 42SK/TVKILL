@@ -36,6 +36,8 @@ public class Brand{
     public void kill(Context c) {
         for (Pattern r : patterns) {
             r.send(c);
+            if (patterns.length>1)
+            wait(c);
         }
     }
 
@@ -54,9 +56,20 @@ public class Brand{
                 if (b.dotransmit) {
                     if (i<b.patterns.length) {
                         b.patterns[i].send(c);
+                        wait(c);
                     }
                 }
             }
+        }
+    }
+
+    //Wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
+    private static void wait(Context c) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
+        try {
+            Thread.sleep(preferences.getLong("delay", 0));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

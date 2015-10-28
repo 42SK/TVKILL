@@ -24,4 +24,11 @@
         android:key="depth"
         android:summary="@string/depth_summary"/>
 
+    <EditTextPreference
+        android:title="Delay between patterns (in milliseconds)"
+        android:summary="Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation."
+        android:defaultValue="0"
+        android:numeric="integer"
+        android:key="delay"/>
+
 </PreferenceScreen>
