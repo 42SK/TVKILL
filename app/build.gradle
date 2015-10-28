@@ -8,8 +8,8 @@ android {
         applicationId "com.redirectapps.tvkill"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 11
-        versionName "1.0.7"
+        versionCode 12
+        versionName "1.0.8"
     }
     buildTypes {
         release {
