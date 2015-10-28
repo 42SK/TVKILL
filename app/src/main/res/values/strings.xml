@@ -54,5 +54,7 @@
     <!-- Preference Strings -->
     <string name="depth">Additional patterns</string>
     <string name="depth_summary">This option will increase the probability that a TV is turned off, but also the duration of the transmission.</string>
+    <string name="delay">Delay between patterns (in milliseconds)</string>
+    <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
 
 </resources>
