@@ -14,6 +14,6 @@ contact.redirectapps@gmail.com
 You may also use the issues-page to submit bug reports and feature requests:  
 https://github.com/42SK/TVKILL/issues
 ##Licence
-This application is open-source.  
+This application is open source.  
 Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html  
 Copyright 2015 Sebastian Kappes
