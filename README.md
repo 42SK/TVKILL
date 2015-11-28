@@ -8,7 +8,7 @@ The app basicly transmits a variety of off-patterns for different TVs successive
 [![F-Droid Badge](https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png)](https://f-droid.org/repository/browse/?fdid=com.redirectapps.tvkill)
 
 ##Feedback
-If you have any suggestions or questions regarding our app, feel free to contact us!
+If you have any suggestions or questions regarding our app, feel free to contact us!  
 contact.redirectapps@gmail.com
 
 You may also use the issues-page to submit bug reports and feature requests:  
