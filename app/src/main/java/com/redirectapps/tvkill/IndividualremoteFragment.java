@@ -28,7 +28,7 @@ public class IndividualremoteFragment extends ListFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.individualremote, container, false);
-        ArrayAdapter adapter = new CustomAdapter(getActivity(),Brand.getAllBrands());
+        ArrayAdapter adapter = new CustomAdapter(getActivity(),BrandContainer.getAllBrands());
         setListAdapter(adapter);
         return view;
     }

@@ -92,8 +92,8 @@ public class RepetitiveModeService extends IntentService {
             Brand.killAll(this);
         }
         else {
-            Brand.getAllBrands();
-            Brand b = Brand.getAllBrands()[selectedBrand-1];
+            BrandContainer.getAllBrands();
+            Brand b = BrandContainer.getAllBrands()[selectedBrand-1];
             while (run) {
                 //Send the patterns of the selected brand
                 b.kill(this);
