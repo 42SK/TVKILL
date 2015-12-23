@@ -16,10 +16,10 @@ https://github.com/42SK/TVKILL/issues
 ##Contributing
 ###Adding new patterns
 If you can determine the off-pattern of a TV that is not supported yet, it would be great if you would add it to **TV KILL**.  
-You can find a detailed explanation on how to add patterns to the application on ![this wiki page](https://github.com/42SK/TVKILL/wiki/How-to-add-IR-patterns-to-TV-KILL).
+You can find a detailed explanation on how to add patterns to the application on [this wiki page](https://github.com/42SK/TVKILL/wiki/How-to-add-IR-patterns-to-TV-KILL).
 ###Translate
-Help us to translate **TV KILL** by creating a new ![strings.xml file](https://github.com/42SK/TVKILL/blob/master/app/src/main/res/values/strings.xml) for your language.  
-We'd also appreciate any translation suggestions for ![the app's description on Google Play](https://play.google.com/store/apps/details?id=com.redirectapps.tvkill).
+Help us to translate **TV KILL** by creating a new [strings.xml file](https://github.com/42SK/TVKILL/blob/master/app/src/main/res/values/strings.xml) for your language.  
+We'd also appreciate any translation suggestions for [the app's description on Google Play](https://play.google.com/store/apps/details?id=com.redirectapps.tvkill).
 
 ##Licence
 This application is free and open source software.  
