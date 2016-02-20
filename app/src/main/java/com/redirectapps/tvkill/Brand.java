@@ -68,7 +68,7 @@ public class Brand{
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
         try {
             Thread.sleep(Long.parseLong(preferences.getString("delay","0")));
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | NumberFormatException e) {
             e.printStackTrace();
         }
     }
