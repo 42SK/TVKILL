@@ -19,6 +19,8 @@ package com.redirectapps.tvkill;
 import android.content.Context;
 import android.os.Build;
 
+import java.util.Arrays;
+
 
 public class Pattern {
 
@@ -49,6 +51,11 @@ public class Pattern {
         this.pattern=pattern;
     }
 
+    protected Pattern(int[] ircode){
+        this.frequency=ircode[0];
+        this.pattern= Arrays.copyOfRange(ircode, 1, ircode.length);
+    }
+
 
 
     /*
@@ -63,15 +70,12 @@ public class Pattern {
 
         // 1. Determine which conversion-algorithm shall be used (see the comment above this method for more details)
         byte convert = 0;
-
         //Devices running on Android Lollipop (Android 5.0.1 (API 21)) and beyond, HTC devices
         if (Build.VERSION.SDK_INT >= 21||Build.MANUFACTURER.equalsIgnoreCase("HTC")) {
             convert = 1;
-        }
-
-        //Samsung devices running on anything lower than Android 5
-        if (Build.MANUFACTURER.equalsIgnoreCase("SAMSUNG")) {
-            if (Build.VERSION.SDK_INT >= 19) {
+        } else {
+            //Samsung devices running on anything lower than Android 5
+            if (Build.MANUFACTURER.equalsIgnoreCase("SAMSUNG")) {
                 int lastIdx = Build.VERSION.RELEASE.lastIndexOf(".");
                 int VERSION_MR = Integer.valueOf(Build.VERSION.RELEASE.substring(lastIdx + 1));
                 if (VERSION_MR < 3) {
@@ -85,7 +89,6 @@ public class Pattern {
                 }
             }
         }
-
 
         // 2. Convert the patterns
         if (convert != 0) {

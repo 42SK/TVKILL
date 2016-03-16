@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 
 
     //This method initiates the transmission and displays a progress Dialog
-    public static void kill(Context c) {
+    public static void kill(Context c, final char button) {
 
         if (repetitiveModeRunning) {
             //Show the repetitiveModeActiveDialog
@@ -131,7 +131,14 @@ public class MainActivity extends Activity {
                 final ProgressDialog transmittingInfo = getProgressDialog(c);
                 transmit = new Thread() {
                     public void run() {
-                        Brand.killAll(context);
+                        switch (button) {
+                            case 'o':
+                                Brand.killAll(context);
+                                break;
+                            case 'm':
+                                Brand.muteAll(context);
+                                break;
+                        }
                         transmittingInfo.dismiss();
                     }
                 };
@@ -143,7 +150,14 @@ public class MainActivity extends Activity {
                 start.show();
                 transmit = new Thread() {
                     public void run() {
-                        Brand.killAll(context);
+                        switch (button) {
+                            case 'o':
+                                Brand.killAll(context);
+                                break;
+                            case 'm':
+                                Brand.muteAll(context);
+                                break;
+                        }
                         start.cancel();
                         complete.show();
                     }
@@ -157,7 +171,12 @@ public class MainActivity extends Activity {
 
     //This method is called when the OFF-button is clicked. It simply calls the kill-method.
     public void off(View v){
-        kill(this);
+        kill(this,'o');
+    }
+
+    //This method is called when the MUTE-button is clicked. It simply calls the kill-method.
+    public void mute(View v) {
+        kill(this,'m');
     }
 
     //This method returns a ProgressDialog

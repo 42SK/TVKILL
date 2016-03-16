@@ -24,6 +24,7 @@ import android.preference.PreferenceManager;
 public class Brand{
 
     private Pattern[] patterns;
+    private Pattern mute;
     boolean dotransmit = true;
     private String designation;
 
@@ -32,7 +33,13 @@ public class Brand{
         this.designation=designation;
     }
 
-    //this method transmits all of the brands patterns
+    protected Brand (String designation, Pattern[] patterns, Pattern mute) {
+        this.patterns=patterns;
+        this.designation=designation;
+        this.mute=mute;
+    }
+
+    //This method transmits all of the brands off-patterns
     public void kill(Context c) {
         for (Pattern r : patterns) {
             r.send(c);
@@ -41,7 +48,12 @@ public class Brand{
         }
     }
 
-    //This Method transmits all patterns of all brands
+    //This method transmits the brands mute-pattern
+    public void mute(Context c) {
+        mute.send(c);
+    }
+
+    //This Method transmits all off-patterns of all brands
     public static void killAll(Context c) {
         //Check if additional patterns shall be transmitted
         int depth = 1;
@@ -63,6 +75,16 @@ public class Brand{
         }
     }
 
+    //This Method transmits the mute-patterns of all brands
+    public static void muteAll(Context c) {
+        for (Brand b : BrandContainer.getAllBrands()) {
+            if (b.hasMute()&&b.dotransmit) {
+                b.mute.send(c);
+                wait(c);
+            }
+        }
+    }
+
     //Wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
     private static void wait(Context c) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
@@ -76,6 +98,11 @@ public class Brand{
     //This method returns the Brands designation
     public String getDesignation() {
         return designation;
+    }
+
+    //This method returns true if the brand has a mute-pattern
+    public boolean hasMute() {
+        return (mute!=null);
     }
 
 

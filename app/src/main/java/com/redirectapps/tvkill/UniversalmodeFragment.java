@@ -18,14 +18,38 @@ package com.redirectapps.tvkill;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class UniversalmodeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.universal,container,false);
+        View view = inflater.inflate(R.layout.universal,container,false);
+
+        //Set the visibility of the mute-button
+        updateMuteButton(view);
+
+        return view;
+    }
+
+    //This method updates the visibility of the mute-button
+    private void updateMuteButton(View v) {
+        //Check whether the mute-button shall be displayed
+        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("show_mute", false))
+            v.findViewById(R.id.mute).setVisibility(View.VISIBLE);
+        else v.findViewById(R.id.mute).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Set the visibility of the mute-button
+        updateMuteButton(getView());
+
     }
 }

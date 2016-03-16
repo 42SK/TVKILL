@@ -48,6 +48,10 @@
     <string name="toast_mode_started">Repetitive-Mode started</string>
     <string name="toast_mode_stopped">Repetitive-Mode stopped</string>
 
+    <!-- Individual-Remote buttons -->
+    <string name="off" translatable="false">OFF</string>
+    <string name="mute">MUTE</string>
+
     <!-- Active-string in notification and dialog -->
     <string name="mode_running">Repetitive-Mode active</string>
 
@@ -74,5 +78,6 @@
     <string name="depth_summary">This option will increase the probability that a TV is turned off, but also the duration of the transmission.</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
     <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
+    <string name="show_mute">Show mute-button (Experimental)</string>
 
 </resources>

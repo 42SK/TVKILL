@@ -36,7 +36,7 @@ public class OffWidgetProvider extends AppWidgetProvider {
             public void onReceive(Context context, Intent intent) {
 
                 //Transmit the patterns
-                MainActivity.kill(context);
+                MainActivity.kill(context,'o');
 
             }
         };

@@ -31,4 +31,9 @@
         android:numeric="integer"
         android:key="delay"/>
 
+    <CheckBoxPreference
+        android:title="@string/show_mute"
+        android:defaultValue="false"
+        android:key="show_mute"/>
+
 </PreferenceScreen>

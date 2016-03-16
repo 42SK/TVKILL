@@ -26,11 +26,28 @@ import android.widget.ArrayAdapter;
 
 public class IndividualremoteFragment extends ListFragment {
 
+    private ArrayAdapter adapter;
+    private boolean stopped = false;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        stopped=false;
         View view = inflater.inflate(R.layout.individualremote, container, false);
-        ArrayAdapter adapter = new CustomAdapter(getActivity(),BrandContainer.getAllBrands());
+        adapter = new CustomAdapter(getActivity(),BrandContainer.getAllBrands());
         setListAdapter(adapter);
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Make sure that the list style updates after changing the settings
+        if(stopped)
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopped=true;
+    }
 }

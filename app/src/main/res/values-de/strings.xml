@@ -48,4 +48,6 @@
     <string name="allBrands">Alle Hersteller</string>
     <string name="delay">Verzögerung zwischen Patterns (in Millisekunden)</string>
     <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen ir-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
+    <string name="mute">STUMM</string>
+    <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
 </resources>
