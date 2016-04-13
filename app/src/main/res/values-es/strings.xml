@@ -35,7 +35,6 @@
     <string name="blaster_dialog_body">Para poder apagar las TV\'S, Tú teléfono debe tener un receptor de infrarrojos incorporado.</string>
     <string name="learn_more">Más Información</string>
     <string name="ok">OK</string>
-    <string name="blaster_dialog_more_blaster_url" translatable="false">http://www.slashgear.com/which-phones-let-me-control-any-tv-24338249/</string>
 
     <!-- Repetitive-Mode spinner items-->
     <string name="allBrands">Todas las marcas</string>
@@ -45,7 +44,6 @@
     <string name="toast_mode_stopped">Modo-Repetitivo detenido</string>
 
     <!-- Individual-Remote buttons -->
-    <string name="off" translatable="false">OFF</string>
     <string name="mute">Silenciar</string>
 
     <!-- Active-string in notification and dialog -->
