@@ -4,8 +4,11 @@
 The app basicly transmits a variety of off-patterns for different TVs successively, which will cause most TVs to power down.
 
 **TV KILL** is available on Google Play and F-Droid  
-<a href="https://play.google.com/store/apps/details?id=com.redirectapps.tvkill&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px/></a>
-<a href="https://f-droid.org/repository/browse/?fdid=com.redirectapps.tvkill"><img alt="Available on F-Droid" src="https://f-droid.org/wiki/images/f/ff/F-Droid-button_available-on_bigger.png" height=60px/></a>
+<a href='https://play.google.com/store/apps/details?id=com.redirectapps.tvkill&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80"/></a>
+<a href="https://f-droid.org/app/com.redirectapps.tvkill">
+    <img src="https://f-droid.org/badge/get-it-on.png"
+         alt="Get it on F-Droid" height="80">
+</a>
 
 ##Feedback
 If you have any suggestions or questions regarding our app, feel free to contact us!  
