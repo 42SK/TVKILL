@@ -54,7 +54,7 @@
     <string name="dialog_running_stop_mode">Parar modo-repetitivo</string>
 
     <!-- strings for multiple usage -->
-    <string name="cancel">cancelar</string>
+    <string name="cancel">Cancelar</string>
     <string name="stop">PARAR</string>
 
     <!-- Help dialogs -->

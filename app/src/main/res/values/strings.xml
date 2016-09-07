@@ -39,7 +39,7 @@
     <string name="blaster_dialog_body">In order to turn-off TVs, your phone must have a built-in infrared blaster.</string>
     <string name="learn_more">Learn more</string>
     <string name="ok">OK</string>
-    <string name="blaster_dialog_more_blaster_url" translatable="false">http://www.slashgear.com/which-phones-let-me-control-any-tv-24338249/</string>
+    <string name="blaster_dialog_more_blaster_url" translatable="false">https://en.wikipedia.org/wiki/List_of_devices_with_IR_blaster#Smartphones</string>
 
     <!-- Repetitive-Mode spinner items-->
     <string name="allBrands">All Brands</string>
@@ -60,7 +60,7 @@
     <string name="dialog_running_stop_mode">Stop repetitive-mode</string>
 
     <!-- strings for multiple usage -->
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->

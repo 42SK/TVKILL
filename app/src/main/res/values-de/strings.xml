@@ -20,7 +20,7 @@
     <string name="app_name">TV KILL</string>
     <string name="blaster_dialog_body">Um Fernseher auszuschalten braucht dein Smartphone einen Infrarot-Sender.</string>
     <string name="blaster_dialog_title">Kein IR-Sender</string>
-    <string name="cancel">abbrechen</string>
+    <string name="cancel">Abbrechen</string>
     <string name="dialog_running_body">Du kanst diesen Modus nicht verwenden während der Unendlich-Modus läuft.</string>
     <string name="dialog_running_stop_mode">Unendlich-Modus beenden</string>
     <string name="learn_more">Mehr erfahren</string>
@@ -30,7 +30,7 @@
     <string name="mode_running">Unendlich-Modus aktiv</string>
     <string name="ok">OK</string>
     <string name="pd_please_wait">Bitte warten…</string>
-    <string name="pd_transmission_in_progress">Pattern wird gesendet</string>
+    <string name="pd_transmission_in_progress">Patterns werden gesendet</string>
     <string name="stop">STOPPEN</string>
     <string name="toast_found">IR-Sender gefunden</string>
     <string name="toast_mode_started">Unendlich-Modus gestartet</string>
@@ -47,7 +47,7 @@
     <string name="toast_transmission_initiated">Patterns werden geseendet…</string>
     <string name="allBrands">Alle Hersteller</string>
     <string name="delay">Verzögerung zwischen Patterns (in Millisekunden)</string>
-    <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen ir-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
+    <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen IR-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
     <string name="mute">STUMM</string>
     <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
 </resources>
