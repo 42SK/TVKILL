@@ -25,11 +25,11 @@
     <string name="menu_specific_devices">Бренд</string>
 
     <!-- Transmission progress-dialog -->
-    <string name="pd_transmission_in_progress">Передаю сигналы...</string>
-    <string name="pd_please_wait">Подождите...</string>
+    <string name="pd_transmission_in_progress">Передаю сигналы…</string>
+    <string name="pd_please_wait">Подождите…</string>
 
     <!-- Transmission toast -->
-    <string name="toast_transmission_initiated">Передаю сигналы...</string>
+    <string name="toast_transmission_initiated">Передаю сигналы…</string>
     <string name="toast_transmission_completed">Переача сигналов завершена!</string>
 
     <!-- Blaster Found toast -->
@@ -39,7 +39,6 @@
     <string name="blaster_dialog_body">Что-бы выключать телевизор, ваш телефон должен иметь IR порт.</string>
     <string name="learn_more">Узнать больше</string>
     <string name="ok">Oкей</string>
-    <string name="blaster_dialog_more_blaster_url" translatable="false">https://en.wikipedia.org/wiki/List_of_devices_with_IR_blaster#Smartphones</string>
 
     <!-- Repetitive-Mode spinner items-->
     <string name="allBrands">Все бренды</string>
@@ -49,7 +48,6 @@
     <string name="toast_mode_stopped">Повторяющийся режим остановился</string>
 
     <!-- Individual-Remote buttons -->
-    <string name="off" translatable="false">OFF</string>
     <string name="mute">MUTE</string>
 
     <!-- Active-string in notification and dialog -->
