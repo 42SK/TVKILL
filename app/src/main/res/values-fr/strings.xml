@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 Sebastian Kappes
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<resources>
+    <string name="app_name">TV KILL</string>
+
+    <!-- Menu -->
+    <string name="menu_universal_mode">Télécommande universelle</string>
+    <string name="menu_repetitive_mode">Mode répétitif</string>
+    <string name="menu_specific_devices">Fabricants</string>
+
+    <!-- Transmission progress-dialog -->
+    <string name="pd_transmission_in_progress">Transmission des signaux</string>
+    <string name="pd_please_wait">Veuillez patienter...</string>
+
+    <!-- Transmission toast -->
+    <string name="toast_transmission_initiated">Transmission des signaux…</string>
+    <string name="toast_transmission_completed">Transmission terminée !</string>
+
+    <!-- Blaster Found toast -->
+    <string name="toast_found">Émetteur IR trouvé</string>
+    <!-- Not found dialog -->
+    <string name="blaster_dialog_title">Émetteur IR non trouvé</string>
+    <string name="blaster_dialog_body">Pour éteindre les TV votre smartphone doit être équipé d\'un émetteur infrarouge intégré.</string>
+    <string name="learn_more">En savoir plus</string>
+    <string name="ok">OK</string>
+    <string name="blaster_dialog_more_blaster_url" translatable="false">https://en.wikipedia.org/wiki/List_of_devices_with_IR_blaster#Smartphones</string>
+
+    <!-- Repetitive-Mode spinner items-->
+    <string name="allBrands">Tous les fabricants</string>
+
+    <!-- Repetitive-Mode started/stopped toast -->
+    <string name="toast_mode_started">Mode répétitif démarré</string>
+    <string name="toast_mode_stopped">Mode répétitif arrêté</string>
+
+    <!-- Individual-Remote buttons -->
+    <string name="off" translatable="false">OFF</string>
+    <string name="mute">MUET</string>
+
+    <!-- Active-string in notification and dialog -->
+    <string name="mode_running">Mode répétitif actif</string>
+
+    <!-- Mode-running dialog -->
+    <string name="dialog_running_body">Vous ne pouvez pas utiliser ce mode pendant que le mode répétitif est actif.</string>
+    <string name="dialog_running_stop_mode">Arrêter le mode répétitif</string>
+
+    <!-- strings for multiple usage -->
+    <string name="cancel">Annuler</string>
+    <string name="stop">STOP</string>
+
+    <!-- Help dialogs -->
+    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en poitant votre smartphone vers la TV et en pressant le bouton rouge. Quand le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différents fabricants vers la TV ce qui va l\'éteindre.</string>
+    <string name="help_repetitive_mode">Ce mode fonctionne comme le mode universel, sauf que votre smartphone transmettra les signaux infrarouges en boucle. Cela va aussi continuer de transmettre lorsque vous fermez l\'application ou que vous verrouillez l\'écran. Pour arrêter le mode répétitif, pressez simplement le bouton une seconde fois.</string>
+    <string name="help_individual_mode">Vous pouvez éteindre des TV de fabricants spécifiques ici.</string>
+    <string name="got_it">D\'accord</string>
+
+    <!-- transmission information individual-mode -->
+    <string name="pattern_for">Signal pour</string>
+    <string name="sent">envoyé</string>
+
+    <!-- Preference Strings -->
+    <string name="depth">Signaux additionnels</string>
+    <string name="depth_summary">Cette option va augmenter la probabilité qu\'une TV soit éteinte, mais aussi la durée de la transmission.</string>
+    <string name="delay">Délai entre les signaux (en millisecondes)</string>
+    <string name="delay_summary">Certaines TV interprêtent mal les commandes quand de multiples signaux sont envoyés les uns après les autres. Vous pouvez ajuster le délai entre les différents signaux ici pour éviter toute mauvaise interprétation.</string>
+    <string name="show_mute">Afficher le bouton muet (Expérimental)</string>
+
+</resources>
