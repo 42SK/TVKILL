@@ -39,7 +39,6 @@
     <string name="blaster_dialog_body">Pour éteindre les TV votre smartphone doit être équipé d\'un émetteur infrarouge intégré.</string>
     <string name="learn_more">En savoir plus</string>
     <string name="ok">OK</string>
-    <string name="blaster_dialog_more_blaster_url" translatable="false">https://en.wikipedia.org/wiki/List_of_devices_with_IR_blaster#Smartphones</string>
 
     <!-- Repetitive-Mode spinner items-->
     <string name="allBrands">Tous les fabricants</string>
@@ -49,7 +48,6 @@
     <string name="toast_mode_stopped">Mode répétitif arrêté</string>
 
     <!-- Individual-Remote buttons -->
-    <string name="off" translatable="false">OFF</string>
     <string name="mute">MUET</string>
 
     <!-- Active-string in notification and dialog -->
