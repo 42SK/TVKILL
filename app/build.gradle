@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.redirectapps.tvkill"
@@ -20,9 +20,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    //Newer versions of the appcompat library have caused immediate crashes on startup
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    //Newer versions of the Android design library have caused bugs in the TabLayout
-    compile 'com.android.support:design:22.2.1'
+    // newer versions of the appcompat library have caused immediate crashes on startup
+    implementation 'com.android.support:appcompat-v7:23.1.0'
+    // newer versions of the Android design library have caused bugs in the TabLayout
+    implementation 'com.android.support:design:22.2.1'
 }
