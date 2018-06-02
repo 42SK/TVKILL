@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 23
@@ -24,4 +25,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:23.1.0'
     // newer versions of the Android design library have caused bugs in the TabLayout
     implementation 'com.android.support:design:22.2.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
