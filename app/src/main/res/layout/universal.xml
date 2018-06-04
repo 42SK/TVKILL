@@ -55,25 +55,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/background"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/offButton"
+            android:layout_centerInParent="true"
+            android:scaleX="3"
+            android:scaleY="3"
+            android:enabled="@{powerOffStatus != UniversalModeButtonStatus.SendingOther}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/buttonContainerUniversal">
-            <android.support.design.widget.FloatingActionButton
-                android:enabled="@{powerOffStatus != UniversalModeButtonStatus.SendingOther}"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                tools:src="@drawable/ic_power_settings_new_black_48dp"
-                android:src="@{powerOffStatus == UniversalModeButtonStatus.SendingThis ? @drawable/ic_stop_black_48dp : @drawable/ic_power_settings_new_black_48dp}"
-                android:id="@+id/kill"
-                android:onClick="@{() -> powerOffStatus == UniversalModeButtonStatus.SendingThis ? handlers.cancel() : handlers.doPowerOff()}"
-                app:backgroundTint="#ff0000"
-                app:borderWidth="0dp"/>
-        </LinearLayout>
+            tools:src="@drawable/ic_power_settings_new_black_48dp"
+            android:src="@{powerOffStatus == UniversalModeButtonStatus.SendingThis ? @drawable/ic_stop_black_48dp : @drawable/ic_power_settings_new_black_48dp}"
+            android:tint="@color/white"
+            app:backgroundTint="@color/killred"
+            android:onClick="@{() -> powerOffStatus == UniversalModeButtonStatus.SendingThis ? handlers.cancel() : handlers.doPowerOff()}" />
 
         <android.support.design.widget.FloatingActionButton
             android:enabled="@{muteStatus != UniversalModeButtonStatus.SendingOther}"
@@ -84,10 +80,9 @@
             android:visibility="@{safeUnbox(showMute) ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> muteStatus == UniversalModeButtonStatus.SendingThis ? handlers.cancel() : handlers.doMute()}"
             app:backgroundTint="#ffff00"
-            app:borderWidth="0dp"
             android:id="@+id/muteButton"
-            android:layout_below="@+id/buttonContainerUniversal"
-            android:layout_toEndOf="@+id/buttonContainerUniversal"/>
+            android:layout_below="@+id/offButton"
+            android:layout_toEndOf="@+id/offButton"/>
 
         <ProgressBar
             android:visibility="@{progress != null ? View.VISIBLE : View.GONE}"

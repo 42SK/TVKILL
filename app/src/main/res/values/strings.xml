@@ -77,6 +77,8 @@
     <string name="sent">sent</string>
 
     <!-- Preference Strings -->
+    <string name="settings">Settings</string>
+
     <string name="depth">Additional patterns</string>
     <string name="depth_summary">This option will increase the probability that a TV is turned off, but also the duration of the transmission.</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
