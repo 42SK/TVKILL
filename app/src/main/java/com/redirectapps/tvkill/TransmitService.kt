@@ -135,49 +135,53 @@ class TransmitService: Service() {
             executor.submit {
                 fun execute() {
                     if (request.brandName == null) {
-                        // TODO: support cancellation signal
-                        // TODO: report progress (if forever == false)
-
                         if (request.action == TransmitServiceAction.Off) {
-                            //Check if additional patterns shall be transmitted
+                            // check if additional patterns should be transmitted
                             var depth = 1
-                            val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-                            if (preferences.getBoolean("depth", false)) {
-                                //TODO: determine longest brand-pattern-array
-                                depth = 2
+
+                            if (Settings.with(this).additionalPatterns.value!!) {
+                                depth = BrandContainer.allBrands.map { it.patterns.size }.max()!!
                             }
-                            //Transmit all patterns
+
+                            val numOfPatterns = BrandContainer.allBrands.sumBy {
+                                Math.min(it.patterns.size, depth)
+                            }
+                            var transmittedPatterns = 0
+
+                            // transmit all patterns
                             for (i in 0 until depth) {
-                                if (cancel.isCanceled) {
-                                    break
-                                }
-
-                                var counter = 0
-
-                                for (b in BrandContainer.allBrands) {
+                                for (brand in BrandContainer.allBrands) {
                                     if (cancel.isCanceled) {
                                         break
                                     }
 
-                                    if (!request.forever) {
-                                        // TODO: handle depth
-                                        status.postValue(TransmitServiceStatus(
-                                                request,
-                                                TransmitServiceProgress(
-                                                    counter++,
-                                                        BrandContainer.allBrands.size
-                                                )
-                                        ))
-                                    }
+                                    if (i < brand.patterns.size) {
+                                        if (!request.forever) {
+                                            status.postValue(TransmitServiceStatus(
+                                                    request,
+                                                    TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                            ))
+                                        }
 
-                                    if (i < b.patterns.size) {
-                                        b.patterns[i].send(this)
+                                        brand.patterns[i].send(this)
                                         Brand.wait(this)
                                     }
                                 }
                             }
                         } else if (request.action == TransmitServiceAction.Mute) {
-                            Brand.muteAll(this)
+                            var transmittedPatterns = 0
+                            val numOfPatterns = BrandContainer.allBrands.size
+
+                            for (brand in BrandContainer.allBrands) {
+                                brand.mute(this)
+
+                                if (!request.forever) {
+                                    status.postValue(TransmitServiceStatus(
+                                            request,
+                                            TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                    ))
+                                }
+                            }
                         } else {
                             throw IllegalStateException()
                         }

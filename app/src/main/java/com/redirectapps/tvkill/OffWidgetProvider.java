@@ -60,5 +60,4 @@ public class OffWidgetProvider extends AppWidgetProvider {
 
         }
     }
-
 }
