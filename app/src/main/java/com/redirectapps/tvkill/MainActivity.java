@@ -41,7 +41,6 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    public static boolean repetitiveModeRunning;
     public static int repetitiveModeBrand;
 
     @Override
@@ -118,8 +117,7 @@ public class MainActivity extends Activity {
 
     //This method initiates the transmission and displays a progress Dialog
     public static void kill(Context c, final char button) {
-
-        if (repetitiveModeRunning) {
+        if (isRepetitiveModeRunning()) {
             //Show the repetitiveModeActiveDialog
             repetitiveModeActiveDialog(c);
         }else {
@@ -133,10 +131,10 @@ public class MainActivity extends Activity {
                     public void run() {
                         switch (button) {
                             case 'o':
-                                Brand.killAll(context);
+                                Brand.Companion.killAll(context);
                                 break;
                             case 'm':
-                                Brand.muteAll(context);
+                                Brand.Companion.muteAll(context);
                                 break;
                         }
                         transmittingInfo.dismiss();
@@ -152,10 +150,10 @@ public class MainActivity extends Activity {
                     public void run() {
                         switch (button) {
                             case 'o':
-                                Brand.killAll(context);
+                                Brand.Companion.killAll(context);
                                 break;
                             case 'm':
-                                Brand.muteAll(context);
+                                Brand.Companion.muteAll(context);
                                 break;
                         }
                         start.cancel();
@@ -184,23 +182,42 @@ public class MainActivity extends Activity {
         return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
     }
 
+    public static boolean isRepetitiveModeRunning() {
+        TransmitServiceStatus status = TransmitService.Companion.getStatus().getValue();
+
+        return status != null && status.getRequest().getForever();
+    }
 
     //This method is called when the repetitive-button is clicked. It either starts or stops the RepetitiveModeService depending on if it is running or not.
     public void repetitiveMode(View v) {
-        Intent RepetitiveIntent = new Intent(this, RepetitiveModeService.class);
-        if (repetitiveModeRunning) {
-            stopService(RepetitiveIntent);
+        if (isRepetitiveModeRunning()) {
+            TransmitService.Companion.executeRequest(
+                    TransmitServiceCancelRequest.INSTANCE,
+                    this
+            );
+
             setRepetitiveButton(false);
-        }else{
-            startService(RepetitiveIntent);
+        } else {
+            // TODO: add support for brand selection (again)
+            TransmitService.Companion.executeRequest(
+                    new TransmitServiceSendRequest(
+                            TransmitServiceAction.Off,
+                            true,
+                            null
+                    ),
+                    this
+            );
+
             setRepetitiveButton(true);
         }
     }
 
     //This Method stops the repetitive-mode
     private static void stopRepetitiveMode (Context c) {
-        Intent Intent = new Intent(c, RepetitiveModeService.class);
-        c.stopService(Intent);
+        TransmitService.Companion.executeRequest(
+                TransmitServiceCancelRequest.INSTANCE,
+                c
+        );
     }
 
     //This method switches the design of the repetitive-mode-button
@@ -221,7 +238,7 @@ public class MainActivity extends Activity {
 
     //This method updates the design of the repetitive-mode-button
     public void updateRepetitiveButton() {
-        setRepetitiveButton(repetitiveModeRunning);
+        setRepetitiveButton(isRepetitiveModeRunning());
     }
 
 

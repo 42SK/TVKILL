@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".RepetitiveModeService" />
+        <service android:name=".TransmitService" android:exported="false" />
 
         <receiver android:name=".OffWidgetProvider" >
             <intent-filter>

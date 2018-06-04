@@ -57,7 +57,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
         individualOFF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.repetitiveModeRunning) {
+                if (MainActivity.isRepetitiveModeRunning()) {
                     //Show the repetitiveModeActiveDialog
                     MainActivity.repetitiveModeActiveDialog(getContext());
                 }else {
@@ -92,7 +92,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
             individualMUTE.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (MainActivity.repetitiveModeRunning) {
+                    if (MainActivity.isRepetitiveModeRunning()) {
                         //Show the repetitiveModeActiveDialog
                         MainActivity.repetitiveModeActiveDialog(getContext());
                     }else {

@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.RemoteViews;
 
+// TODO: refactor this
 public class OffWidgetProvider extends AppWidgetProvider {
 
     @Override

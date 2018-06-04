@@ -42,7 +42,7 @@ public class RepetitiveModeFragment extends Fragment implements AdapterView.OnIt
         //The first option is to transmit patterns for all brands
         optionList.add(this.getString(R.string.allBrands));
         //One can also choose to transmit patterns for one brand only.
-        Brand[] allBrands = BrandContainer.getAllBrands();
+        Brand[] allBrands = BrandContainer.INSTANCE.getAllBrands();
         for (Brand b : allBrands) {
             //Add the brand's name to the ArrayList
             optionList.add(b.getDesignation().toUpperCase());

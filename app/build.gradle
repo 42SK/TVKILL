@@ -26,6 +26,7 @@ dependencies {
     // newer versions of the Android design library have caused bugs in the TabLayout
     implementation 'com.android.support:design:22.2.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 }
 repositories {
     mavenCentral()
