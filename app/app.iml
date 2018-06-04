@@ -34,10 +34,15 @@
           <option name="languageVersion" value="1.2" />
           <option name="apiVersion" value="1.2" />
           <option name="pluginOptions">
-            <array />
+            <array>
+              <option value="plugin:org.jetbrains.kotlin.android:experimental=false" />
+              <option value="plugin:org.jetbrains.kotlin.android:enabled=true" />
+              <option value="plugin:org.jetbrains.kotlin.android:defaultCacheImplementation=hashMap" />
+            </array>
           </option>
           <option name="pluginClasspaths">
             <array>
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.41/10100eedfe2e26b9cf18b850d997b42d02af7500/kotlin-android-extensions-1.2.41.jar" />
               <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.2.41/870d8f3b110200303a07d4bbfc7bf9066669203b/kotlin-annotation-processing-gradle-1.2.41.jar" />
             </array>
           </option>

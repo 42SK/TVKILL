@@ -63,33 +63,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, UniversalModeFragment())
-                    .commit()
-        }
+            val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
 
-        //Check for the IR-emitter
-        val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
-
-        if (irService.hasIrEmitter()) {
-            //Inform the user about the presence of his IR-emitter
-            Toast.makeText(applicationContext, R.string.toast_found, Toast.LENGTH_SHORT).show()
-        } else {
-            // TODO: use different fragment for app content
-            //Display a Dialog that tells the user to buy a different phone
-            val alertDialog: AlertDialog
-            val builder = AlertDialog.Builder(this)
-            builder.setCancelable(false)
-            builder.setTitle(R.string.blaster_dialog_title)
-            builder.setMessage(R.string.blaster_dialog_body)
-            builder.setPositiveButton(R.string.ok) { dialog, which -> finish() }
-            builder.setNeutralButton(R.string.learn_more) { dialog, which ->
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.blaster_dialog_more_blaster_url)))
-                startActivity(browserIntent)
-                finish()
+            if (irService.hasIrEmitter()) {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, UniversalModeFragment())
+                        .commit()
+            } else {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, UnsupportedFragment())
+                        .commit()
             }
-            alertDialog = builder.create()
-            alertDialog.show()
         }
     }
 
