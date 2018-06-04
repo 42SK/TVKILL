@@ -81,7 +81,7 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
         }
 
         //Wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
-        private fun wait(c: Context) {
+        public fun wait(c: Context) {
             val preferences = PreferenceManager.getDefaultSharedPreferences(c)
             try {
                 Thread.sleep(java.lang.Long.parseLong(preferences.getString("delay", "0")))

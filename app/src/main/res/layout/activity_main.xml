@@ -25,16 +25,9 @@
     android:background="@color/background"
     android:id="@+id/main">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"/>
-
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/fragment_container">
+        android:layout_height="fill_parent">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/help_button"
@@ -61,6 +54,11 @@
             app:borderWidth="0dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true" />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

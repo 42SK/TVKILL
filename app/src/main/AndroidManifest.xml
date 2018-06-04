@@ -20,9 +20,9 @@
     package="com.redirectapps.tvkill">
 
     <uses-permission android:name="android.permission.TRANSMIT_IR" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.consumerir" />
-
 
     <application
         android:allowBackup="true"

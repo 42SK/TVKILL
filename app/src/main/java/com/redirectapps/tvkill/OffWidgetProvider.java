@@ -25,7 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.RemoteViews;
 
-// TODO: refactor this
+// TODO: reimplement this
 public class OffWidgetProvider extends AppWidgetProvider {
 
     @Override
@@ -37,7 +37,7 @@ public class OffWidgetProvider extends AppWidgetProvider {
             public void onReceive(Context context, Intent intent) {
 
                 //Transmit the patterns
-                MainActivity.kill(context,'o');
+                //MainActivity.kill(context,'o');
 
             }
         };

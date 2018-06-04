@@ -10,6 +10,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.IBinder
 import android.os.PowerManager
+import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
 import java.io.Serializable
@@ -22,6 +23,10 @@ class TransmitService: Service() {
         private const val NOTIFICATION_ID = 1
 
         val status = MutableLiveData<TransmitServiceStatus>()
+
+        init {
+            status.value = null
+        }
 
         fun executeRequest(request: TransmitServiceRequest, context: Context) {
             context.startService(buildIntent(request, context))
@@ -47,9 +52,6 @@ class TransmitService: Service() {
 
     init {
         isBound.value = false
-        isBound.observeForever {
-            updateNotification()
-        }
     }
 
     override fun onCreate() {
@@ -59,7 +61,7 @@ class TransmitService: Service() {
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TransmitService")
 
         val cancelIntent = buildIntent(TransmitServiceCancelRequest, this)
-        val pendingCancelIntent = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingCancelIntent = PendingIntent.getService(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationBuilder = NotificationCompat.Builder(this)
@@ -75,6 +77,9 @@ class TransmitService: Service() {
                 .addAction(R.drawable.ic_clear_black_48dp, getString(R.string.stop), pendingCancelIntent)
 
         status.observeForever(statusObserver)
+        isBound.observeForever {
+            updateNotification()
+        }
 
         wakeLock.acquire()
     }
@@ -88,6 +93,8 @@ class TransmitService: Service() {
 
         cancel()
         status.value = null
+
+        stopForeground(true)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -111,6 +118,7 @@ class TransmitService: Service() {
     // managing of current running things
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val request = intent!!.getSerializableExtra(EXTRA_REQUEST) as TransmitServiceRequest
+        val cancel = this.cancel
 
         if (request is TransmitServiceSendRequest) {
             // there is no lock because the selected executor only executes one task per time
@@ -122,7 +130,45 @@ class TransmitService: Service() {
                         // TODO: report progress (if forever == false)
 
                         if (request.action == TransmitServiceAction.Off) {
-                            Brand.killAll(this)
+                            //Check if additional patterns shall be transmitted
+                            var depth = 1
+                            val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                            if (preferences.getBoolean("depth", false)) {
+                                //TODO: determine longest brand-pattern-array
+                                depth = 2
+                            }
+                            //Transmit all patterns
+                            for (i in 0 until depth) {
+                                if (cancel.isCanceled) {
+                                    break
+                                }
+
+                                var counter = 0
+
+                                for (b in BrandContainer.allBrands) {
+                                    if (cancel.isCanceled) {
+                                        break
+                                    }
+
+                                    if (!request.forever) {
+                                        // TODO: handle depth
+                                        status.postValue(TransmitServiceStatus(
+                                                request,
+                                                TransmitServiceProgress(
+                                                    counter++,
+                                                        BrandContainer.allBrands.size
+                                                )
+                                        ))
+                                    }
+
+                                    if (b.dotransmit) {
+                                        if (i < b.patterns.size) {
+                                            b.patterns[i].send(this)
+                                            Brand.wait(this)
+                                        }
+                                    }
+                                }
+                            }
                         } else if (request.action == TransmitServiceAction.Mute) {
                             Brand.muteAll(this)
                         } else {
