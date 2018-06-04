@@ -8,7 +8,9 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.os.PowerManager
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
@@ -21,6 +23,7 @@ class TransmitService: Service() {
     companion object {
         private const val EXTRA_REQUEST = "request"
         private const val NOTIFICATION_ID = 1
+        private val handler = Handler(Looper.getMainLooper())
 
         val status = MutableLiveData<TransmitServiceStatus>()
 
@@ -50,6 +53,7 @@ class TransmitService: Service() {
         updateNotification()
     }
     private var stopped = false
+    private var pendingRequests = 0
 
     init {
         isBound.value = false
@@ -75,6 +79,7 @@ class TransmitService: Service() {
                 // this is set later (depending on the status)
                 // .setContentTitle(getString(R.string.mode_running))
                 .setOnlyAlertOnce(true)
+                .setProgress(100, 0, true)
                 .addAction(R.drawable.ic_clear_black_48dp, getString(R.string.stop), pendingCancelIntent)
 
         status.observeForever(statusObserver)
@@ -124,6 +129,8 @@ class TransmitService: Service() {
 
         if (request is TransmitServiceSendRequest) {
             // there is no lock because the selected executor only executes one task per time
+
+            pendingRequests++
 
             executor.submit {
                 fun execute() {
@@ -204,7 +211,14 @@ class TransmitService: Service() {
                         execute()
                     }
                 } finally {
-                    status.postValue(null)  // nothing is running
+                    handler.post {
+                        if (--pendingRequests == 0) {
+                            status.value = null // nothing is running
+                            stopSelf()
+                        } else {
+                            // status will be changed very soon
+                        }
+                    }
                 }
             }
         } else if (request is TransmitServiceCancelRequest) {
@@ -230,16 +244,22 @@ class TransmitService: Service() {
         val request = status.value
         val bound = isBound.value
 
-        if (bound!! || request == null) {
+        if (bound!!) {
             if (isNotificationVisible) {
                 stopForeground(true)
                 isNotificationVisible = false
             }
         } else {
-            if (request.request.forever) {
+            if (request != null && request.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
             } else {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running_normal))
+            }
+
+            if (request == null || request.progress == null) {
+                notificationBuilder.setProgress(100, 0, true)
+            } else {
+                notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
             }
 
             if (isNotificationVisible) {
