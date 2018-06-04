@@ -49,6 +49,7 @@ class TransmitService: Service() {
     private val statusObserver = Observer<TransmitServiceStatus> {
         updateNotification()
     }
+    private var stopped = false
 
     init {
         isBound.value = false
@@ -93,6 +94,7 @@ class TransmitService: Service() {
 
         cancel()
         status.value = null
+        stopped = true
 
         stopForeground(true)
     }
@@ -221,16 +223,20 @@ class TransmitService: Service() {
     }
 
     private fun updateNotification() {
+        if (stopped) {
+            return
+        }
+
         val request = status.value
         val bound = isBound.value
 
-        if (bound!!) {
+        if (bound!! || request == null) {
             if (isNotificationVisible) {
                 stopForeground(true)
                 isNotificationVisible = false
             }
         } else {
-            if (request != null && request.request.forever) {
+            if (request.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
             } else {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running_normal))

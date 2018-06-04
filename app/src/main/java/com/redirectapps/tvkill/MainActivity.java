@@ -22,9 +22,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
@@ -32,6 +34,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.hardware.ConsumerIrManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +44,19 @@ import android.widget.Toast;
 
 // TODO: refactor layout
 public class MainActivity extends AppCompatActivity {
+    // this allows the service to see that the activity is shown
+    private final ServiceConnection dummyServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +98,24 @@ public class MainActivity extends AppCompatActivity {
             alertDialog=builder.create();
             alertDialog.show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        bindService(
+                new Intent(this, TransmitService.class),
+                dummyServiceConnection,
+                0
+        );
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        unbindService(dummyServiceConnection);
     }
 
     // TODO: enable settings button
