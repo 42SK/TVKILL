@@ -170,11 +170,9 @@ class TransmitService: Service() {
                                         ))
                                     }
 
-                                    if (b.dotransmit) {
-                                        if (i < b.patterns.size) {
-                                            b.patterns[i].send(this)
-                                            Brand.wait(this)
-                                        }
+                                    if (i < b.patterns.size) {
+                                        b.patterns[i].send(this)
+                                        Brand.wait(this)
                                     }
                                 }
                             }

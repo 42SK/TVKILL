@@ -21,9 +21,6 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
-    // TODO: refactor this/ remove this
-    var dotransmit = true
-
     //This method transmits all of the brands off-patterns
     fun kill(c: Context) {
         for (r in patterns) {
@@ -40,12 +37,6 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
         mute.send(c)
     }
 
-    //This method returns true if the brand has a mute-pattern
-    // TODO: remove this
-    fun hasMute(): Boolean {
-        return true
-    }
-
     companion object {
 
         //This Method transmits all off-patterns of all brands
@@ -60,11 +51,9 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
             //Transmit all patterns
             for (i in 0 until depth) {
                 for (b in BrandContainer.allBrands) {
-                    if (b.dotransmit) {
-                        if (i < b.patterns.size) {
-                            b.patterns[i].send(c)
-                            wait(c)
-                        }
+                    if (i < b.patterns.size) {
+                        b.patterns[i].send(c)
+                        wait(c)
                     }
                 }
             }
@@ -73,10 +62,8 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
         //This Method transmits the mute-patterns of all brands
         fun muteAll(c: Context) {
             for (b in BrandContainer.allBrands) {
-                if (b.hasMute() && b.dotransmit) {
-                    b.mute.send(c)
-                    wait(c)
-                }
+                b.mute.send(c)
+                wait(c)
             }
         }
 
