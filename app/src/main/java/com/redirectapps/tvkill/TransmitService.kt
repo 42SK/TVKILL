@@ -186,6 +186,10 @@ class TransmitService: Service() {
                             val numOfPatterns = BrandContainer.allBrands.size
 
                             for (brand in BrandContainer.allBrands) {
+                                if (cancel.isCanceled) {
+                                    break
+                                }
+
                                 brand.mute(this)
 
                                 if (!request.forever) {
