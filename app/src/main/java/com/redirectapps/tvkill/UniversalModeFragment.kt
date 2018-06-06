@@ -26,7 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.redirectapps.tvkill.databinding.UniversalBinding
 
-// TODO: remove old layouts
+// TODO: remove old layouts and strings
 class UniversalModeFragment : Fragment(), UniversalModeHandlers {
     companion object {
         private const val STATUS_FOREVER_MODE = "forever_mode"
@@ -51,7 +51,7 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
         }
 
         binding.handlers = this
-        Settings.with(context).showMute.observe(this, Observer { binding.showMute = it })
+        Settings.with(context!!).showMute.observe(this, Observer { binding.showMute = it })
         foreverModeEnabled.observe(this, Observer { binding.foreverModeEnabled = it })
 
         TransmitService.status.observe(this, Observer {

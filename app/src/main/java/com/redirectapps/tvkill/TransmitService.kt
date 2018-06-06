@@ -1,17 +1,12 @@
 package com.redirectapps.tvkill
 
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.Handler
-import android.os.IBinder
-import android.os.Looper
-import android.os.PowerManager
+import android.os.*
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
@@ -23,6 +18,8 @@ class TransmitService: Service() {
     companion object {
         private const val EXTRA_REQUEST = "request"
         private const val NOTIFICATION_ID = 1
+        const val NOTIFICATION_CHANNEL = "report running in background"
+
         private val handler = Handler(Looper.getMainLooper())
 
         val status = MutableLiveData<TransmitServiceStatus>()
@@ -69,7 +66,7 @@ class TransmitService: Service() {
         val pendingCancelIntent = PendingIntent.getService(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationBuilder = NotificationCompat.Builder(this)
+        notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -81,6 +78,22 @@ class TransmitService: Service() {
                 .setOnlyAlertOnce(true)
                 .setProgress(100, 0, true)
                 .addAction(R.drawable.ic_clear_black_48dp, getString(R.string.stop), pendingCancelIntent)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // setup notification channel (system ignores it if already registered)
+            val channel = NotificationChannel(
+                    NOTIFICATION_CHANNEL,
+                    getString(R.string.mode_running_normal),
+                    NotificationManager.IMPORTANCE_DEFAULT
+            )
+
+            channel.setSound(null, null)
+            channel.vibrationPattern = null
+            channel.setShowBadge(false)
+            channel.enableLights(false)
+
+            notificationManager.createNotificationChannel(channel)
+        }
 
         status.observeForever(statusObserver)
         isBound.observeForever {
