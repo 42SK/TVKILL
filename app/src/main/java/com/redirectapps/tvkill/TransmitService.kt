@@ -10,6 +10,7 @@ import android.os.*
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
+import com.redirectapps.tvkill.widget.UpdateWidget
 import java.io.Serializable
 import java.util.concurrent.Executors
 
@@ -48,6 +49,7 @@ class TransmitService: Service() {
     private lateinit var notificationManager: NotificationManager
     private val statusObserver = Observer<TransmitServiceStatus> {
         updateNotification()
+        UpdateWidget.updateAllWidgets(this)
     }
     private var stopped = false
     private var pendingRequests = 0
@@ -63,7 +65,7 @@ class TransmitService: Service() {
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TransmitService")
 
         val cancelIntent = buildIntent(TransmitServiceCancelRequest, this)
-        val pendingCancelIntent = PendingIntent.getService(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingCancelIntent = PendingIntent.getService(this, PendingIntents.NOTIFICATION_CANCEL, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
@@ -113,6 +115,8 @@ class TransmitService: Service() {
         cancel()
         status.value = null
         stopped = true
+
+        UpdateWidget.updateAllWidgets(this)
 
         stopForeground(true)
     }
