@@ -83,7 +83,7 @@ class TransmitService: Service() {
             // setup notification channel (system ignores it if already registered)
             val channel = NotificationChannel(
                     NOTIFICATION_CHANNEL,
-                    getString(R.string.mode_running_normal),
+                    getString(R.string.toast_transmission_initiated),
                     NotificationManager.IMPORTANCE_DEFAULT
             )
 
@@ -272,7 +272,7 @@ class TransmitService: Service() {
             if (request != null && request.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
             } else {
-                notificationBuilder.setContentTitle(getString(R.string.mode_running_normal))
+                notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
             }
 
             if (request == null || request.progress == null) {
