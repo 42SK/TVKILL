@@ -16,7 +16,6 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
-    <string name="menu_universal_mode">Control Universal</string>
     <string name="menu_repetitive_mode">Modo-Repetitivo</string>
     <string name="menu_specific_devices">Marcas</string>
 
@@ -26,22 +25,12 @@
 
     <!-- Transmission toast -->
     <string name="toast_transmission_initiated">Transmitiendo Patrones…</string>
-    <string name="toast_transmission_completed">Transmisión completa!</string>
 
-    <!-- Blaster Found toast -->
-    <string name="toast_found">IR blaster Encontrado</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">No IR blaster</string>
     <string name="blaster_dialog_body">Para poder apagar las TV\'S, Tú teléfono debe tener un receptor de infrarrojos incorporado.</string>
     <string name="learn_more">Más Información</string>
     <string name="ok">OK</string>
-
-    <!-- Repetitive-Mode spinner items-->
-    <string name="allBrands">Todas las marcas</string>
-
-    <!-- Repetitive-Mode started/stopped toast -->
-    <string name="toast_mode_started">Modo-Repetitivo iniciado</string>
-    <string name="toast_mode_stopped">Modo-Repetitivo detenido</string>
 
     <!-- Individual-Remote buttons -->
     <string name="mute">Silenciar</string>
@@ -49,23 +38,9 @@
     <!-- Active-string in notification and dialog -->
     <string name="mode_running">Modo-Repetitivo activo</string>
 
-    <!-- Mode-running dialog -->
-    <string name="dialog_running_body">No puedes usar este modo mientras el modo-repetitivo este en marcha</string>
-    <string name="dialog_running_stop_mode">Parar modo-repetitivo</string>
-
     <!-- strings for multiple usage -->
     <string name="cancel">Cancelar</string>
     <string name="stop">PARAR</string>
-
-    <!-- Help dialogs -->
-    <string name="help_universal_mode">Este es el modo universal. Tu puedes apagar cualquier televisor apuntando tu celular a la TV y presionando el boton rojo. cuando el boton es oprimido, tu celular enviara una variedad de patrones-IR de diferentes marcas al televisor, eso hara que el televisor se apague.</string>
-    <string name="help_repetitive_mode">Este modo funciona igual que el modo universal, solamente que el teléfono transmitirá el patron-IR una y otra vez, hasta que presiones el boton. Esto tambien continuara transmitiendo cuando tu cierres la aplicacion o bloquees el telefono. Para parar el modo repetitivo, solo aprieta el boton denuevo.</string>
-    <string name="help_individual_mode">Puedes apagar los televisores de marcas específicas aquí.</string>
-    <string name="got_it">Lo tengo</string>
-
-    <!-- transmission information individual-mode -->
-    <string name="pattern_for">Señal para</string>
-    <string name="sent">Enviado</string>
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>

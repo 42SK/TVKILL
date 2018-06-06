@@ -20,7 +20,6 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
-    <string name="menu_universal_mode">Télécommande universelle</string>
     <string name="menu_repetitive_mode">Mode répétitif</string>
     <string name="menu_specific_devices">Fabricants</string>
 
@@ -30,22 +29,13 @@
 
     <!-- Transmission toast -->
     <string name="toast_transmission_initiated">Transmission des signaux…</string>
-    <string name="toast_transmission_completed">Transmission terminée !</string>
 
-    <!-- Blaster Found toast -->
-    <string name="toast_found">Émetteur IR trouvé</string>
+
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">Émetteur IR non trouvé</string>
     <string name="blaster_dialog_body">Pour éteindre les TV votre smartphone doit être équipé d\'un émetteur infrarouge intégré.</string>
     <string name="learn_more">En savoir plus</string>
     <string name="ok">OK</string>
-
-    <!-- Repetitive-Mode spinner items-->
-    <string name="allBrands">Tous les fabricants</string>
-
-    <!-- Repetitive-Mode started/stopped toast -->
-    <string name="toast_mode_started">Mode répétitif démarré</string>
-    <string name="toast_mode_stopped">Mode répétitif arrêté</string>
 
     <!-- Individual-Remote buttons -->
     <string name="mute">MUET</string>
@@ -53,23 +43,9 @@
     <!-- Active-string in notification and dialog -->
     <string name="mode_running">Mode répétitif actif</string>
 
-    <!-- Mode-running dialog -->
-    <string name="dialog_running_body">Vous ne pouvez pas utiliser ce mode pendant que le mode répétitif est actif.</string>
-    <string name="dialog_running_stop_mode">Arrêter le mode répétitif</string>
-
     <!-- strings for multiple usage -->
     <string name="cancel">Annuler</string>
     <string name="stop">STOP</string>
-
-    <!-- Help dialogs -->
-    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en poitant votre smartphone vers la TV et en pressant le bouton rouge. Quand le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différents fabricants vers la TV ce qui va l\'éteindre.</string>
-    <string name="help_repetitive_mode">Ce mode fonctionne comme le mode universel, sauf que votre smartphone transmettra les signaux infrarouges en boucle. Cela va aussi continuer de transmettre lorsque vous fermez l\'application ou que vous verrouillez l\'écran. Pour arrêter le mode répétitif, pressez simplement le bouton une seconde fois.</string>
-    <string name="help_individual_mode">Vous pouvez éteindre des TV de fabricants spécifiques ici.</string>
-    <string name="got_it">D\'accord</string>
-
-    <!-- transmission information individual-mode -->
-    <string name="pattern_for">Signal pour</string>
-    <string name="sent">envoyé</string>
 
     <!-- Preference Strings -->
     <string name="depth">Signaux additionnels</string>
