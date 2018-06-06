@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="brandName"
+            type="String" />
+
+        <variable
+            name="showMuteButton"
+            type="Boolean" />
+
+        <variable
+            name="status"
+            type="com.redirectapps.tvkill.BrandStatus" />
+
+        <variable
+            name="handlers"
+            type="com.redirectapps.tvkill.BrandAdapterHandlers" />
+
+        <import type="android.view.View" />
+        <import type="com.redirectapps.tvkill.BrandStatus" />
+    </data>
+
+    <FrameLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:text="@{brandName}"
+                    tools:text="Samsung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.PowerOff}"
+                        android:background="?selectableItemBackground"
+                        android:text="@string/off"
+                        android:onClick="@{() -> status != BrandStatus.PowerOff ? handlers.doPowerOff(brandName) : null}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.Mute}"
+                        android:visibility="@{safeUnbox(showMuteButton) ? View.VISIBLE : View.GONE}"
+                        android:background="?selectableItemBackground"
+                        android:text="@string/mute"
+                        android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : null}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+</layout>

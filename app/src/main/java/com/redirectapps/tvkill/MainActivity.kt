@@ -63,9 +63,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
-
-            if (irService.hasIrEmitter()) {
+            if (doesSupportIr()) {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.container, UniversalModeFragment())
                         .commit()
@@ -75,6 +73,12 @@ class MainActivity : AppCompatActivity() {
                         .commit()
             }
         }
+    }
+
+    private fun doesSupportIr(): Boolean {
+        val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
+
+        return irService.hasIrEmitter()
     }
 
     override fun onResume() {
@@ -93,8 +97,12 @@ class MainActivity : AppCompatActivity() {
         unbindService(dummyServiceConnection)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        if (!doesSupportIr()) {
+            menu.removeItem(R.id.brands)
+        }
 
         return true
     }
@@ -107,6 +115,11 @@ class MainActivity : AppCompatActivity() {
             ))
 
             return true
+        } else if (item.itemId == R.id.brands) {
+            startActivity(Intent(
+                    this,
+                    BrandActivity::class.java
+            ))
         }
 
         return super.onOptionsItemSelected(item)

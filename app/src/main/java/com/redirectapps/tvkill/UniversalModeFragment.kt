@@ -64,22 +64,25 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
                 binding.sendingSomething = true
                 binding.progress = it.progress
 
-                if (it.request.action == TransmitServiceAction.Off) {
-                    binding.powerOffStatus = UniversalModeButtonStatus.SendingThis
-                    binding.muteStatus = UniversalModeButtonStatus.SendingOther
-                } else if (it.request.action == TransmitServiceAction.Mute) {
-                    binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
-                    binding.muteStatus = UniversalModeButtonStatus.SendingThis
-                } else {
-                    throw IllegalStateException()
-                }
+                if (it.request.brandName == null) {
+                    if (it.request.action == TransmitServiceAction.Off) {
+                        binding.powerOffStatus = UniversalModeButtonStatus.SendingThis
+                        binding.muteStatus = UniversalModeButtonStatus.SendingOther
+                    } else if (it.request.action == TransmitServiceAction.Mute) {
+                        binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
+                        binding.muteStatus = UniversalModeButtonStatus.SendingThis
+                    } else {
+                        throw IllegalStateException()
+                    }
 
-                binding.foreverModeEnabled = it.request.forever
+                    binding.foreverModeEnabled = it.request.forever
+                } else {
+                    binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
+                    binding.muteStatus = UniversalModeButtonStatus.SendingOther
+                }
             }
         })
     }
-
-    // TODO: add selection of brand
 
     override fun doPowerOff() {
         TransmitService.executeRequest(
