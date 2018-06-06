@@ -22,6 +22,7 @@ import android.app.Fragment
 import android.app.FragmentManager
 import android.app.FragmentTransaction
 import android.app.ProgressDialog
+import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
 import android.content.DialogInterface
@@ -100,7 +101,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        if (!doesSupportIr()) {
+        if (doesSupportIr()) {
+            val brandsItem = menu.findItem(R.id.brands)
+
+            TransmitService.status.observe(this, Observer {
+                brandsItem.isEnabled = it == null
+            })
+        } else {
             menu.removeItem(R.id.brands)
         }
 
