@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         bindService(
                 Intent(this, TransmitService::class.java),
                 dummyServiceConnection,
-                0
+                Context.BIND_AUTO_CREATE
         )
     }
 
