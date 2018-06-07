@@ -21,6 +21,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.hardware.ConsumerIrManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         TransmitService.subscribeIfRunning.observe(this, Observer {  })
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
     }
 
     private fun doesSupportIr(): Boolean {
