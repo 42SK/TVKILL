@@ -16,16 +16,9 @@
  */
 package com.redirectapps.tvkill.widget
 
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.widget.RemoteViews
-
-import com.redirectapps.tvkill.R
 import com.redirectapps.tvkill.Settings
 
 class OffWidgetProvider : AppWidgetProvider() {

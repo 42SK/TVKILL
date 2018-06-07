@@ -17,7 +17,6 @@
 package com.redirectapps.tvkill
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {

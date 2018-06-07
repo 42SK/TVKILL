@@ -19,13 +19,10 @@ package com.redirectapps.tvkill
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.hardware.ConsumerIrManager
 import android.os.Bundle
-import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem

@@ -18,14 +18,13 @@ package com.redirectapps.tvkill
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.redirectapps.tvkill.databinding.FragmentBrandBinding
-import kotlinx.android.synthetic.main.fragment_brand.*
 
 class BrandActivityFragment : Fragment(), BrandAdapterHandlers, BrandActivityFragmentHandlers {
     companion object {
