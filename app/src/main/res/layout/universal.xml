@@ -85,15 +85,43 @@
             android:layout_below="@+id/offButton"
             android:layout_toEndOf="@+id/offButton"/>
 
-        <ProgressBar
-            android:visibility="@{progress != null ? View.VISIBLE : View.GONE}"
-            tools:progress="50"
-            android:progress="@{progress.current}"
-            android:max="@{progress.max}"
+        <LinearLayout
+            android:padding="8dp"
+            android:id="@+id/transmitView"
+            android:visibility="@{safeUnbox(sendingSomething) ? View.VISIBLE : View.INVISIBLE}"
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            style="?android:progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:padding="8dp"
+                android:src="@drawable/ic_settings_remote_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/toast_transmission_initiated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ProgressBar
+                    tools:progress="50"
+                    android:progress="@{progress.current}"
+                    android:max="@{progress.max}"
+                    android:indeterminate="@{safeUnbox(sendingSomething) &amp;&amp; progress == null}"
+                    style="?android:progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
 
         <CheckBox
             android:enabled="@{!safeUnbox(sendingSomething)}"
@@ -101,7 +129,7 @@
             android:checked="@{safeUnbox(foreverModeEnabled)}"
             android:padding="@dimen/activity_vertical_margin"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/transmitView"
             android:text="@string/menu_repetitive_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
