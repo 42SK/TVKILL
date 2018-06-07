@@ -91,7 +91,7 @@ class Settings private constructor(context: Context) {
                     .putString(PREF_WIDGET_IDS, TextUtils.join(",", newIdList.map { it.toString() }))
                     .apply()
 
-            this.appWidgetIds = Collections.unmodifiableSet(appWidgetIds)
+            this.appWidgetIds = Collections.unmodifiableSet(newIdList)
         }
     }
 
@@ -104,7 +104,7 @@ class Settings private constructor(context: Context) {
                     .putString(PREF_WIDGET_IDS, TextUtils.join(",", newIdList.map { it.toString() }))
                     .apply()
 
-            this.appWidgetIds = Collections.unmodifiableSet(appWidgetIds)
+            this.appWidgetIds = Collections.unmodifiableSet(newIdList)
         }
     }
 }
