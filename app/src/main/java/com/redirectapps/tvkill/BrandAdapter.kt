@@ -71,12 +71,16 @@ class BrandAdapter: RecyclerView.Adapter<BrandViewHolder>() {
             } else {
                 throw IllegalStateException()
             }
+
+            holder.binding.sendingThisForever = transmitStatus!!.request.forever
         } else {
             if (transmitStatus == null) {
                 holder.binding.status = BrandStatus.Idle
             } else {
                 holder.binding.status = BrandStatus.SendingOther
             }
+
+            holder.binding.sendingThisForever = false
         }
 
         holder.binding.executePendingBindings()

@@ -36,6 +36,10 @@
             name="handlers"
             type="com.redirectapps.tvkill.BrandAdapterHandlers" />
 
+        <variable
+            name="sendingThisForever"
+            type="Boolean" />
+
         <import type="android.view.View" />
         <import type="com.redirectapps.tvkill.BrandStatus" />
     </data>
@@ -54,37 +58,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:text="@{brandName}"
-                    tools:text="Samsung"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <Button
-                        android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.PowerOff}"
-                        android:background="?selectableItemBackground"
-                        android:text="@string/off"
-                        android:onClick="@{() -> status != BrandStatus.PowerOff ? handlers.doPowerOff(brandName) : handlers.cancelTransmit()}"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:text="@{brandName}"
+                        tools:text="Samsung"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
-                    <Button
+                    <ImageButton
+                        android:contentDescription="@string/mute"
                         android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.Mute}"
+                        android:tint="@{status == BrandStatus.Idle || status == BrandStatus.Mute ? @color/black : @color/grey}"
+                        android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : handlers.cancelTransmit()}"
                         android:visibility="@{safeUnbox(showMuteButton) ? View.VISIBLE : View.GONE}"
                         android:background="?selectableItemBackground"
-                        android:text="@string/mute"
-                        android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : handlers.cancelTransmit()}"
+                        android:src="@drawable/ic_volume_off_black_48dp"
+                        android:padding="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
+                    <ImageButton
+                        android:contentDescription="@string/off"
+                        android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.PowerOff}"
+                        android:tint="@{status == BrandStatus.Idle || status == BrandStatus.PowerOff ? @color/black : @color/grey}"
+                        android:onClick="@{() -> status != BrandStatus.PowerOff ? handlers.doPowerOff(brandName) : handlers.cancelTransmit()}"
+                        android:background="?selectableItemBackground"
+                        android:src="@drawable/ic_power_settings_new_black_48dp"
+                        android:padding="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:visibility="@{safeUnbox(sendingThisForever) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_settings_remote_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="@string/toast_transmission_initiated"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <ProgressBar
+                            android:indeterminate="true"
+                            style="?android:progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </FrameLayout>
