@@ -16,6 +16,7 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
+    <string name="menu_universal_mode">Control Universal</string>
     <string name="menu_repetitive_mode">Modo-Repetitivo</string>
     <string name="menu_specific_devices">Marcas</string>
 
@@ -41,6 +42,11 @@
     <!-- strings for multiple usage -->
     <string name="cancel">Cancelar</string>
     <string name="stop">PARAR</string>
+
+    <!-- Help dialogs -->
+    <string name="help_universal_mode">Este es el modo universal. Tu puedes apagar cualquier televisor apuntando tu celular a la TV y presionando el boton rojo. cuando el boton es oprimido, tu celular enviara una variedad de patrones-IR de diferentes marcas al televisor, eso hara que el televisor se apague.</string>
+    <string name="help_repetitive_mode">Este modo funciona igual que el modo universal, solamente que el teléfono transmitirá el patron-IR una y otra vez, hasta que presiones el boton. Esto tambien continuara transmitiendo cuando tu cierres la aplicacion o bloquees el telefono. Para parar el modo repetitivo, solo aprieta el boton denuevo.</string>
+    <string name="help_individual_mode">Puedes apagar los televisores de marcas específicas aquí.</string>
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>

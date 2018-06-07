@@ -20,6 +20,7 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
+    <string name="menu_universal_mode">Télécommande universelle</string>
     <string name="menu_repetitive_mode">Mode répétitif</string>
     <string name="menu_specific_devices">Fabricants</string>
 
@@ -46,6 +47,11 @@
     <!-- strings for multiple usage -->
     <string name="cancel">Annuler</string>
     <string name="stop">STOP</string>
+
+    <!-- Help dialogs -->
+    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en poitant votre smartphone vers la TV et en pressant le bouton rouge. Quand le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différents fabricants vers la TV ce qui va l\'éteindre.</string>
+    <string name="help_repetitive_mode">Ce mode fonctionne comme le mode universel, sauf que votre smartphone transmettra les signaux infrarouges en boucle. Cela va aussi continuer de transmettre lorsque vous fermez l\'application ou que vous verrouillez l\'écran. Pour arrêter le mode répétitif, pressez simplement le bouton une seconde fois.</string>
+    <string name="help_individual_mode">Vous pouvez éteindre des TV de fabricants spécifiques ici.</string>
 
     <!-- Preference Strings -->
     <string name="depth">Signaux additionnels</string>

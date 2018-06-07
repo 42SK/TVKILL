@@ -21,6 +21,7 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Universal Mode Screen -->
+    <string name="menu_universal_mode">Universal Remote</string>
     <string name="menu_repetitive_mode">Repetitive-Mode</string>
 
     <!-- Menu -->
@@ -50,6 +51,11 @@
     <!-- strings for multiple usage -->
     <string name="cancel">Cancel</string>
     <string name="stop">STOP</string>
+
+    <!-- Help dialogs -->
+    <string name="help_universal_mode">This is the universal-mode. You can turn off any TV by pointing your phone at the TV and pressing the red button. When the button is pressed, your phone will transmit a variety of IR-patterns from different brands to the TV which will turn the TV off.</string>
+    <string name="help_repetitive_mode">This mode works just like the universal-mode, only that your phone will transmit the IR-patterns over and over again once you have pressed the button. It will also continue to transmit when you close the application or lock you phone\'s screen. To stop the repetitive-mode, just press the button a second time.</string>
+    <string name="help_individual_mode">You can turn off TVs from specific brands here.</string>
 
     <!-- Preference Strings -->
     <string name="settings">Settings</string>

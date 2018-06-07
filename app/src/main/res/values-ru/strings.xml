@@ -20,6 +20,7 @@
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
+    <string name="menu_universal_mode">Универсальный пульт</string>
     <string name="menu_repetitive_mode">Повторяющийся режим</string>
     <string name="menu_specific_devices">Бренд</string>
 
@@ -45,6 +46,11 @@
     <!-- strings for multiple usage -->
     <string name="cancel">Отменить</string>
     <string name="stop">Стоп</string>
+
+    <!-- Help dialogs -->
+    <string name="help_universal_mode">Это универсальный режим. Вы можете выключить любой телевизор, указав свой телефон в телевизор и нажав на красную кнопку. При нажатии кнопки, ваш телефон будет передавать различные IR-коды различных марок на телевизор, который будет выключить телевизор.</string>
+    <string name="help_repetitive_mode">Этот режим работает так же, как универсальный режим, только ваш телефон будет передавать IR-коды снова и снова, как только вы нажали кнопку. Он также будет продолжать передавать при закрытии приложения или когда вы заблокируете телефон. Чтобы остановить повторяющийся режим, просто нажмите кнопку второй раз.</string>
+    <string name="help_individual_mode">Вы можете выключите телевизоры отдельных брендов</string>
 
     <!-- Preference Strings -->
     <string name="depth">Дополнительные коды</string>

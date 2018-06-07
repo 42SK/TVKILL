@@ -25,6 +25,7 @@
     <string name="learn_more">Mehr erfahren</string>
     <string name="menu_repetitive_mode">Unendlich-Modus</string>
     <string name="menu_specific_devices">Hersteller</string>
+    <string name="menu_universal_mode">Universelle Fernbedienung</string>
     <string name="mode_running">Unendlich-Modus aktiv</string>
     <string name="ok">OK</string>
     <string name="pd_please_wait">Bitte warten…</string>
@@ -39,4 +40,7 @@
     <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
     <string name="settings">Einstellungen</string>
     <string name="off">Ausschalten</string>
+    <string name="help_universal_mode">Mit der Universellen-Fernbedienung kannst du jeden beliebigen Fernseher ausschalten. Richte dein Smartphone auf den Fernseher und drücke den Knopf. Dein Gerät sendet dann mehrere IR-Patterns an den Fernseher, die den Fernseher ausschalten.</string>
+    <string name="help_repetitive_mode">Dieser Modus funktioniert wie die Universal-Fernbedienung, nur dass die IR-Patterns immer wieder gesendet werden. Dein Gerät sendet auch dann Signale an den Fernseher wenn du die App verlässt oder die Bildschirmsperre aktivierst. Drücke den Knopf einfach erneut, um den Unendlich-Modus zu stoppen.</string>
+    <string name="help_individual_mode">Hier kannst du alle Fernseher nach Herstellern ausschalten.</string>
 </resources>
