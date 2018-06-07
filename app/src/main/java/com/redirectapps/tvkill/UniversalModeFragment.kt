@@ -34,6 +34,16 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
     lateinit var binding: UniversalBinding
     var foreverModeEnabled = MutableLiveData<Boolean>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            foreverModeEnabled.value = savedInstanceState.getBoolean(STATUS_FOREVER_MODE)
+        } else {
+            foreverModeEnabled.value = false
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = UniversalBinding.inflate(inflater, container, false)
 
@@ -42,12 +52,6 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (savedInstanceState != null) {
-            foreverModeEnabled.value = savedInstanceState.getBoolean(STATUS_FOREVER_MODE)
-        } else {
-            foreverModeEnabled.value = false
-        }
 
         binding.handlers = this
         Settings.with(context!!).showMute.observe(this, Observer { binding.showMute = it })
@@ -63,22 +67,18 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
                 binding.sendingSomething = true
                 binding.progress = it.progress
 
-                if (it.request.brandName == null) {
-                    if (it.request.action == TransmitServiceAction.Off) {
-                        binding.powerOffStatus = UniversalModeButtonStatus.SendingThis
-                        binding.muteStatus = UniversalModeButtonStatus.SendingOther
-                    } else if (it.request.action == TransmitServiceAction.Mute) {
-                        binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
-                        binding.muteStatus = UniversalModeButtonStatus.SendingThis
-                    } else {
-                        throw IllegalStateException()
-                    }
-
-                    binding.foreverModeEnabled = it.request.forever
-                } else {
-                    binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
+                // it's possible to cancel sending even if it's only for one brand
+                if (it.request.action == TransmitServiceAction.Off) {
+                    binding.powerOffStatus = UniversalModeButtonStatus.SendingThis
                     binding.muteStatus = UniversalModeButtonStatus.SendingOther
+                } else if (it.request.action == TransmitServiceAction.Mute) {
+                    binding.powerOffStatus = UniversalModeButtonStatus.SendingOther
+                    binding.muteStatus = UniversalModeButtonStatus.SendingThis
+                } else {
+                    throw IllegalStateException()
                 }
+
+                binding.foreverModeEnabled = it.request.forever
             }
         })
     }

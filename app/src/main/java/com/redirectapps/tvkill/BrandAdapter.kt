@@ -107,4 +107,5 @@ enum class BrandStatus {
 interface BrandAdapterHandlers {
     fun doPowerOff(designation: String)
     fun doMute(designation: String)
+    fun cancelTransmit()
 }

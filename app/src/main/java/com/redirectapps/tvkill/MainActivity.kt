@@ -18,36 +18,23 @@
 package com.redirectapps.tvkill
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.app.Fragment
-import android.app.FragmentManager
-import android.app.FragmentTransaction
-import android.app.ProgressDialog
 import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.pm.ActivityInfo
-import android.content.res.ColorStateList
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.hardware.ConsumerIrManager
-import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.Spinner
-import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private const val REQUEST_BRAND_LIST = 1
+    }
+
     // this allows the service to see that the activity is shown
     private val dummyServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -106,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             val brandsItem = menu.findItem(R.id.brands)
 
             TransmitService.status.observe(this, Observer {
-                brandsItem.isEnabled = it == null
+                brandsItem.isEnabled = it == null || it.request.brandName != null
             })
         } else {
             menu.removeItem(R.id.brands)
@@ -124,12 +111,25 @@ class MainActivity : AppCompatActivity() {
 
             return true
         } else if (item.itemId == R.id.brands) {
-            startActivity(Intent(
-                    this,
-                    BrandActivity::class.java
-            ))
+            // the brands item is only enable when IR is supported/ the universal fragment is loaded
+            val fragment = supportFragmentManager.findFragmentById(R.id.container) as UniversalModeFragment
+
+            BrandActivity.startForResult(this, fragment.foreverModeEnabled.value!!, REQUEST_BRAND_LIST)
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_BRAND_LIST && data != null && resultCode == Activity.RESULT_OK) {
+            // the brands item is only enable when IR is supported/ the universal fragment is loaded
+            // so that it should be still there
+            val fragment = supportFragmentManager.findFragmentById(R.id.container) as UniversalModeFragment
+
+            // restore the value from the brand list
+            fragment.foreverModeEnabled.value = data.getBooleanExtra(BrandActivityFragment.FOREVER_MODE_ENABLED, false)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

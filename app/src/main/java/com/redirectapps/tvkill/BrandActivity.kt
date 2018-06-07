@@ -16,6 +16,8 @@
  */
 package com.redirectapps.tvkill
 
+import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -28,6 +30,18 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_brand.*
 
 class BrandActivity : AppCompatActivity() {
+    companion object {
+        private const val FOREVER_MODE_ENABLED = "forever_mode_enabled"
+
+        fun startForResult(activity: Activity, foreverModeEnabled: Boolean, requestCode: Int) {
+            activity.startActivityForResult(
+                    Intent(activity, BrandActivity::class.java)
+                            .putExtra(FOREVER_MODE_ENABLED, foreverModeEnabled),
+                    requestCode
+            )
+        }
+    }
+
     // this allows the service to see that the activity is shown
     private val dummyServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -43,6 +57,25 @@ class BrandActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_brand)
         setSupportActionBar(toolbar)
+
+        lateinit var fragment: BrandActivityFragment
+
+        if (savedInstanceState == null) {
+            fragment = BrandActivityFragment.newInstance(intent.getBooleanExtra(FOREVER_MODE_ENABLED, false))
+
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit()
+        } else {
+            fragment = supportFragmentManager.findFragmentById(R.id.container) as BrandActivityFragment
+        }
+
+        fragment.foreverModeEnabled.observe(this, Observer {
+            setResult(
+                    Activity.RESULT_OK,
+                    Intent().putExtra(FOREVER_MODE_ENABLED, it!!)
+            )
+        })
     }
 
     override fun onResume() {

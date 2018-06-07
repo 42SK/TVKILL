@@ -16,6 +16,7 @@
  */
 package com.redirectapps.tvkill
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.support.v4.app.Fragment
 import android.os.Bundle
@@ -23,11 +24,50 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.redirectapps.tvkill.databinding.FragmentBrandBinding
 import kotlinx.android.synthetic.main.fragment_brand.*
 
-class BrandActivityFragment : Fragment(), BrandAdapterHandlers {
+class BrandActivityFragment : Fragment(), BrandAdapterHandlers, BrandActivityFragmentHandlers {
+    companion object {
+        const val FOREVER_MODE_ENABLED = "forever_mode_enabled"
+
+        fun newInstance(foreverModeEnabled: Boolean): BrandActivityFragment {
+            val result = BrandActivityFragment()
+
+            result.arguments = Bundle()
+            result.arguments!!.putBoolean(FOREVER_MODE_ENABLED, foreverModeEnabled)
+
+            return result
+        }
+    }
+
+    lateinit var binding: FragmentBrandBinding;
+    var foreverModeEnabled = MutableLiveData<Boolean>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val arguments = this.arguments
+
+        if (savedInstanceState != null) {
+            foreverModeEnabled.value = savedInstanceState.getBoolean(FOREVER_MODE_ENABLED)
+        } else if (arguments != null) {
+            foreverModeEnabled.value = arguments.getBoolean(FOREVER_MODE_ENABLED, false)
+        } else {
+            foreverModeEnabled.value = false
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putBoolean(FOREVER_MODE_ENABLED, foreverModeEnabled.value!!)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_brand, container, false)
+        binding = FragmentBrandBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +75,9 @@ class BrandActivityFragment : Fragment(), BrandAdapterHandlers {
 
         val adapter = BrandAdapter()
 
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(context)
+        binding.recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(context)
+        binding.handlers = this
 
         Settings.with(context!!).showMute.observe(this, Observer {
             if (it != null) {
@@ -46,16 +87,20 @@ class BrandActivityFragment : Fragment(), BrandAdapterHandlers {
 
         TransmitService.status.observe(this, Observer {
             adapter.setTransmitStatus(it)
+
+            binding.canModifyForeverEnabled = it == null
         })
 
         adapter.setHandlers(this)
+
+        foreverModeEnabled.observe(this, Observer { binding.foreverModeEnabled = it })
     }
 
     override fun doMute(designation: String) {
         TransmitService.executeRequest(
                 TransmitServiceSendRequest(
                         TransmitServiceAction.Mute,
-                        false,
+                        foreverModeEnabled.value!!,
                         designation
                 ),
                 context!!
@@ -66,10 +111,25 @@ class BrandActivityFragment : Fragment(), BrandAdapterHandlers {
         TransmitService.executeRequest(
                 TransmitServiceSendRequest(
                         TransmitServiceAction.Off,
-                        false,
+                        foreverModeEnabled.value!!,
                         designation
                 ),
                 context!!
         )
     }
+
+    override fun cancelTransmit() {
+        TransmitService.executeRequest(
+                TransmitServiceCancelRequest,
+                context!!
+        )
+    }
+
+    override fun setForeverModeEnabled(enabled: Boolean) {
+        foreverModeEnabled.value = enabled
+    }
+}
+
+interface BrandActivityFragmentHandlers {
+    fun setForeverModeEnabled(enabled: Boolean)
 }

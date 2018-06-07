@@ -70,7 +70,7 @@
                         android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.PowerOff}"
                         android:background="?selectableItemBackground"
                         android:text="@string/off"
-                        android:onClick="@{() -> status != BrandStatus.PowerOff ? handlers.doPowerOff(brandName) : null}"
+                        android:onClick="@{() -> status != BrandStatus.PowerOff ? handlers.doPowerOff(brandName) : handlers.cancelTransmit()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -79,7 +79,7 @@
                         android:visibility="@{safeUnbox(showMuteButton) ? View.VISIBLE : View.GONE}"
                         android:background="?selectableItemBackground"
                         android:text="@string/mute"
-                        android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : null}"
+                        android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : handlers.cancelTransmit()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
