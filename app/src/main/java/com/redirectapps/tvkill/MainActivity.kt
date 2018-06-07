@@ -87,6 +87,11 @@ class MainActivity : AppCompatActivity() {
             val fragment = supportFragmentManager.findFragmentById(R.id.container) as UniversalModeFragment
 
             BrandActivity.startForResult(this, fragment.foreverModeEnabled.value!!, REQUEST_BRAND_LIST)
+        } else if (item.itemId == R.id.help) {
+            startActivity(Intent(
+                    this,
+                    HelpActivity::class.java
+            ))
         }
 
         return super.onOptionsItemSelected(item)

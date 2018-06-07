@@ -26,6 +26,11 @@
 
     <item
         app:showAsAction="never"
+        android:id="@+id/help"
+        android:title="@string/help" />
+
+    <item
+        app:showAsAction="never"
         android:id="@+id/settings"
         android:title="@string/settings" />
 </menu>

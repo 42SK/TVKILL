@@ -38,8 +38,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:exported="false"
             android:name=".Preferences"
+            android:exported="false"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.redirectapps.tvkill.Preferences" />
@@ -63,9 +63,14 @@
         </receiver>
 
         <activity
-            android:exported="false"
             android:name=".BrandActivity"
+            android:exported="false"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:exported="false"
+            android:name=".HelpActivity"
+            android:label="@string/help"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
