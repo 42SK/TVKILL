@@ -35,17 +35,6 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_BRAND_LIST = 1
     }
 
-    // this allows the service to see that the activity is shown
-    private val dummyServiceConnection = object : ServiceConnection {
-        override fun onServiceConnected(name: ComponentName, service: IBinder) {
-
-        }
-
-        override fun onServiceDisconnected(name: ComponentName) {
-
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,28 +51,14 @@ class MainActivity : AppCompatActivity() {
                         .commit()
             }
         }
+
+        TransmitService.subscribeIfRunning.observe(this, Observer {  })
     }
 
     private fun doesSupportIr(): Boolean {
         val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
 
         return irService.hasIrEmitter()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        bindService(
-                Intent(this, TransmitService::class.java),
-                dummyServiceConnection,
-                Context.BIND_AUTO_CREATE
-        )
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        unbindService(dummyServiceConnection)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

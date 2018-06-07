@@ -17,13 +17,13 @@
 package com.redirectapps.tvkill
 
 import android.app.*
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.*
-import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
 import com.redirectapps.tvkill.widget.UpdateWidget
@@ -39,10 +39,26 @@ class TransmitService: Service() {
 
         private val handler = Handler(Looper.getMainLooper())
 
+        private val isAppInForeground = MutableLiveData<Boolean>()
         val status = MutableLiveData<TransmitServiceStatus>()
 
         init {
             status.value = null
+            isAppInForeground.value = false
+        }
+
+        val subscribeIfRunning = object: LiveData<Void>() {
+            override fun onActive() {
+                super.onActive()
+
+                isAppInForeground.value = true
+            }
+
+            override fun onInactive() {
+                super.onInactive()
+
+                isAppInForeground.value = false
+            }
         }
 
         fun executeRequest(request: TransmitServiceRequest, context: Context) {
@@ -56,7 +72,6 @@ class TransmitService: Service() {
     }
 
     // detection if bound (used for showing/ hiding notification)
-    private val isBound = MutableLiveData<Boolean>()
     private var cancel = CancellationSignal()
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var wakeLock: PowerManager.WakeLock
@@ -69,10 +84,6 @@ class TransmitService: Service() {
     }
     private var stopped = false
     private var pendingRequests = 0
-
-    init {
-        isBound.value = false
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -114,7 +125,7 @@ class TransmitService: Service() {
         }
 
         status.observeForever(statusObserver)
-        isBound.observeForever {
+        isAppInForeground.observeForever {
             updateNotification()
         }
 
@@ -137,22 +148,8 @@ class TransmitService: Service() {
         stopForeground(true)
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
-        isBound.value = true
-
+    override fun onBind(intent: Intent?): IBinder? {
         return null
-    }
-
-    override fun onUnbind(intent: Intent?): Boolean {
-        isBound.value = false
-
-        return true
-    }
-
-    override fun onRebind(intent: Intent?) {
-        super.onRebind(intent)
-
-        isBound.value = true
     }
 
     // managing of current running things
@@ -281,9 +278,9 @@ class TransmitService: Service() {
         }
 
         val request = status.value
-        val bound = isBound.value
+        val appRunning = isAppInForeground.value
 
-        if (bound!!) {
+        if (appRunning!!) {
             if (isNotificationVisible) {
                 stopForeground(true)
                 isNotificationVisible = false
