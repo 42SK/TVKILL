@@ -16,18 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ImageButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:src="@drawable/ic_power_settings_new_black_48dp"
+    android:tint="#aaa"
+    android:background="#00000000"
+    android:id="@+id/killWidget"/>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@android:id/list"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="76dp"
-        android:clipToPadding="false"/>
-
-</RelativeLayout>

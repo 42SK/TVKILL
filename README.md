@@ -29,3 +29,4 @@ We'd also appreciate any translation suggestions for [the app's description on G
 This application is free and open source software.  
 Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html  
 Copyright 2015 Sebastian Kappes
+Copyright 2018 Jonas Lochmann

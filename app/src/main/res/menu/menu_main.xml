@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2015 Sebastian Kappes
+    Copyright (C) 2018 Jonas Lochmann
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,24 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CheckBoxPreference
-        android:title="@string/depth"
-        android:defaultValue="false"
-        android:key="depth"
-        android:summary="@string/depth_summary"/>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/brands"
+        android:title="@string/menu_specific_devices" />
 
-    <EditTextPreference
-        android:title="@string/delay"
-        android:summary="@string/delay_summary"
-        android:defaultValue="0"
-        android:numeric="integer"
-        android:key="delay"/>
+    <item
+        app:showAsAction="never"
+        android:id="@+id/help"
+        android:title="@string/help" />
 
-    <CheckBoxPreference
-        android:title="@string/show_mute"
-        android:defaultValue="false"
-        android:key="show_mute"/>
-
-</PreferenceScreen>
+    <item
+        app:showAsAction="never"
+        android:id="@+id/settings"
+        android:title="@string/settings" />
+</menu>

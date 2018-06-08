@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Copyright (C) 2015 Sebastian Kappes
+    Copyright (C) 2018 Jonas Lochmann
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,39 +17,130 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:background="@color/background"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/buttonContainerUniversal">
+    <data>
+        <variable
+            name="showMute"
+            type="Boolean" />
+
+        <variable
+            name="foreverModeEnabled"
+            type="Boolean" />
+
+        <variable
+            name="handlers"
+            type="com.redirectapps.tvkill.UniversalModeHandlers" />
+
+        <variable
+            name="sendingSomething"
+            type="Boolean" />
+
+        <variable
+            name="powerOffStatus"
+            type="com.redirectapps.tvkill.UniversalModeButtonStatus" />
+
+        <variable
+            name="muteStatus"
+            type="com.redirectapps.tvkill.UniversalModeButtonStatus" />
+
+        <variable
+            name="progress"
+            type="com.redirectapps.tvkill.TransmitServiceProgress" />
+
+        <variable
+            name="currentPattern"
+            type="com.redirectapps.tvkill.TransmitServicePattern" />
+
+        <variable
+            name="showCurrentPattern"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+        <import type="com.redirectapps.tvkill.UniversalModeButtonStatus" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_power_settings_new_black_48dp"
-            android:id="@+id/kill"
-            android:onClick="off"
-            app:backgroundTint="#ff0000"
-            app:borderWidth="0dp"/>
-    </LinearLayout>
+            android:id="@+id/offButton"
+            android:layout_centerInParent="true"
+            android:scaleX="3"
+            android:scaleY="3"
+            android:enabled="@{powerOffStatus != UniversalModeButtonStatus.SendingOther}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_power_settings_new_black_48dp"
+            android:src="@{powerOffStatus == UniversalModeButtonStatus.SendingThis ? @drawable/ic_stop_black_48dp : @drawable/ic_power_settings_new_black_48dp}"
+            android:tint="@color/white"
+            app:backgroundTint="@color/killred"
+            android:onClick="@{() -> powerOffStatus == UniversalModeButtonStatus.SendingThis ? handlers.cancel() : handlers.doPowerOff()}" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_volume_off_black_48dp"
-        android:id="@+id/mute"
-        android:visibility="gone"
-        android:onClick="mute"
-        app:backgroundTint="#ffff00"
-        app:borderWidth="0dp"
-        android:layout_below="@+id/buttonContainerUniversal"
-        android:layout_toEndOf="@+id/buttonContainerUniversal"/>
+        <android.support.design.widget.FloatingActionButton
+            android:enabled="@{muteStatus != UniversalModeButtonStatus.SendingOther}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_volume_off_black_48dp"
+            android:src="@{muteStatus == UniversalModeButtonStatus.SendingThis ? @drawable/ic_stop_black_48dp : @drawable/ic_volume_off_black_48dp}"
+            android:visibility="@{safeUnbox(showMute) ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> muteStatus == UniversalModeButtonStatus.SendingThis ? handlers.cancel() : handlers.doMute()}"
+            app:backgroundTint="#ffff00"
+            android:id="@+id/muteButton"
+            android:layout_below="@+id/offButton"
+            android:layout_toEndOf="@+id/offButton"/>
 
-</RelativeLayout>
+        <LinearLayout
+            android:padding="8dp"
+            android:id="@+id/transmitView"
+            android:visibility="@{safeUnbox(sendingSomething) ? View.VISIBLE : View.INVISIBLE}"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:padding="8dp"
+                android:src="@drawable/ic_settings_remote_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    tools:text="@string/toast_transmission_initiated"
+                    android:text="@{safeUnbox(showCurrentPattern) &amp;&amp; currentPattern != null ? currentPattern.toString() : @string/toast_transmission_initiated}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ProgressBar
+                    tools:progress="50"
+                    android:progress="@{progress.current}"
+                    android:max="@{progress.max}"
+                    android:indeterminate="@{safeUnbox(sendingSomething) &amp;&amp; progress == null}"
+                    style="?android:progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <CheckBox
+            android:enabled="@{!safeUnbox(sendingSomething)}"
+            android:onCheckedChanged="@{(view, value) -> handlers.setForeverModeEnabled(value)}"
+            android:checked="@{safeUnbox(foreverModeEnabled)}"
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/transmitView"
+            android:text="@string/menu_repetitive_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</layout>
