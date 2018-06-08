@@ -129,7 +129,8 @@
                             android:layout_height="wrap_content" />
 
                         <ProgressBar
-                            android:indeterminate="true"
+                            tools:indeterminate="true"
+                            android:indeterminate="@{safeUnbox(sendingThisForever)}"
                             style="?android:progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
