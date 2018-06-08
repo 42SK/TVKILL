@@ -26,7 +26,7 @@ We'd also appreciate any translation suggestions for [the app's description on G
 
 ## Licence
 [![GPLv3](https://gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.html)  
-This application is free and open source software.  
+This application is free (and open source) software.  
 Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html  
-Copyright 2015 Sebastian Kappes
+Copyright 2015-2018 Sebastian Kappes  
 Copyright 2018 Jonas Lochmann
