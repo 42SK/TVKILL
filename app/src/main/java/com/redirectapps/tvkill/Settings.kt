@@ -43,15 +43,18 @@ class Settings private constructor(context: Context) {
         private const val PREF_WIDGET_IDS = "widget_ids"
         // the old value was saved as string, so the setting was renamed
         private const val PREF_DELAY_BETWEEN_PATTERNS = "delay_2"
+        private const val PREF_SHOW_DETAILS = "show_details"
     }
 
     private val showMuteInternal = MutableLiveData<Boolean>()
     private val additionalPatternsInternal = MutableLiveData<Boolean>()
     private val delayBetweenPatternsInternal = MutableLiveData<Long>()
+    private val showDetailsInternal = MutableLiveData<Boolean>()
 
     val showMute: LiveData<Boolean> = showMuteInternal
     val additionalPatterns: LiveData<Boolean> = additionalPatternsInternal
     val delayBetweenPatterns: LiveData<Long> = delayBetweenPatternsInternal
+    val showDetails: LiveData<Boolean> = showDetailsInternal
 
     private var appWidgetIds: Set<Int>
     val lock = Object()
@@ -63,6 +66,7 @@ class Settings private constructor(context: Context) {
         showMuteInternal.value = preferences.getBoolean(PREF_MUTE, false)
         additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
         delayBetweenPatternsInternal.value = preferences.getLong(PREF_DELAY_BETWEEN_PATTERNS, 0)
+        showDetailsInternal.value = preferences.getBoolean(PREF_SHOW_DETAILS, false)
 
         appWidgetIds = Collections.unmodifiableSet(
                 HashSet<Int>(
@@ -95,6 +99,14 @@ class Settings private constructor(context: Context) {
 
         preferences.edit()
                 .putLong(PREF_DELAY_BETWEEN_PATTERNS, delay)
+                .apply()
+    }
+
+    fun setShowDetails(showDetails: Boolean) {
+        showDetailsInternal.value = showDetails
+
+        preferences.edit()
+                .putBoolean(PREF_SHOW_DETAILS, showDetails)
                 .apply()
     }
 

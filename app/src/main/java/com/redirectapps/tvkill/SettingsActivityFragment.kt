@@ -51,6 +51,10 @@ class SettingsActivityFragment : Fragment(), SettingsFragmentHandlers {
         settings.delayBetweenPatterns.observe(this, Observer {
             binding.delayBetweenPatterns = it!!.toInt()
         })
+
+        settings.showDetails.observe(this, Observer {
+            binding.showDetailsEnabled = it!!
+        })
     }
 
     override fun setEnableMuteButton(enableMuteButton: Boolean) {
@@ -64,10 +68,15 @@ class SettingsActivityFragment : Fragment(), SettingsFragmentHandlers {
     override fun setDelayBetweenPatterns(delayInMillis: Long) {
         Settings.with(context!!).setDelayBetweenPatterns(delayInMillis)
     }
+
+    override fun setEnableShowDetails(showDetails: Boolean) {
+        Settings.with(context!!).setShowDetails(showDetails)
+    }
 }
 
 interface SettingsFragmentHandlers {
     fun setEnableMuteButton(enableMuteButton: Boolean)
     fun setEnableAdditionalPatterns(enabledAdditionalPatterns: Boolean)
     fun setDelayBetweenPatterns(delayInMillis: Long)
+    fun setEnableShowDetails(showDetails: Boolean)
 }

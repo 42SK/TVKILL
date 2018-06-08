@@ -10,6 +10,10 @@
             type="Boolean" />
 
         <variable
+            name="showDetailsEnabled"
+            type="Boolean" />
+
+        <variable
             name="muteButtonEnabled"
             type="Boolean" />
 
@@ -120,8 +124,50 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:layout_gravity="center_vertical"
                         android:textAppearance="?android:textAppearanceLarge"
                         android:text="@string/show_mute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:onClick="@{() -> handlers.setEnableShowDetails(!safeUnbox(showDetailsEnabled))}"
+                android:foreground="?selectableItemBackground"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:visibility="@{safeUnbox(showDetailsEnabled) ? View.GONE : View.VISIBLE}"
+                        tools:visibility="gone"
+                        android:padding="16dp"
+                        android:tint="@color/checkBoxOff"
+                        android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:visibility="@{safeUnbox(showDetailsEnabled) ? View.VISIBLE : View.GONE}"
+                        android:padding="16dp"
+                        android:tint="@color/checkBoxOn"
+                        android:src="@drawable/ic_check_box_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:text="@string/show_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
