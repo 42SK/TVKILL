@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Copyright (C) 2018 Jonas Lochmann
+    Copyright (C) 2018 Seabstian Kappes
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,6 +76,7 @@
                         android:textAppearance="?android:textAppearanceLarge"
                         android:text="@{brandName}"
                         tools:text="Samsung"
+                        android:textAllCaps="true"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
