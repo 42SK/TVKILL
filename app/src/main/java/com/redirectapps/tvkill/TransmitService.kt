@@ -210,14 +210,14 @@ class TransmitService: Service() {
                                     break
                                 }
 
-                                brand.mute(this)
-
                                 if (!request.forever) {
                                     status.postValue(TransmitServiceStatus(
                                             request,
                                             TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
                                     ))
                                 }
+
+                                brand.mute(this)
                             }
                         } else {
                             throw IllegalStateException()
