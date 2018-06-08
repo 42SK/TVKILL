@@ -21,7 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:src="@drawable/ic_power_settings_new_black_48dp"
-    android:tint="@color/white"
+    android:tint="#aaa"
     android:background="#00000000"
     android:id="@+id/killWidget"/>
 

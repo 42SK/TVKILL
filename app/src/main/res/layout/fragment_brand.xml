@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2018 Jonas Lochmann
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="foreverModeEnabled"
+            type="Boolean" />
+
+        <variable
+            name="canModifyForeverEnabled"
+            type="Boolean" />
+
+        <variable
+            name="handlers"
+            type="com.redirectapps.tvkill.BrandActivityFragmentHandlers" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".BrandActivityFragment"
+        tools:showIn="@layout/activity_brand">
+
+        <CheckBox
+            android:checked="@{safeUnbox(foreverModeEnabled)}"
+            android:enabled="@{safeUnbox(canModifyForeverEnabled)}"
+            android:onCheckedChanged="@{(view, value) -> handlers.setForeverModeEnabled(value)}"
+            android:layout_margin="8dp"
+            android:text="@string/menu_repetitive_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

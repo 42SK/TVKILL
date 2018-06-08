@@ -30,32 +30,18 @@
 
     <!-- Transmission toast -->
     <string name="toast_transmission_initiated">Передаю сигналы…</string>
-    <string name="toast_transmission_completed">Переача сигналов завершена!</string>
 
-    <!-- Blaster Found toast -->
-    <string name="toast_found">IR порт найден</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">IR порт не найден</string>
     <string name="blaster_dialog_body">Что-бы выключать телевизор, ваш телефон должен иметь IR порт.</string>
     <string name="learn_more">Узнать больше</string>
     <string name="ok">Oкей</string>
 
-    <!-- Repetitive-Mode spinner items-->
-    <string name="allBrands">Все бренды</string>
-
-    <!-- Repetitive-Mode started/stopped toast -->
-    <string name="toast_mode_started">Повторяющийся режим начался</string>
-    <string name="toast_mode_stopped">Повторяющийся режим остановился</string>
-
     <!-- Individual-Remote buttons -->
     <string name="mute">MUTE</string>
 
     <!-- Active-string in notification and dialog -->
     <string name="mode_running">Повторяющийся режим активен</string>
-
-    <!-- Mode-running dialog -->
-    <string name="dialog_running_body">Вы не можете использовать этот режим пока вы пользуетесь повторяющеемся режимом</string>
-    <string name="dialog_running_stop_mode">Остановить повторяющийся режим</string>
 
     <!-- strings for multiple usage -->
     <string name="cancel">Отменить</string>
@@ -65,11 +51,6 @@
     <string name="help_universal_mode">Это универсальный режим. Вы можете выключить любой телевизор, указав свой телефон в телевизор и нажав на красную кнопку. При нажатии кнопки, ваш телефон будет передавать различные IR-коды различных марок на телевизор, который будет выключить телевизор.</string>
     <string name="help_repetitive_mode">Этот режим работает так же, как универсальный режим, только ваш телефон будет передавать IR-коды снова и снова, как только вы нажали кнопку. Он также будет продолжать передавать при закрытии приложения или когда вы заблокируете телефон. Чтобы остановить повторяющийся режим, просто нажмите кнопку второй раз.</string>
     <string name="help_individual_mode">Вы можете выключите телевизоры отдельных брендов</string>
-    <string name="got_it">Понял</string>
-
-    <!-- transmission information individual-mode -->
-    <string name="pattern_for">Сигнал для</string>
-    <string name="sent">Отправить</string>
 
     <!-- Preference Strings -->
     <string name="depth">Дополнительные коды</string>

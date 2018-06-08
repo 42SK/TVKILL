@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.redirectapps.tvkill"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 21
         versionName "1.2.5"
     }
@@ -17,12 +20,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    //Newer versions of the appcompat library have caused immediate crashes on startup
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    //Newer versions of the Android design library have caused bugs in the TabLayout
-    compile 'com.android.support:design:22.2.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    kapt "com.android.databinding:compiler:$gradle_version"
+}
+repositories {
+    mavenCentral()
 }

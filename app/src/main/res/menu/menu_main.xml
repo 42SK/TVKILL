@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2015 Sebastian Kappes
+    Copyright (C) 2018 Jonas Lochmann
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@android:id/list"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="76dp"
-        android:clipToPadding="false"/>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/brands"
+        android:title="@string/menu_specific_devices" />
 
-</RelativeLayout>
+    <item
+        app:showAsAction="never"
+        android:id="@+id/help"
+        android:title="@string/help" />
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/settings"
+        android:title="@string/settings" />
+</menu>
