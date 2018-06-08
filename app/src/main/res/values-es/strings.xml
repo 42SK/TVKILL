@@ -51,7 +51,7 @@
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>
     <string name="depth_summary">Esta opcion incrementara la probabilidad que el televisor se apague, pero aumentara la duracion de la transmision</string>
-    <string name="delay">Retraso entre patrones (en milisegundos)</string>
+    <string name="delay">Retraso entre patrones</string>
     <string name="delay_summary">Algunos televisores malinterpretan comandos cuando múltiples señales se envían directamente uno tras otro. Se puede ajustar el retardo entre los patrones individuales para evitar malas interpretaciones.</string>
     <string name="show_mute">Mostrar el boton de silenciar (Experimental)</string>
 

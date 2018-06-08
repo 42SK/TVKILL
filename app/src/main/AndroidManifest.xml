@@ -37,16 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Preferences"
-            android:exported="false"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="com.redirectapps.tvkill.Preferences" />
-
-                <category android:name="android.intent.category.PREFERENCE" />
-            </intent-filter>
-        </activity>
 
         <service
             android:name=".TransmitService"
@@ -68,10 +58,19 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:exported="false"
             android:name=".HelpActivity"
+            android:exported="false"
             android:label="@string/help"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.redirectapps.tvkill.Preferences" />
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

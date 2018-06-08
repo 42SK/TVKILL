@@ -38,16 +38,21 @@ class Settings private constructor(context: Context) {
             return settings!!
         }
 
-        private val PREF_MUTE = "show_mute"
-        private val PREF_ADDITIONAL_PATTERNS = "depth"
-        private val PREF_WIDGET_IDS = "widget_ids"
+        private const val PREF_MUTE = "show_mute"
+        private const val PREF_ADDITIONAL_PATTERNS = "depth"
+        private const val PREF_WIDGET_IDS = "widget_ids"
+        // the old value was saved as string, so the setting was renamed
+        private const val PREF_DELAY_BETWEEN_PATTERNS = "delay_2"
     }
 
     private val showMuteInternal = MutableLiveData<Boolean>()
     private val additionalPatternsInternal = MutableLiveData<Boolean>()
+    private val delayBetweenPatternsInternal = MutableLiveData<Long>()
 
     val showMute: LiveData<Boolean> = showMuteInternal
     val additionalPatterns: LiveData<Boolean> = additionalPatternsInternal
+    val delayBetweenPatterns: LiveData<Long> = delayBetweenPatternsInternal
+
     private var appWidgetIds: Set<Int>
     val lock = Object()
     val preferences: SharedPreferences
@@ -57,16 +62,7 @@ class Settings private constructor(context: Context) {
 
         showMuteInternal.value = preferences.getBoolean(PREF_MUTE, false)
         additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
-
-        preferences.registerOnSharedPreferenceChangeListener { _, key ->
-            if (PREF_MUTE == key) {
-                showMuteInternal.setValue(preferences.getBoolean(PREF_MUTE, false))
-            } else if (PREF_ADDITIONAL_PATTERNS == key) {
-                additionalPatternsInternal.setValue(preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false))
-            } else {
-                // ignore
-            }
-        }
+        delayBetweenPatternsInternal.value = preferences.getLong(PREF_DELAY_BETWEEN_PATTERNS, 0)
 
         appWidgetIds = Collections.unmodifiableSet(
                 HashSet<Int>(
@@ -76,6 +72,30 @@ class Settings private constructor(context: Context) {
                                 .map { it.toInt() }
                 )
         )
+    }
+
+    fun setShowMute(showMute: Boolean) {
+        showMuteInternal.value = showMute
+
+        preferences.edit()
+                .putBoolean(PREF_MUTE, showMute)
+                .apply()
+    }
+
+    fun setShowAdditionalPatterns(additionalPatterns: Boolean) {
+        additionalPatternsInternal.value = additionalPatterns
+
+        preferences.edit()
+                .putBoolean(PREF_ADDITIONAL_PATTERNS, additionalPatterns)
+                .apply()
+    }
+
+    fun setDelayBetweenPatterns(delay: Long) {
+        delayBetweenPatternsInternal.value = delay
+
+        preferences.edit()
+                .putLong(PREF_DELAY_BETWEEN_PATTERNS, delay)
+                .apply()
     }
 
     fun getAppWidgetIds(): Set<Int> {
