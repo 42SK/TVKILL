@@ -44,4 +44,11 @@
     <string name="help_universal_mode">Mit der Universellen-Fernbedienung kannst du jeden beliebigen Fernseher ausschalten. Richte dein Smartphone auf den Fernseher und drücke den Knopf. Dein Gerät sendet dann mehrere IR-Patterns an den Fernseher, die den Fernseher ausschalten.</string>
     <string name="help_repetitive_mode">Dieser Modus funktioniert wie die Universal-Fernbedienung, nur dass die IR-Patterns immer wieder gesendet werden. Dein Gerät sendet auch dann Signale an den Fernseher wenn du die App verlässt oder die Bildschirmsperre aktivierst. Drücke den Knopf einfach erneut, um den Unendlich-Modus zu stoppen.</string>
     <string name="help_individual_mode">Hier kannst du alle Fernseher nach Herstellern ausschalten.</string>
+
+    <!-- information that muting is disabled in forever mode -->
+    <string name="mute_disabled_title">Stummschalten deaktiviert</string>
+    <string name="mute_disabled_text">
+        Das Wiederholen des Stummschaltbefehls wäre sinnlos, da dadurch das Stummschalten immer wieder
+        an- und abgeschaltet werden würde. Deshalb ist diese Funktion deaktiviert.
+    </string>
 </resources>

@@ -29,6 +29,10 @@
             type="Boolean" />
 
         <variable
+            name="enableMuteButton"
+            type="Boolean" />
+
+        <variable
             name="status"
             type="com.redirectapps.tvkill.BrandStatus" />
 
@@ -73,8 +77,8 @@
 
                     <ImageButton
                         android:contentDescription="@string/mute"
-                        android:enabled="@{status == BrandStatus.Idle || status == BrandStatus.Mute}"
-                        android:tint="@{status == BrandStatus.Idle || status == BrandStatus.Mute ? @color/black : @color/grey}"
+                        android:enabled="@{(status == BrandStatus.Idle || status == BrandStatus.Mute) &amp;&amp; safeUnbox(enableMuteButton)}"
+                        android:tint="@{(status == BrandStatus.Idle || status == BrandStatus.Mute) &amp;&amp; safeUnbox(enableMuteButton) ? @color/black : @color/grey}"
                         android:onClick="@{() -> status != BrandStatus.Mute ? handlers.doMute(brandName) : handlers.cancelTransmit()}"
                         android:visibility="@{safeUnbox(showMuteButton) ? View.VISIBLE : View.GONE}"
                         android:background="?selectableItemBackground"

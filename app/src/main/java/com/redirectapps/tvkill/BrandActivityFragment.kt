@@ -92,7 +92,10 @@ class BrandActivityFragment : Fragment(), BrandAdapterHandlers, BrandActivityFra
 
         adapter.setHandlers(this)
 
-        foreverModeEnabled.observe(this, Observer { binding.foreverModeEnabled = it })
+        foreverModeEnabled.observe(this, Observer {
+            binding.foreverModeEnabled = it
+            adapter.setForeverModeEnabled(it!!)
+        })
     }
 
     override fun doMute(designation: String) {
