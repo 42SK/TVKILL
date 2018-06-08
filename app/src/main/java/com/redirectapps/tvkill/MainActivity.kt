@@ -18,15 +18,18 @@
 package com.redirectapps.tvkill
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.hardware.ConsumerIrManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -39,15 +42,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            if (doesSupportIr()) {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, UniversalModeFragment())
-                        .commit()
-            } else {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, UnsupportedFragment())
-                        .commit()
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, UniversalModeFragment())
+                    .commit()
+        }
+
+        //Check for the IR-emitter
+        val irService = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
+
+        if (!irService.hasIrEmitter()) {
+            //Display a Dialog that tells the user to buy a different phone
+            val alertDialog: AlertDialog
+            val builder = AlertDialog.Builder(this)
+            builder.setCancelable(false)
+            builder.setTitle(R.string.blaster_dialog_title)
+            builder.setMessage(R.string.blaster_dialog_body)
+            builder.setPositiveButton(R.string.ok) { dialog, which -> finish() }
+            builder.setNeutralButton(R.string.learn_more) { dialog, which ->
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.blaster_dialog_more_blaster_url)))
+                startActivity(browserIntent)
+                finish()
             }
+            alertDialog = builder.create()
+            alertDialog.show()
         }
 
         TransmitService.subscribeIfRunning.observe(this, Observer {  })
