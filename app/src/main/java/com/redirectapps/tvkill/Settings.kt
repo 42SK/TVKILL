@@ -41,22 +41,18 @@ class Settings private constructor(context: Context) {
         private const val PREF_MUTE = "show_mute"
         private const val PREF_ADDITIONAL_PATTERNS = "depth"
         private const val PREF_WIDGET_IDS = "widget_ids"
-        // the old value was saved as string, so the setting was renamed
-        private const val PREF_DELAY_BETWEEN_PATTERNS = "delay_2"
         private const val PREF_SHOW_DETAILS = "show_details"
     }
 
     private val showMuteInternal = MutableLiveData<Boolean>()
     private val additionalPatternsInternal = MutableLiveData<Boolean>()
-    private val delayBetweenPatternsInternal = MutableLiveData<Long>()
     private val showDetailsInternal = MutableLiveData<Boolean>()
 
     val showMute: LiveData<Boolean> = showMuteInternal
     val additionalPatterns: LiveData<Boolean> = additionalPatternsInternal
-    val delayBetweenPatterns: LiveData<Long> = delayBetweenPatternsInternal
     val showDetails: LiveData<Boolean> = showDetailsInternal
-
     private var appWidgetIds: Set<Int>
+
     val lock = Object()
     val preferences: SharedPreferences
 
@@ -65,8 +61,19 @@ class Settings private constructor(context: Context) {
 
         showMuteInternal.value = preferences.getBoolean(PREF_MUTE, false)
         additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
-        delayBetweenPatternsInternal.value = preferences.getLong(PREF_DELAY_BETWEEN_PATTERNS, 0)
         showDetailsInternal.value = preferences.getBoolean(PREF_SHOW_DETAILS, false)
+
+        preferences.registerOnSharedPreferenceChangeListener { _, key ->
+            if (PREF_MUTE == key) {
+                showMuteInternal.setValue(preferences.getBoolean(PREF_MUTE, false))
+            } else if (PREF_ADDITIONAL_PATTERNS == key) {
+                additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
+            } else if (PREF_SHOW_DETAILS == key) {
+                showDetailsInternal.value = preferences.getBoolean(PREF_SHOW_DETAILS, false)
+            } else {
+                // ignore
+            }
+        }
 
         appWidgetIds = Collections.unmodifiableSet(
                 HashSet<Int>(
@@ -76,38 +83,6 @@ class Settings private constructor(context: Context) {
                                 .map { it.toInt() }
                 )
         )
-    }
-
-    fun setShowMute(showMute: Boolean) {
-        showMuteInternal.value = showMute
-
-        preferences.edit()
-                .putBoolean(PREF_MUTE, showMute)
-                .apply()
-    }
-
-    fun setShowAdditionalPatterns(additionalPatterns: Boolean) {
-        additionalPatternsInternal.value = additionalPatterns
-
-        preferences.edit()
-                .putBoolean(PREF_ADDITIONAL_PATTERNS, additionalPatterns)
-                .apply()
-    }
-
-    fun setDelayBetweenPatterns(delay: Long) {
-        delayBetweenPatternsInternal.value = delay
-
-        preferences.edit()
-                .putLong(PREF_DELAY_BETWEEN_PATTERNS, delay)
-                .apply()
-    }
-
-    fun setShowDetails(showDetails: Boolean) {
-        showDetailsInternal.value = showDetails
-
-        preferences.edit()
-                .putBoolean(PREF_SHOW_DETAILS, showDetails)
-                .apply()
     }
 
     fun getAppWidgetIds(): Set<Int> {

@@ -4,6 +4,4 @@
     <color name="killred">#ff3d00</color>
     <color name="black">#000</color>
     <color name="grey">#aaa</color>
-    <color name="checkBoxOff">#666</color>
-    <color name="checkBoxOn">#009688</color>
 </resources>

@@ -56,7 +56,7 @@
     <!-- Preference Strings -->
     <string name="depth">Signaux additionnels</string>
     <string name="depth_summary">Cette option va augmenter la probabilité qu\'une TV soit éteinte, mais aussi la durée de la transmission.</string>
-    <string name="delay">Délai entre les signaux</string>
+    <string name="delay">Délai entre les signaux (en millisecondes)</string>
     <string name="delay_summary">Certaines TV interprêtent mal les commandes quand de multiples signaux sont envoyés les uns après les autres. Vous pouvez ajuster le délai entre les différents signaux ici pour éviter toute mauvaise interprétation.</string>
     <string name="show_mute">Afficher le bouton muet (Expérimental)</string>
 

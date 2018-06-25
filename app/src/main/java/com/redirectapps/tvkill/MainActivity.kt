@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.settings) {
             startActivity(Intent(
                     this,
-                    SettingsActivity::class.java
+                    Preferences::class.java
             ))
 
             return true

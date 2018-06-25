@@ -17,6 +17,7 @@
 package com.redirectapps.tvkill
 
 import android.content.Context
+import android.preference.PreferenceManager
 
 class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
     // this method transmits all of the brands off-patterns
@@ -38,11 +39,15 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
     companion object {
         // wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
         fun wait(c: Context) {
+            val preferences = PreferenceManager.getDefaultSharedPreferences(c)
             try {
-                Thread.sleep(Settings.with(c).delayBetweenPatterns.value!!)
+                Thread.sleep(java.lang.Long.parseLong(preferences.getString("delay", "0")))
             } catch (e: InterruptedException) {
                 e.printStackTrace()
+            } catch (e: NumberFormatException) {
+                e.printStackTrace()
             }
+
         }
     }
 }
