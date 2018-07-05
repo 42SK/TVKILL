@@ -50,6 +50,14 @@
             name="progress"
             type="com.redirectapps.tvkill.TransmitServiceProgress" />
 
+        <variable
+            name="currentPattern"
+            type="com.redirectapps.tvkill.TransmitServicePattern" />
+
+        <variable
+            name="showCurrentPattern"
+            type="Boolean" />
+
         <import type="android.view.View" />
         <import type="com.redirectapps.tvkill.UniversalModeButtonStatus" />
     </data>
@@ -107,7 +115,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="@string/toast_transmission_initiated"
+                    tools:text="@string/toast_transmission_initiated"
+                    android:text="@{safeUnbox(showCurrentPattern) &amp;&amp; currentPattern != null ? currentPattern.toString() : @string/toast_transmission_initiated}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

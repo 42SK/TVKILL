@@ -66,6 +66,7 @@
     <string name="delay">Delay between patterns (in milliseconds)</string>
     <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
     <string name="show_mute">Show mute-button (Experimental)</string>
+    <string name="show_details">Show details during transmission</string>
 
     <!-- information that muting is disabled in forever mode -->
     <string name="mute_disabled_title">Muting disabled</string>

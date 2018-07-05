@@ -189,10 +189,26 @@ class TransmitService: Service() {
                                     }
 
                                     if (i < brand.patterns.size) {
-                                        if (!request.forever) {
+                                        val currentPattern = TransmitServicePattern(
+                                                request.action,
+                                                brand.designation,
+                                                i
+                                        )
+
+                                        if (request.forever) {
                                             status.postValue(TransmitServiceStatus(
                                                     request,
-                                                    TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                                    null,
+                                                    currentPattern
+                                            ))
+                                        } else {
+                                            status.postValue(TransmitServiceStatus(
+                                                    request,
+                                                    TransmitServiceProgress(
+                                                            transmittedPatterns++,
+                                                            numOfPatterns
+                                                    ),
+                                                    currentPattern
                                             ))
                                         }
 
@@ -210,10 +226,27 @@ class TransmitService: Service() {
                                     break
                                 }
 
-                                if (!request.forever) {
+                                val currentPattern = TransmitServicePattern(
+                                        request.action,
+                                        brand.designation,
+                                        // there is not depth for muting
+                                        0
+                                )
+
+                                if (request.forever) {
                                     status.postValue(TransmitServiceStatus(
                                             request,
-                                            TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                            null,
+                                            currentPattern
+                                    ))
+                                } else {
+                                    status.postValue(TransmitServiceStatus(
+                                            request,
+                                            TransmitServiceProgress(
+                                                    transmittedPatterns++,
+                                                    numOfPatterns
+                                            ),
+                                            currentPattern
                                     ))
                                 }
 
@@ -240,7 +273,7 @@ class TransmitService: Service() {
                 }
 
                 try {
-                    status.postValue(TransmitServiceStatus(request, null))  // inform about this request
+                    status.postValue(TransmitServiceStatus(request, null, null))  // inform about this request
 
                     if (request.forever) {
                         while (!cancel.isCanceled) {
@@ -321,4 +354,18 @@ enum class TransmitServiceAction {
 
 data class TransmitServiceProgress(val current: Int, val max: Int)
 
-class TransmitServiceStatus(val request: TransmitServiceSendRequest, val progress: TransmitServiceProgress?)
+class TransmitServiceStatus(val request: TransmitServiceSendRequest, val progress: TransmitServiceProgress?, val currentPattern: TransmitServicePattern?)
+
+data class TransmitServicePattern(
+        val type: TransmitServiceAction,
+        val designation: String,
+        val depth: Int  // starting at 0
+) {
+    override fun toString(): String {
+        if (depth == 0) {
+            return designation
+        } else {
+            return designation + " - " + (depth + 1).toString()
+        }
+    }
+}

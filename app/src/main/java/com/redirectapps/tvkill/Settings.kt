@@ -38,17 +38,21 @@ class Settings private constructor(context: Context) {
             return settings!!
         }
 
-        private val PREF_MUTE = "show_mute"
-        private val PREF_ADDITIONAL_PATTERNS = "depth"
-        private val PREF_WIDGET_IDS = "widget_ids"
+        private const val PREF_MUTE = "show_mute"
+        private const val PREF_ADDITIONAL_PATTERNS = "depth"
+        private const val PREF_WIDGET_IDS = "widget_ids"
+        private const val PREF_SHOW_DETAILS = "show_details"
     }
 
     private val showMuteInternal = MutableLiveData<Boolean>()
     private val additionalPatternsInternal = MutableLiveData<Boolean>()
+    private val showDetailsInternal = MutableLiveData<Boolean>()
 
     val showMute: LiveData<Boolean> = showMuteInternal
     val additionalPatterns: LiveData<Boolean> = additionalPatternsInternal
+    val showDetails: LiveData<Boolean> = showDetailsInternal
     private var appWidgetIds: Set<Int>
+
     val lock = Object()
     val preferences: SharedPreferences
 
@@ -57,12 +61,15 @@ class Settings private constructor(context: Context) {
 
         showMuteInternal.value = preferences.getBoolean(PREF_MUTE, false)
         additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
+        showDetailsInternal.value = preferences.getBoolean(PREF_SHOW_DETAILS, false)
 
         preferences.registerOnSharedPreferenceChangeListener { _, key ->
             if (PREF_MUTE == key) {
                 showMuteInternal.setValue(preferences.getBoolean(PREF_MUTE, false))
             } else if (PREF_ADDITIONAL_PATTERNS == key) {
-                additionalPatternsInternal.setValue(preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false))
+                additionalPatternsInternal.value = preferences.getBoolean(PREF_ADDITIONAL_PATTERNS, false)
+            } else if (PREF_SHOW_DETAILS == key) {
+                showDetailsInternal.value = preferences.getBoolean(PREF_SHOW_DETAILS, false)
             } else {
                 // ignore
             }

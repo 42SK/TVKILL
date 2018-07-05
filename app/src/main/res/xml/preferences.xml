@@ -36,4 +36,9 @@
         android:defaultValue="false"
         android:key="show_mute"/>
 
+    <CheckBoxPreference
+        android:title="@string/show_details"
+        android:defaultValue="false"
+        android:key="show_details"/>
+
 </PreferenceScreen>

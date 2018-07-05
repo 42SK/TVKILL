@@ -62,9 +62,11 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
                 binding.powerOffStatus = UniversalModeButtonStatus.Idle
                 binding.muteStatus = UniversalModeButtonStatus.Idle
                 binding.progress = null
+                binding.currentPattern = null
             } else {
                 binding.sendingSomething = true
                 binding.progress = it.progress
+                binding.currentPattern = it.currentPattern
 
                 // it's possible to cancel sending even if it's only for one brand
                 if (it.request.action == TransmitServiceAction.Off) {
@@ -79,6 +81,10 @@ class UniversalModeFragment : Fragment(), UniversalModeHandlers {
 
                 binding.foreverModeEnabled = it.request.forever
             }
+        })
+
+        Settings.with(context!!).showDetails.observe(this, Observer {
+            binding.showCurrentPattern = it!!
         })
     }
 

@@ -38,6 +38,7 @@
     <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen IR-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
     <string name="mute">STUMM</string>
     <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
+    <string name="show_details">Zeige Details beim Senden</string>
     <string name="settings">Einstellungen</string>
     <string name="off">Ausschalten</string>
     <string name="help">Hilfe</string>
