@@ -1,5 +1,5 @@
 /**
-*   Copyright (C) 2015 Sebastian Kappes
+*   Copyright (C) 2015-2018 Sebastian Kappes
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -131,10 +131,20 @@ public class MainActivity extends Activity {
                     public void run() {
                         switch (button) {
                             case 'o':
-                                Brand.Companion.killAll(context);
+                                TransmitService.Companion.executeRequest(
+                                        new TransmitServiceSendRequest(
+                                                TransmitServiceAction.Off,
+                                                false,
+                                                null
+                                        ), context);
                                 break;
                             case 'm':
-                                Brand.Companion.muteAll(context);
+                                TransmitService.Companion.executeRequest(
+                                        new TransmitServiceSendRequest(
+                                                TransmitServiceAction.Mute,
+                                                false,
+                                                null
+                                        ), context);
                                 break;
                         }
                         transmittingInfo.dismiss();
@@ -150,10 +160,20 @@ public class MainActivity extends Activity {
                     public void run() {
                         switch (button) {
                             case 'o':
-                                Brand.Companion.killAll(context);
+                                TransmitService.Companion.executeRequest(
+                                        new TransmitServiceSendRequest(
+                                                TransmitServiceAction.Off,
+                                                false,
+                                                null
+                                        ), context);
                                 break;
                             case 'm':
-                                Brand.Companion.muteAll(context);
+                                TransmitService.Companion.executeRequest(
+                                        new TransmitServiceSendRequest(
+                                                TransmitServiceAction.Mute,
+                                                false,
+                                                null
+                                        ), context);
                                 break;
                         }
                         start.cancel();

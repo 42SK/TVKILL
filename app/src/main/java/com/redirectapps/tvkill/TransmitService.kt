@@ -1,17 +1,35 @@
+/**
+ * Copyright (C) 2018 Jonas Lochmann
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http:></http:>//www.gnu.org/licenses/>.
+ */
 package com.redirectapps.tvkill
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.IBinder
-import android.os.PowerManager
+import android.os.*
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
+import com.redirectapps.tvkill.widget.UpdateWidget
 import java.io.Serializable
 import java.util.concurrent.Executors
 
@@ -20,8 +38,31 @@ class TransmitService: Service() {
     companion object {
         private const val EXTRA_REQUEST = "request"
         private const val NOTIFICATION_ID = 1
+        const val NOTIFICATION_CHANNEL = "report running in background"
 
+        private val handler = Handler(Looper.getMainLooper())
+
+        private val isAppInForeground = MutableLiveData<Boolean>()
         val status = MutableLiveData<TransmitServiceStatus>()
+
+        init {
+            status.value = null
+            isAppInForeground.value = false
+        }
+
+        val subscribeIfRunning = object: LiveData<Void>() {
+            override fun onActive() {
+                super.onActive()
+
+                isAppInForeground.value = true
+            }
+
+            override fun onInactive() {
+                super.onInactive()
+
+                isAppInForeground.value = false
+            }
+        }
 
         fun executeRequest(request: TransmitServiceRequest, context: Context) {
             context.startService(buildIntent(request, context))
@@ -34,7 +75,6 @@ class TransmitService: Service() {
     }
 
     // detection if bound (used for showing/ hiding notification)
-    private val isBound = MutableLiveData<Boolean>()
     private var cancel = CancellationSignal()
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var wakeLock: PowerManager.WakeLock
@@ -43,14 +83,10 @@ class TransmitService: Service() {
     private lateinit var notificationManager: NotificationManager
     private val statusObserver = Observer<TransmitServiceStatus> {
         updateNotification()
+        UpdateWidget.updateAllWidgets(this)
     }
-
-    init {
-        isBound.value = false
-        isBound.observeForever {
-            updateNotification()
-        }
-    }
+    private var stopped = false
+    private var pendingRequests = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -59,10 +95,10 @@ class TransmitService: Service() {
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TransmitService")
 
         val cancelIntent = buildIntent(TransmitServiceCancelRequest, this)
-        val pendingCancelIntent = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingCancelIntent = PendingIntent.getService(this, PendingIntents.NOTIFICATION_CANCEL, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationBuilder = NotificationCompat.Builder(this)
+        notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -72,9 +108,29 @@ class TransmitService: Service() {
                 // this is set later (depending on the status)
                 // .setContentTitle(getString(R.string.mode_running))
                 .setOnlyAlertOnce(true)
+                .setProgress(100, 0, true)
                 .addAction(R.drawable.ic_clear_black_48dp, getString(R.string.stop), pendingCancelIntent)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // setup notification channel (system ignores it if already registered)
+            val channel = NotificationChannel(
+                    NOTIFICATION_CHANNEL,
+                    getString(R.string.toast_transmission_initiated),
+                    NotificationManager.IMPORTANCE_DEFAULT
+            )
+
+            channel.setSound(null, null)
+            channel.vibrationPattern = null
+            channel.setShowBadge(false)
+            channel.enableLights(false)
+
+            notificationManager.createNotificationChannel(channel)
+        }
+
         status.observeForever(statusObserver)
+        isAppInForeground.observeForever {
+            updateNotification()
+        }
 
         wakeLock.acquire()
     }
@@ -88,43 +144,81 @@ class TransmitService: Service() {
 
         cancel()
         status.value = null
+        stopped = true
+
+        UpdateWidget.updateAllWidgets(this)
+
+        stopForeground(true)
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
-        isBound.value = true
-
+    override fun onBind(intent: Intent?): IBinder? {
         return null
-    }
-
-    override fun onUnbind(intent: Intent?): Boolean {
-        isBound.value = false
-
-        return true
-    }
-
-    override fun onRebind(intent: Intent?) {
-        super.onRebind(intent)
-
-        isBound.value = true
     }
 
     // managing of current running things
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val request = intent!!.getSerializableExtra(EXTRA_REQUEST) as TransmitServiceRequest
+        val cancel = this.cancel
 
         if (request is TransmitServiceSendRequest) {
             // there is no lock because the selected executor only executes one task per time
 
+            pendingRequests++
+
             executor.submit {
                 fun execute() {
                     if (request.brandName == null) {
-                        // TODO: support cancellation signal
-                        // TODO: report progress (if forever == false)
-
                         if (request.action == TransmitServiceAction.Off) {
-                            Brand.killAll(this)
+                            // check if additional patterns should be transmitted
+                            var depth = 1
+
+                            if (Settings.with(this).additionalPatterns.value!!) {
+                                depth = BrandContainer.allBrands.map { it.patterns.size }.max()!!
+                            }
+
+                            val numOfPatterns = BrandContainer.allBrands.sumBy {
+                                Math.min(it.patterns.size, depth)
+                            }
+                            var transmittedPatterns = 0
+
+                            // transmit all patterns
+                            for (i in 0 until depth) {
+                                for (brand in BrandContainer.allBrands) {
+                                    if (cancel.isCanceled) {
+                                        break
+                                    }
+
+                                    if (i < brand.patterns.size) {
+                                        if (!request.forever) {
+                                            status.postValue(TransmitServiceStatus(
+                                                    request,
+                                                    TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                            ))
+                                        }
+
+                                        brand.patterns[i].send(this)
+                                        Brand.wait(this)
+                                    }
+                                }
+                            }
                         } else if (request.action == TransmitServiceAction.Mute) {
-                            Brand.muteAll(this)
+                            var transmittedPatterns = 0
+                            val numOfPatterns = BrandContainer.allBrands.size
+
+                            for (brand in BrandContainer.allBrands) {
+                                if (cancel.isCanceled) {
+                                    break
+                                }
+
+                                if (!request.forever) {
+                                    status.postValue(TransmitServiceStatus(
+                                            request,
+                                            TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                    ))
+                                }
+
+                                brand.mute(this)
+                            }
                         } else {
                             throw IllegalStateException()
                         }
@@ -156,7 +250,14 @@ class TransmitService: Service() {
                         execute()
                     }
                 } finally {
-                    status.postValue(null)  // nothing is running
+                    handler.post {
+                        if (--pendingRequests == 0) {
+                            status.value = null // nothing is running
+                            stopSelf()
+                        } else {
+                            // status will be changed very soon
+                        }
+                    }
                 }
             }
         } else if (request is TransmitServiceCancelRequest) {
@@ -175,10 +276,14 @@ class TransmitService: Service() {
     }
 
     private fun updateNotification() {
-        val request = status.value
-        val bound = isBound.value
+        if (stopped) {
+            return
+        }
 
-        if (bound!!) {
+        val request = status.value
+        val appRunning = isAppInForeground.value
+
+        if (appRunning!!) {
             if (isNotificationVisible) {
                 stopForeground(true)
                 isNotificationVisible = false
@@ -187,7 +292,13 @@ class TransmitService: Service() {
             if (request != null && request.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
             } else {
-                notificationBuilder.setContentTitle(getString(R.string.mode_running_normal))
+                notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
+            }
+
+            if (request == null || request.progress == null) {
+                notificationBuilder.setProgress(100, 0, true)
+            } else {
+                notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
             }
 
             if (isNotificationVisible) {

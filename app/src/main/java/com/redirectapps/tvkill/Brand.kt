@@ -17,14 +17,10 @@
 package com.redirectapps.tvkill
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
-    // TODO: refactor this/ remove this
-    var dotransmit = true
-
-    //This method transmits all of the brands off-patterns
+    // this method transmits all of the brands off-patterns
     fun kill(c: Context) {
         for (r in patterns) {
             r.send(c)
@@ -35,53 +31,14 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
         }
     }
 
-    //This method transmits the brands mute-pattern
+    // this method transmits the brands mute-pattern
     fun mute(c: Context) {
         mute.send(c)
     }
 
-    //This method returns true if the brand has a mute-pattern
-    // TODO: remove this
-    fun hasMute(): Boolean {
-        return true
-    }
-
     companion object {
-
-        //This Method transmits all off-patterns of all brands
-        fun killAll(c: Context) {
-            //Check if additional patterns shall be transmitted
-            var depth = 1
-            val preferences = PreferenceManager.getDefaultSharedPreferences(c)
-            if (preferences.getBoolean("depth", false)) {
-                //TODO: determine longest brand-pattern-array
-                depth = 2
-            }
-            //Transmit all patterns
-            for (i in 0 until depth) {
-                for (b in BrandContainer.allBrands) {
-                    if (b.dotransmit) {
-                        if (i < b.patterns.size) {
-                            b.patterns[i].send(c)
-                            wait(c)
-                        }
-                    }
-                }
-            }
-        }
-
-        //This Method transmits the mute-patterns of all brands
-        fun muteAll(c: Context) {
-            for (b in BrandContainer.allBrands) {
-                if (b.hasMute() && b.dotransmit) {
-                    b.mute.send(c)
-                    wait(c)
-                }
-            }
-        }
-
-        //Wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
-        private fun wait(c: Context) {
+        // wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
+        fun wait(c: Context) {
             val preferences = PreferenceManager.getDefaultSharedPreferences(c)
             try {
                 Thread.sleep(java.lang.Long.parseLong(preferences.getString("delay", "0")))
@@ -93,6 +50,4 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
 
         }
     }
-
-
 }
