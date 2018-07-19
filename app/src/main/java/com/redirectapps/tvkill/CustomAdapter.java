@@ -63,7 +63,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
                 }else {
                     //Show a progress dialog and transmit the brands patterns
                     final Context c = getContext();
-                    final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c,false);
+                    final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c,true);
                     Thread transmit = new Thread() {
                         public void run() {
                             BrandItem.kill(c);
