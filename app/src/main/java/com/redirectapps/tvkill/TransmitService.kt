@@ -23,8 +23,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.*
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.support.v4.app.NotificationCompat
 import android.support.v4.os.CancellationSignal
 import com.redirectapps.tvkill.widget.UpdateWidget
@@ -71,6 +73,8 @@ class TransmitService: Service() {
                     .putExtra(EXTRA_REQUEST, request)
         }
     }
+
+    private var verboseInformation: Boolean = false
 
     // detection if bound (used for showing/ hiding notification)
     private var cancel = CancellationSignal()
@@ -173,6 +177,8 @@ class TransmitService: Service() {
                 fun execute() {
                     if (request.brandName == null) {
                         if (request.action == TransmitServiceAction.Off) {
+                            verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose",false)
+
                             // check if additional patterns should be transmitted
                             var depth = 1
 
@@ -307,7 +313,9 @@ class TransmitService: Service() {
                 //Also update the progress dialog (if present)
                 if (MainActivity.progressDialog!=null) {
                     MainActivity.progressDialog.setMax(request.progress.max)
-                    MainActivity.progressDialog.setProgress(request.progress.current)
+                    MainActivity.progressDialog.setProgress(request.progress.current+1)
+                    if (verboseInformation)
+                        MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize()+" (%1d/%2d)")
                 }
             }
 

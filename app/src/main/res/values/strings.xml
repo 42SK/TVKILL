@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2015 Sebastian Kappes
+    Copyright (C) 2015-2018 Sebastian Kappes
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -74,6 +74,8 @@
     <string name="sent">sent</string>
 
     <!-- Preference Strings -->
+    <string name="show_verbose">Additional progress information</string>
+    <string name="show_verbose_summary">Show additional information (such as the pattern currently being transmitted) in the progress dialog when transmitting all patterns.</string>
     <string name="depth">Additional patterns</string>
     <string name="depth_summary">This option will increase the probability that a TV is turned off, but also the duration of the transmission.</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
