@@ -218,12 +218,11 @@ public class MainActivity extends Activity {
 
             setRepetitiveButton(false);
         } else {
-            // TODO: add support for brand selection (again)
             TransmitService.Companion.executeRequest(
                     new TransmitServiceSendRequest(
                             TransmitServiceAction.Off,
                             true,
-                            null
+                            repetitiveModeBrand==0?null:BrandContainer.getAllBrands()[repetitiveModeBrand-1].getDesignation()
                     ),
                     this
             );

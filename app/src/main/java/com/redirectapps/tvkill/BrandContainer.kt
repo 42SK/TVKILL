@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Sebastian Kappes
+ * Copyright (C) 2015-2018 Sebastian Kappes
  * Copyright (C) 2018 Jonas Lochmann
  *
  * This program is free software: you can redistribute it and/or modify
@@ -166,7 +166,7 @@ object BrandContainer {
             Pattern(intArrayOf(38343, 1, 1, 343, 172, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 65, 21, 22, 21, 65, 21, 65, 21, 65, 21, 65, 21, 22, 21, 65, 21, 22, 21, 22, 21, 65, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 65, 21, 65, 21, 22, 21, 65, 21, 65, 21, 65, 21, 65, 21, 65, 21, 4907))
     )
 
-    val allBrands = arrayOf(samsung, sony, lg, panasonic, philips, nec, sharp, jvc, toshiba, mitsubishi, vizio, rca, pioneer, hisense, akai, aoc)
+    @JvmStatic val allBrands = arrayOf(samsung, sony, lg, panasonic, philips, nec, sharp, jvc, toshiba, mitsubishi, vizio, rca, pioneer, hisense, akai, aoc)
 
     val brandByDesignation: Map<String, Brand> by lazy {
         val result = HashMap<String, Brand>()
