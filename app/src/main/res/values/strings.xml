@@ -55,9 +55,6 @@
     <!-- Active-string in notification and dialog -->
     <string name="mode_running">Repetitive-Mode active</string>
 
-    <!-- Active string in notification when not in infinite mode -->
-    <string name="mode_running_normal">Sending patterns</string>
-
     <!-- Mode-running dialog -->
     <string name="dialog_running_body">You can\'t use this mode while the Repetitive-Mode is running.</string>
     <string name="dialog_running_stop_mode">Stop repetitive-mode</string>
