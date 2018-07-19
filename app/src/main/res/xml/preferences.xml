@@ -17,28 +17,40 @@
 
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-            android:title="@string/show_verbose"
-            android:defaultValue="false"
-            android:key="show_verbose"
-            android:summary="@string/show_verbose_summary"/>
+    <PreferenceCategory
+        android:title="@string/category_appearance">
+        <CheckBoxPreference
+                android:title="@string/show_verbose"
+                android:defaultValue="false"
+                android:key="show_verbose"
+                android:summary="@string/show_verbose_summary"/>
 
-    <CheckBoxPreference
-        android:title="@string/depth"
-        android:defaultValue="false"
-        android:key="depth"
-        android:summary="@string/depth_summary"/>
+        <CheckBoxPreference
+                android:title="@string/old_dialog"
+                android:defaultValue="false"
+                android:key="old_dialog"
+                android:summary="@string/old_dialog_summary"/>
 
-    <EditTextPreference
-        android:title="@string/delay"
-        android:summary="@string/delay_summary"
-        android:defaultValue="0"
-        android:numeric="integer"
-        android:key="delay"/>
+        <CheckBoxPreference
+                android:title="@string/show_mute"
+                android:defaultValue="false"
+                android:key="show_mute"/>
+</PreferenceCategory>
 
-    <CheckBoxPreference
-        android:title="@string/show_mute"
-        android:defaultValue="false"
-        android:key="show_mute"/>
+    <PreferenceCategory
+            android:title="@string/category_transmission">
+        <CheckBoxPreference
+                android:title="@string/depth"
+                android:defaultValue="false"
+                android:key="depth"
+                android:summary="@string/depth_summary"/>
+
+        <EditTextPreference
+                android:title="@string/delay"
+                android:summary="@string/delay_summary"
+                android:defaultValue="0"
+                android:numeric="integer"
+                android:key="delay"/>
+   </PreferenceCategory>
 
 </PreferenceScreen>

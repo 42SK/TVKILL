@@ -52,4 +52,8 @@
     <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
     <string name="show_verbose">Zusätzliche Informationen</string>
     <string name="show_verbose_summary">Zeige zusätzliche Informationen (z.B. das aktuell übertragende Pattern) in der Fortschrittsanzeige an.</string>
+    <string name="old_dialog">Vereinfachte Fortschrittsanzeige</string>
+    <string name="old_dialog_summary">Verwende die alte kreisförmige Forschrittsanzeige.</string>
+    <string name="category_appearance">Aussehen</string>
+    <string name="category_transmission">Patterns</string>
 </resources>

@@ -25,6 +25,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,8 @@ import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 
 public class MainActivity extends Activity {
@@ -204,7 +207,7 @@ public class MainActivity extends Activity {
             return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
 
         ProgressDialog pd = new ProgressDialog(c);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pd.setProgressStyle(getDefaultSharedPreferences(c).getBoolean("old_dialog",false)?ProgressDialog.STYLE_SPINNER:ProgressDialog.STYLE_HORIZONTAL);
         pd.setMax(BrandContainer.getAllBrands().length);
         pd.setTitle(c.getString(R.string.pd_transmission_in_progress));
         pd.setMessage(c.getString(R.string.pd_please_wait));

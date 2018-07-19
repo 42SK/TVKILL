@@ -74,6 +74,8 @@
     <string name="sent">sent</string>
 
     <!-- Preference Strings -->
+    <string name="category_appearance">Appearance</string>
+    <string name="category_transmission">Pattern transmission</string>
     <string name="show_verbose">Additional progress information</string>
     <string name="show_verbose_summary">Show additional information (such as the pattern currently being transmitted) in the progress dialog when transmitting all patterns.</string>
     <string name="depth">Additional patterns</string>
@@ -81,5 +83,7 @@
     <string name="delay">Delay between patterns (in milliseconds)</string>
     <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
     <string name="show_mute">Show mute-button (Experimental)</string>
+    <string name="old_dialog">Simplified progress dialog</string>
+    <string name="old_dialog_summary">Use the old circular progress dialog</string>
 
 </resources>
