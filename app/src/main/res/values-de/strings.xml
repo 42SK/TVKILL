@@ -44,7 +44,7 @@
     <string name="depth">Zusätzliche Patterns</string>
     <string name="depth_summary">Wenn diese Option aktiviert ist, werden für jeden Hersteller zusätzliche IR-Patterns gesendet, was die Sendezeit sowie die Wahrscheinlichkeit, dass ein Fernseher ausgeschaltet wird, erhöht.</string>
     <string name="toast_transmission_completed">Alle Patterns wurden gesendet!</string>
-    <string name="toast_transmission_initiated">Patterns werden geseendet…</string>
+    <string name="toast_transmission_initiated">Patterns werden gesendet…</string>
     <string name="allBrands">Alle Hersteller</string>
     <string name="delay">Verzögerung zwischen Patterns (in Millisekunden)</string>
     <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen IR-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
