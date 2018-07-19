@@ -63,7 +63,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
                 }else {
                     //Show a progress dialog and transmit the brands patterns
                     final Context c = getContext();
-                    final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c);
+                    final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c,false);
                     Thread transmit = new Thread() {
                         public void run() {
                             BrandItem.kill(c);
@@ -98,7 +98,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
                     }else {
                         //Show a progress dialog and transmit the brands mute-pattern
                         final Context c = getContext();
-                        final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c);
+                        final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c,true);
                         Thread transmit = new Thread() {
                             public void run() {
                                 BrandItem.mute(c);

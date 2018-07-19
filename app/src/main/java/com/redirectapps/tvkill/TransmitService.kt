@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2018 Jonas Lochmann
+ * Copyright (C) 2018 Sebastian Kappes
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +17,7 @@
  */
 package com.redirectapps.tvkill
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
@@ -149,6 +147,12 @@ class TransmitService: Service() {
         UpdateWidget.updateAllWidgets(this)
 
         stopForeground(true)
+
+        //Dismiss the progress dialog (if present)
+        if (MainActivity.progressDialog!=null) {
+            MainActivity.progressDialog.dismiss()
+            MainActivity.progressDialog = null
+        }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -299,6 +303,12 @@ class TransmitService: Service() {
                 notificationBuilder.setProgress(100, 0, true)
             } else {
                 notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
+
+                //Also update the progress dialog (if present)
+                if (MainActivity.progressDialog!=null) {
+                    MainActivity.progressDialog.setMax(request.progress.max)
+                    MainActivity.progressDialog.setProgress(request.progress.current)
+                }
             }
 
             if (isNotificationVisible) {

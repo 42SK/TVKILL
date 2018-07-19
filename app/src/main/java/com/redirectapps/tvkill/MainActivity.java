@@ -42,6 +42,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     public static int repetitiveModeBrand;
+    public static ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,8 @@ public class MainActivity extends Activity {
 
             try {
                 //Show a progress dialog and transmit all patterns
-                final ProgressDialog transmittingInfo = getProgressDialog(c);
+                progressDialog = getProgressDialog(c,false);
+                progressDialog.show();
                 transmit = new Thread() {
                     public void run() {
                         switch (button) {
@@ -147,7 +149,6 @@ public class MainActivity extends Activity {
                                         ), context);
                                 break;
                         }
-                        transmittingInfo.dismiss();
                     }
                 };
                 transmit.start();
@@ -198,8 +199,23 @@ public class MainActivity extends Activity {
     }
 
     //This method returns a ProgressDialog
-    public static ProgressDialog getProgressDialog(Context c) {
-        return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
+    public static ProgressDialog getProgressDialog(final Context c, boolean singlePattern) {
+        if (singlePattern)
+            return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
+
+        ProgressDialog pd = new ProgressDialog(c);
+        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pd.setMax(BrandContainer.getAllBrands().length);
+        pd.setTitle(c.getString(R.string.pd_transmission_in_progress));
+        pd.setMessage(c.getString(R.string.pd_please_wait));
+        pd.setCancelable(true);
+        pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                TransmitService.Companion.executeRequest( TransmitServiceCancelRequest.INSTANCE, c);
+            }
+        });
+        return pd;
     }
 
     public static boolean isRepetitiveModeRunning() {
