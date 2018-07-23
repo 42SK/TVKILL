@@ -299,23 +299,24 @@ class TransmitService: Service() {
                 isNotificationVisible = false
             }
         } else {
-            if (request != null && request.request.forever) {
+            if (request == null)
+                return
+            if (request.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
-            } else {
-                notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
-            }
-
-            if (request == null || request.progress == null) {
                 notificationBuilder.setProgress(100, 0, true)
             } else {
-                notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
+                notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
 
-                //Also update the progress dialog (if present)
-                if (MainActivity.progressDialog!=null) {
-                    MainActivity.progressDialog.setMax(request.progress.max)
-                    MainActivity.progressDialog.setProgress(request.progress.current+1)
-                    if (verboseInformation)
-                        MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize()+" (%1d/%2d)")
+                if (request.progress != null) {
+                    notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
+
+                    //Also update the progress dialog (if present)
+                    if (MainActivity.progressDialog!=null) {
+                        MainActivity.progressDialog.setMax(request.progress.max)
+                        MainActivity.progressDialog.setProgress(request.progress.current+1)
+                        if (verboseInformation)
+                            MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize()+" (%1d/%2d)")
+                    }
                 }
             }
 
