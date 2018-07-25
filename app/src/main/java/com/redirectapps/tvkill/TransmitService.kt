@@ -154,7 +154,12 @@ class TransmitService: Service() {
 
         //Dismiss the progress dialog (if present)
         if (MainActivity.progressDialog!=null) {
-            MainActivity.progressDialog.dismiss()
+            try {
+                MainActivity.progressDialog.dismiss()
+            } catch (e:IllegalArgumentException) {
+                //On Android 8.1, the OS apparently sometimes throws this exception due to some internal bug (this is not our fault)
+                e.printStackTrace()
+            }
             MainActivity.progressDialog = null
         }
     }
@@ -315,7 +320,12 @@ class TransmitService: Service() {
                         MainActivity.progressDialog.setMax(request.progress.max)
                         MainActivity.progressDialog.setProgress(request.progress.current+1)
                         if (verboseInformation)
-                            MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize()+" (%1d/%2d)")
+                            try {
+                                MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize() + " (%1d/%2d)")
+                            } catch (e:ArrayIndexOutOfBoundsException) {
+                                //There is no obvious reason why this exception should occur, but, according to crash reports from Google Play, it does happen.
+                                e.printStackTrace()
+                            }
                     }
                 }
             }
