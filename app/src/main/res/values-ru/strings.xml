@@ -72,10 +72,14 @@
     <string name="sent">Отправить</string>
 
     <!-- Preference Strings -->
+    <string name="category_appearance">Внешний вид</string>
+    <string name="category_transmission">Передача кодов</string>
     <string name="depth">Дополнительные коды</string>
     <string name="depth_summary">Эта опция добовляет дополнительные коды</string>
     <string name="delay">Задержка между кодами (в миллисекундах)</string>
     <string name="delay_summary">Некоторые телевизоры путают команды, когда множественные сигналы посылаются непосредственно один за другим. Вы можете настроить задержку между отдельными узорами здесь, чтобы избежать неправильного толкования.</string>
     <string name="show_mute">Показать кнопку mute (эксперементальная опция)</string>
+    <string name="old_dialog">Упрощённый диалог процесса</string>
+    <string name="old_dialog_summary">Использовать старый круговой диалог выполнения</string>
 
 </resources>
