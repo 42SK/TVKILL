@@ -74,6 +74,8 @@
     <!-- Preference Strings -->
     <string name="category_appearance">Внешний вид</string>
     <string name="category_transmission">Передача кодов</string>
+    <string name="show_verbose">Дополнительная информация о прогрессе</string>
+    <string name="show_verbose_summary">Показать дополнительную информацию (такую как код который передается) в процессовом диалоге при передаче всех кодов.</string>
     <string name="depth">Дополнительные коды</string>
     <string name="depth_summary">Эта опция добовляет дополнительные коды</string>
     <string name="delay">Задержка между кодами (в миллисекундах)</string>
