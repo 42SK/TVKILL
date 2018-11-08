@@ -166,13 +166,14 @@ object BrandContainer {
             Pattern(intArrayOf(38343, 1, 1, 343, 172, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 65, 21, 22, 21, 65, 21, 65, 21, 65, 21, 65, 21, 22, 21, 65, 21, 22, 21, 22, 21, 65, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 65, 21, 65, 21, 22, 21, 65, 21, 65, 21, 65, 21, 65, 21, 65, 21, 4907))
     )
 
-    @JvmStatic val allBrands = arrayOf(samsung, sony, lg, panasonic, philips, nec, sharp, jvc, toshiba, mitsubishi, vizio, rca, pioneer, hisense, akai, aoc)
+    @JvmStatic
+    val allBrands = arrayOf(samsung, sony, lg, panasonic, philips, nec, sharp, jvc, toshiba, mitsubishi, vizio, rca, pioneer, hisense, akai, aoc)
 
     val brandByDesignation: Map<String, Brand> by lazy {
         val result = HashMap<String, Brand>()
 
         allBrands.forEach {
-            result.put(it.designation, it)
+            result[it.designation] = it
         }
 
         Collections.unmodifiableMap(result)
