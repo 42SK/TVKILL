@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2015 Sebastian Kappes
 
     This program is free software: you can redistribute it and/or modify
@@ -17,9 +16,10 @@
 
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/off_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:updatePeriodMillis="3600000"
-    android:initialLayout="@layout/off_widget"
-    android:resizeMode="none">
+    android:resizeMode="none"
+    android:updatePeriodMillis="3600000">
+
 </appwidget-provider>

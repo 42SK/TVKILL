@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2015 Sebastian Kappes
 
     This program is free software: you can redistribute it and/or modify
@@ -17,17 +16,17 @@
 
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@android:id/list"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="76dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:paddingBottom="76dp" />
 
 </RelativeLayout>
