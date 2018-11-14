@@ -25,7 +25,7 @@
     <string name="menu_specific_devices">Brands</string>
 
     <!-- Transmission progress-dialog -->
-    <string name="pd_transmission_in_progress">Transmitting patterns</string>
+    <string name="pd_transmission_in_progress">Transmitting patterns…</string>
     <string name="pd_please_wait">Please wait…</string>
 
     <!-- Transmission toast -->
@@ -56,7 +56,7 @@
     <string name="mode_running">Repetitive-Mode active</string>
 
     <!-- Mode-running dialog -->
-    <string name="dialog_running_body">You can\'t use this mode while the Repetitive-Mode is running.</string>
+    <string name="dialog_running_body">You can\'t use this mode while the repetitive-Mode is running.</string>
     <string name="dialog_running_stop_mode">Stop repetitive-mode</string>
 
     <!-- strings for multiple usage -->
@@ -64,8 +64,8 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">This is the universal-mode. You can turn off any TV by pointing your phone at the TV and pressing the red button. When the button is pressed, your phone will transmit a variety of IR-patterns from different brands to the TV which will turn the TV off.</string>
-    <string name="help_repetitive_mode">This mode works just like the universal-mode, only that your phone will transmit the IR-patterns over and over again once you have pressed the button. It will also continue to transmit when you close the application or lock you phone\'s screen. To stop the repetitive-mode, just press the button a second time.</string>
+    <string name="help_universal_mode">This is the universal-mode. You can turn off any TV by pointing your phone at the TV and pressing the red button. When the button is pressed, your phone will transmit a variety of IR-patterns from different brands to the TV, which will turn the TV off.</string>
+    <string name="help_repetitive_mode">This mode works just like the universal-mode, only that your phone will transmit the IR-patterns over and over again once you have pressed the button. It will also continue to transmit when you close the application or lock your phone\'s screen. To stop the repetitive-mode, just press the button a second time.</string>
     <string name="help_individual_mode">You can turn off TVs from specific brands here.</string>
     <string name="got_it">Got it</string>
 
@@ -79,7 +79,7 @@
     <string name="show_verbose">Additional progress information</string>
     <string name="show_verbose_summary">Show additional information (such as the pattern currently being transmitted) in the progress dialog when transmitting all patterns.</string>
     <string name="depth">Additional patterns</string>
-    <string name="depth_summary">This option will increase the probability that a TV is turned off, but also the duration of the transmission.</string>
+    <string name="depth_summary">This option will increase the probability that a TV is turned off, but it also lengthens the duration of the transmission.</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
     <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
     <string name="show_mute">Show mute-button (Experimental)</string>
