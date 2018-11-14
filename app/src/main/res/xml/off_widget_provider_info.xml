@@ -17,9 +17,10 @@
 
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/off_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:updatePeriodMillis="3600000"
-    android:initialLayout="@layout/off_widget"
-    android:resizeMode="none">
+    android:resizeMode="none"
+    android:updatePeriodMillis="3600000">
+
 </appwidget-provider>

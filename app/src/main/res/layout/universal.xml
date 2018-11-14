@@ -18,37 +18,39 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/background"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/buttonContainerUniversal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/buttonContainerUniversal">
+        android:layout_centerVertical="true">
+
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/kill"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_power_settings_new_black_48dp"
-            android:id="@+id/kill"
             android:onClick="off"
+            android:src="@drawable/ic_power_settings_new_black_48dp"
             app:backgroundTint="#ff0000"
-            app:borderWidth="0dp"/>
+            app:borderWidth="0dp" />
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_volume_off_black_48dp"
-        android:id="@+id/mute"
-        android:visibility="gone"
-        android:onClick="mute"
-        app:backgroundTint="#ffff00"
-        app:borderWidth="0dp"
         android:layout_below="@+id/buttonContainerUniversal"
-        android:layout_toEndOf="@+id/buttonContainerUniversal"/>
+        android:layout_toEndOf="@+id/buttonContainerUniversal"
+        android:onClick="mute"
+        android:src="@drawable/ic_volume_off_black_48dp"
+        android:visibility="gone"
+        app:backgroundTint="#ffff00"
+        app:borderWidth="0dp" />
 
 </RelativeLayout>
