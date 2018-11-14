@@ -17,13 +17,15 @@
  */
 package com.redirectapps.tvkill
 
-import android.app.*
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.*
 import android.preference.PreferenceManager.getDefaultSharedPreferences
@@ -33,7 +35,7 @@ import com.redirectapps.tvkill.widget.UpdateWidget
 import java.io.Serializable
 import java.util.concurrent.Executors
 
-class TransmitService: Service() {
+class TransmitService : Service() {
     // helper method for starting
     companion object {
         private const val EXTRA_REQUEST = "request"
@@ -50,7 +52,7 @@ class TransmitService: Service() {
             isAppInForeground.value = false
         }
 
-        val subscribeIfRunning = object: LiveData<Void>() {
+        val subscribeIfRunning = object : LiveData<Void>() {
             override fun onActive() {
                 super.onActive()
 
@@ -134,7 +136,7 @@ class TransmitService: Service() {
             updateNotification()
         }
 
-        wakeLock.acquire()
+        wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/)
     }
 
     override fun onDestroy() {
@@ -153,10 +155,10 @@ class TransmitService: Service() {
         stopForeground(true)
 
         //Dismiss the progress dialog (if present)
-        if (MainActivity.progressDialog!=null) {
+        if (MainActivity.progressDialog != null) {
             try {
                 MainActivity.progressDialog.dismiss()
-            } catch (e:IllegalArgumentException) {
+            } catch (e: IllegalArgumentException) {
                 //On Android 8.1, the OS apparently sometimes throws this exception due to some internal bug (this is not our fault)
                 e.printStackTrace()
             }
@@ -182,7 +184,7 @@ class TransmitService: Service() {
                 fun execute() {
                     if (request.brandName == null) {
                         if (request.action == TransmitServiceAction.Off) {
-                            verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose",false)
+                            verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
 
                             // check if additional patterns should be transmitted
                             var depth = 1
@@ -239,17 +241,12 @@ class TransmitService: Service() {
                         }
                     } else {
                         val brand = BrandContainer.brandByDesignation[request.brandName]
+                                ?: throw IllegalStateException()
 
-                        if (brand == null) {
-                            throw IllegalStateException()
-                        }
-
-                        if (request.action == TransmitServiceAction.Off) {
-                            brand.kill(this)
-                        } else if (request.action == TransmitServiceAction.Mute) {
-                            brand.mute(this)
-                        } else {
-                            throw IllegalStateException()
+                        when {
+                            request.action == TransmitServiceAction.Off -> brand.kill(this)
+                            request.action == TransmitServiceAction.Mute -> brand.mute(this)
+                            else -> throw IllegalStateException()
                         }
                     }
                 }
@@ -316,13 +313,13 @@ class TransmitService: Service() {
                     notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
 
                     //Also update the progress dialog (if present)
-                    if (MainActivity.progressDialog!=null) {
-                        MainActivity.progressDialog.setMax(request.progress.max)
-                        MainActivity.progressDialog.setProgress(request.progress.current+1)
+                    if (MainActivity.progressDialog != null) {
+                        MainActivity.progressDialog.max = request.progress.max
+                        MainActivity.progressDialog.progress = request.progress.current + 1
                         if (verboseInformation)
                             try {
                                 MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize() + " (%1d/%2d)")
-                            } catch (e:ArrayIndexOutOfBoundsException) {
+                            } catch (e: ArrayIndexOutOfBoundsException) {
                                 //There is no obvious reason why this exception should occur, but, according to crash reports from Google Play, it does happen.
                                 e.printStackTrace()
                             }
@@ -340,9 +337,9 @@ class TransmitService: Service() {
     }
 }
 
-sealed class TransmitServiceRequest(): Serializable
-class TransmitServiceSendRequest(val action: TransmitServiceAction, val forever: Boolean, val brandName: String?): TransmitServiceRequest()
-object TransmitServiceCancelRequest: TransmitServiceRequest()
+sealed class TransmitServiceRequest : Serializable
+class TransmitServiceSendRequest(val action: TransmitServiceAction, val forever: Boolean, val brandName: String?) : TransmitServiceRequest()
+object TransmitServiceCancelRequest : TransmitServiceRequest()
 
 enum class TransmitServiceAction {
     Off, Mute

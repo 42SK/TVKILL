@@ -19,7 +19,7 @@ package com.redirectapps.tvkill
 import android.content.Context
 import android.preference.PreferenceManager
 
-class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
+class Brand(val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
     // this method transmits all of the brands off-patterns
     fun kill(c: Context) {
         for (r in patterns) {
@@ -37,7 +37,7 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
     }
 
     companion object {
-        // wait for a certain time to avoid a misinterpretation of the commands when they are sent succecevly
+        // wait for a certain time to avoid a misinterpretation of the commands when they are sent successfully
         fun wait(c: Context) {
             val preferences = PreferenceManager.getDefaultSharedPreferences(c)
             try {
@@ -47,7 +47,6 @@ class Brand (val designation: String, val patterns: Array<Pattern>, val mute: Pa
             } catch (e: NumberFormatException) {
                 e.printStackTrace()
             }
-
         }
     }
 }
