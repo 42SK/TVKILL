@@ -23,6 +23,7 @@ You can find a detailed explanation on how to add patterns to the application on
 ### Translate
 Help us to translate **TV KILL** by creating a new [strings.xml file](https://github.com/42SK/TVKILL/blob/master/app/src/main/res/values/strings.xml) for your language.  
 We'd also appreciate any translation suggestions for [the app's description on Google Play](https://play.google.com/store/apps/details?id=com.redirectapps.tvkill).
+Take a short look at our [contributing guidelines](https://github.com/42SK/TVKILL/blob/master/CONTRIBUTING.md) before opening a pull request.
 
 ## Licence
 [![GPLv3](https://gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.html)  
