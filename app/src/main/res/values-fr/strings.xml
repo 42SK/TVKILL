@@ -22,7 +22,7 @@
     <!-- Menu -->
     <string name="menu_universal_mode">Télécommande universelle</string>
     <string name="menu_repetitive_mode">Mode répétitif</string>
-    <string name="menu_specific_devices">Fabricants</string>
+    <string name="menu_specific_devices">Marques</string>
 
     <!-- Transmission progress-dialog -->
     <string name="pd_transmission_in_progress">Transmission des signaux</string>
@@ -41,7 +41,7 @@
     <string name="ok">OK</string>
 
     <!-- Repetitive-Mode spinner items-->
-    <string name="allBrands">Tous les fabricants</string>
+    <string name="allBrands">Toutes les marques</string>
 
     <!-- Repetitive-Mode started/stopped toast -->
     <string name="toast_mode_started">Mode répétitif démarré</string>
@@ -62,9 +62,9 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en poitant votre smartphone vers la TV et en pressant le bouton rouge. Quand le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différents fabricants vers la TV ce qui va l\'éteindre.</string>
+    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en pointant votre smartphone vers la TV et en pressant le bouton rouge. Lorsque le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différentes marques vers la TV ce qui va l\'éteindre.</string>
     <string name="help_repetitive_mode">Ce mode fonctionne comme le mode universel, sauf que votre smartphone transmettra les signaux infrarouges en boucle. Cela va aussi continuer de transmettre lorsque vous fermez l\'application ou que vous verrouillez l\'écran. Pour arrêter le mode répétitif, pressez simplement le bouton une seconde fois.</string>
-    <string name="help_individual_mode">Vous pouvez éteindre des TV de fabricants spécifiques ici.</string>
+    <string name="help_individual_mode">Vous pouvez éteindre des TV de marques spécifiques ici.</string>
     <string name="got_it">D\'accord</string>
 
     <!-- transmission information individual-mode -->
@@ -72,10 +72,16 @@
     <string name="sent">envoyé</string>
 
     <!-- Preference Strings -->
+    <string name="category_appearance">Apparence</string>
+    <string name="category_transmission">Transmission des signaux</string>
+    <string name="show_verbose">Informations de transmission supplémentaires</string>
+    <string name="show_verbose_summary">Afficher des informations supplémentaires (comme le signal actuellement transmis) dans le pop-up de progression lors de la transmission des signaux.</string>
     <string name="depth">Signaux additionnels</string>
     <string name="depth_summary">Cette option va augmenter la probabilité qu\'une TV soit éteinte, mais aussi la durée de la transmission.</string>
     <string name="delay">Délai entre les signaux (en millisecondes)</string>
     <string name="delay_summary">Certaines TV interprêtent mal les commandes quand de multiples signaux sont envoyés les uns après les autres. Vous pouvez ajuster le délai entre les différents signaux ici pour éviter toute mauvaise interprétation.</string>
     <string name="show_mute">Afficher le bouton muet (Expérimental)</string>
+    <string name="old_dialog">Pop-up de progression simplifié</string>
+    <string name="old_dialog_summary">Utiliser l\'ancien pop-up de progression circulaire</string>
 
 </resources>
