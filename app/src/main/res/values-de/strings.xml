@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2015 Sebastian Kappes
+    Copyright (C) 2015-2018 Sebastian Kappes
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
     <string name="app_name">TV KILL</string>
     <string name="blaster_dialog_body">Um Fernseher auszuschalten braucht dein Smartphone einen Infrarot-Sender.</string>
     <string name="blaster_dialog_title">Kein IR-Sender</string>
-    <string name="cancel">abbrechen</string>
+    <string name="cancel">Abbrechen</string>
     <string name="dialog_running_body">Du kanst diesen Modus nicht verwenden während der Unendlich-Modus läuft.</string>
     <string name="dialog_running_stop_mode">Unendlich-Modus beenden</string>
     <string name="learn_more">Mehr erfahren</string>
@@ -30,13 +30,13 @@
     <string name="mode_running">Unendlich-Modus aktiv</string>
     <string name="ok">OK</string>
     <string name="pd_please_wait">Bitte warten…</string>
-    <string name="pd_transmission_in_progress">Pattern wird gesendet</string>
+    <string name="pd_transmission_in_progress">Patterns werden gesendet</string>
     <string name="stop">STOPPEN</string>
     <string name="toast_found">IR-Sender gefunden</string>
     <string name="toast_mode_started">Unendlich-Modus gestartet</string>
     <string name="toast_mode_stopped">Unendlich-Modus beendet</string>
-    <string name="help_universal_mode">Mit der Universellen-Fernbedienung kannst du jeden beliebigen Fernseher abschalten. Richte dein Smartphone auf den Fernseher und drücke den Knopf. Dein Gerät sendet dann mehrere IR-Patterns an den Fernseher, die den Fernseher ausschalten.</string>
-    <string name="help_repetitive_mode">Dieser Modus funktioniert wie die Universal-Fernbedienung, nur dass die IR-Patterns immer wieder gesendet werden. Dein Gerät sendet dann auch Signale an den Fernseher, wenn du die App verlässt oder die Bildschirmsperre aktivierst. Drücke den Knopf einfach erneut, um den Unendlich-Modus zu stoppen.</string>
+    <string name="help_universal_mode">Mit der Universellen-Fernbedienung kannst du jeden beliebigen Fernseher ausschalten. Richte dein Smartphone auf den Fernseher und drücke den Knopf. Dein Gerät sendet dann mehrere IR-Patterns an den Fernseher, die den Fernseher ausschalten.</string>
+    <string name="help_repetitive_mode">Dieser Modus funktioniert wie die Universal-Fernbedienung, nur dass die IR-Patterns immer wieder gesendet werden. Dein Gerät sendet auch dann Signale an den Fernseher wenn du die App verlässt oder die Bildschirmsperre aktivierst. Drücke den Knopf einfach erneut, um den Unendlich-Modus zu stoppen.</string>
     <string name="got_it">OK</string>
     <string name="help_individual_mode">Hier kannst du alle Fernseher nach Herstellern ausschalten.</string>
     <string name="pattern_for">Signal für</string>
@@ -44,10 +44,16 @@
     <string name="depth">Zusätzliche Patterns</string>
     <string name="depth_summary">Wenn diese Option aktiviert ist, werden für jeden Hersteller zusätzliche IR-Patterns gesendet, was die Sendezeit sowie die Wahrscheinlichkeit, dass ein Fernseher ausgeschaltet wird, erhöht.</string>
     <string name="toast_transmission_completed">Alle Patterns wurden gesendet!</string>
-    <string name="toast_transmission_initiated">Patterns werden geseendet…</string>
+    <string name="toast_transmission_initiated">Patterns werden gesendet…</string>
     <string name="allBrands">Alle Hersteller</string>
     <string name="delay">Verzögerung zwischen Patterns (in Millisekunden)</string>
-    <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen ir-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
+    <string name="delay_summary">Manche Fernseher interpretieren die gesendeten Befehle nicht richtig wenn die Abstände zwischen den einzelnen IR-Signalen zu klein sind. Mit dieser Option kann eine Verzögerung zwischen den individuellen Patterns erzwungen werden, um dies zu verhindern.</string>
     <string name="mute">STUMM</string>
     <string name="show_mute">Zeige "stumm"-Funktion (Experimentell)</string>
+    <string name="show_verbose">Zusätzliche Informationen</string>
+    <string name="show_verbose_summary">Zeige zusätzliche Informationen (z.B. das aktuell übertragende Pattern) in der Fortschrittsanzeige an.</string>
+    <string name="old_dialog">Vereinfachte Fortschrittsanzeige</string>
+    <string name="old_dialog_summary">Verwende die alte kreisförmige Forschrittsanzeige.</string>
+    <string name="category_appearance">Aussehen</string>
+    <string name="category_transmission">Patterns</string>
 </resources>

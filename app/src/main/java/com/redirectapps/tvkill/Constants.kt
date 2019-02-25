@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Sebastian Kappes
+ * Copyright (C) 2018 Jonas Lochmann
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,19 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http:></http:>//www.gnu.org/licenses/>.
  */
-package com.redirectapps.tvkill;
+package com.redirectapps.tvkill
 
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-
-
-public class Preferences extends PreferenceActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-    }
+object PendingIntents {
+    const val WIDGET_POWER_OFF = 1
+    const val WIDGET_CANCEL = 2
+    const val NOTIFICATION_CANCEL = 3
 }

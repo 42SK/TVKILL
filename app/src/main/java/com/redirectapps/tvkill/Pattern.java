@@ -1,19 +1,19 @@
 /**
-*   Copyright (C) 2015 Sebastian Kappes
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (C) 2015 Sebastian Kappes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.redirectapps.tvkill;
 
 import android.content.Context;
@@ -26,7 +26,7 @@ public class Pattern {
 
     private int[] pattern;
     private int frequency;
-    private boolean converted=false;
+    private boolean converted = false;
 
     //This method converts the remotes pattern, if this has not been done yet, and passes the converted pattern to the initiate-method.
     public void send(Context c) {
@@ -46,32 +46,31 @@ public class Pattern {
     }
 
 
-    protected Pattern(int frequency, int[] pattern){
-        this.frequency=frequency;
-        this.pattern=pattern;
+    protected Pattern(int frequency, int[] pattern) {
+        this.frequency = frequency;
+        this.pattern = pattern;
     }
 
-    protected Pattern(int[] ircode){
-        this.frequency=ircode[0];
-        this.pattern= Arrays.copyOfRange(ircode, 1, ircode.length);
+    protected Pattern(int[] ircode) {
+        this.frequency = ircode[0];
+        this.pattern = Arrays.copyOfRange(ircode, 1, ircode.length);
     }
-
 
 
     /*
-    * The following method preforms calculations on the IR-codes in order to make them work on certain devices.
-    *
-    * Patterns have to be converted on devices running on Android Lollipop or newer and HTC devices.
-    * Certain Samsung devices also require a converted PAttern,depending on their Android version.
-    * Older devices including Samsung devices running on an android version older than 4.4.3 can use the unconverted patterns, in that case, this method simply returns the input data.
-    *
-    */
+     * The following method preforms calculations on the IR-codes in order to make them work on certain devices.
+     *
+     * Patterns have to be converted on devices running on Android Lollipop or newer and HTC devices.
+     * Certain Samsung devices also require a converted Pattern, depending on their Android version.
+     * Older devices including Samsung devices running on an android version older than 4.4.3 can use the unconverted patterns, in that case, this method simply returns the input data.
+     *
+     */
     private static int[] convert(int[] irData, int frequency) {
 
         // 1. Determine which conversion-algorithm shall be used (see the comment above this method for more details)
         byte convert = 0;
         //Devices running on Android Lollipop (Android 5.0.1 (API 21)) and beyond, HTC devices
-        if (Build.VERSION.SDK_INT >= 21||Build.MANUFACTURER.equalsIgnoreCase("HTC")) {
+        if (Build.VERSION.SDK_INT >= 21 || Build.MANUFACTURER.equalsIgnoreCase("HTC")) {
             convert = 1;
         } else {
             //Samsung devices running on anything lower than Android 5
@@ -98,7 +97,8 @@ public class Pattern {
                         irData[i] = irData[i] * (1000000 / frequency);
                         break;
                     case 2:
-                        irData[i] = (int) Math.ceil(irData[i] * 26.27272727272727); //converted as suggested by Samsung: http://developer.samsung.com/android/technical-docs/Workaround-to-solve-issues-with-the-ConsumerIrManager-in-Android-version-lower-than-4-4-3-KitKat
+                        irData[i] = (int) Math.ceil(irData[i] * 26.27272727272727);
+                        //converted as suggested by Samsung: http://developer.samsung.com/android/technical-docs/Workaround-to-solve-issues-with-the-ConsumerIrManager-in-Android-version-lower-than-4-4-3-KitKat
                         break;
                 }
             }
@@ -106,6 +106,4 @@ public class Pattern {
         return irData;
 
     }
-
-
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#fff</color>
     <color name="killred">#ff3d00</color>
     <color name="startgreen">#76ff03</color>
     <color name="stopred">#ff3d00</color>
