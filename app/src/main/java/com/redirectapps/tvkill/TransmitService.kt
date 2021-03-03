@@ -239,6 +239,7 @@ class TransmitService : Service() {
                                 }
 
                                 brand.mute(this)
+                                Brand.wait(this)
                             }
                         } else {
                             throw IllegalStateException()
