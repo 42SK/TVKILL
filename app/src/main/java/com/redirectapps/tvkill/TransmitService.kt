@@ -299,7 +299,7 @@ class TransmitService : Service() {
             return
         }
 
-        val request = status.value
+        val serviceStatus = status.value
         val appRunning = isAppInForeground.value
 
         if (appRunning!!) {
@@ -308,23 +308,23 @@ class TransmitService : Service() {
                 isNotificationVisible = false
             }
         } else {
-            if (request == null)
+            if (serviceStatus == null)
                 return
-            if (request.request.forever) {
+            if (serviceStatus.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
                 notificationBuilder.setProgress(100, 0, true)
             } else {
                 notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
 
-                if (request.progress != null) {
-                    notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
+                if (serviceStatus.progress != null) {
+                    notificationBuilder.setProgress(serviceStatus.progress.max, serviceStatus.progress.current, false)
 
                     //Also update the progress dialog (if present)
                     if (MainActivity.progressDialog != null) {
-                        MainActivity.progressDialog.max = request.progress.max
-                        MainActivity.progressDialog.progress = request.progress.current + 1
+                        MainActivity.progressDialog.max = serviceStatus.progress.max
+                        MainActivity.progressDialog.progress = serviceStatus.progress.current + 1
                         if (verboseInformation)
-                            MainActivity.progressDialog.setProgressNumberFormat(request.progress.brandName.capitalize() + " (%1d/%2d)")
+                            MainActivity.progressDialog.setProgressNumberFormat(serviceStatus.progress.brandName.capitalize() + " (%1d/%2d)")
                     }
                 }
             }
