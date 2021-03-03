@@ -44,7 +44,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
         View listItem = inflater.inflate(R.layout.list_item, parent, false);
 
         //Get the Brand for this position
-        final Brand BrandItem = getItem(position);
+        final Brand brandItem = getItem(position);
 
         //Find the views
         TextView BrandName = listItem.findViewById(R.id.designation);
@@ -52,7 +52,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
         Button individualMUTE = listItem.findViewById(R.id.individualMute);
 
         //Set the brad's name
-        BrandName.setText(BrandItem.getDesignation());
+        BrandName.setText(brandItem.getDesignation());
         //Set the action of the off-button
         individualOFF.setOnClickListener(v -> {
             if (MainActivity.isRepetitiveModeRunning()) {
@@ -64,7 +64,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
                 final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c, true);
                 Thread transmit = new Thread() {
                     public void run() {
-                        BrandItem.kill(c);
+                        brandItem.kill(c);
                         transmittingInfo.dismiss();
                     }
                 };
@@ -97,7 +97,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
                     final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c, true);
                     Thread transmit = new Thread() {
                         public void run() {
-                            BrandItem.mute(c);
+                            brandItem.mute(c);
                             transmittingInfo.dismiss();
                         }
                     };
