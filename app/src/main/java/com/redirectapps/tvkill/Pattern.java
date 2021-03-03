@@ -97,12 +97,25 @@ public class Pattern {
             }
         }
 
-        // 2. Convert the patterns
+        // 2. Avoid "Non-positive IR slice" error by removing 0 values
+        int[] tempIrData = new int[irData.length];
+        int j = 0;
+        for (int value : irData) {
+            if (value > 0) {
+                tempIrData[j] = value;
+                j++;
+            }
+        }
+        if (j != irData.length) {
+            irData = Arrays.copyOf(tempIrData, j);
+        }
+
+        // 3. Convert the patterns
         if (convert != 0) {
             for (int i = 0; i < irData.length; i++) {
                 switch (convert) {
                     case 1:
-                        irData[i] = irData[i] * (1000000 / frequency);
+                        irData[i] = irData[i] * (1000000 / frequency); // Risk of dividing by zero if frequency is 0
                         break;
                     case 2:
                         irData[i] = (int) Math.ceil(irData[i] * 26.27272727272727);
@@ -112,6 +125,5 @@ public class Pattern {
             }
         }
         return irData;
-
     }
 }
