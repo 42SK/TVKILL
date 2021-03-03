@@ -96,7 +96,7 @@ class TransmitService : Service() {
         super.onCreate()
 
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TransmitService")
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TVKILL:TransmitService")
 
         val cancelIntent = buildIntent(TransmitServiceCancelRequest, this)
         val pendingCancelIntent = PendingIntent.getService(this, PendingIntents.NOTIFICATION_CANCEL, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -183,6 +183,7 @@ class TransmitService : Service() {
             executor.submit {
                 fun execute() {
                     if (request.brandName == null) {
+                        // All brands
                         if (request.action == TransmitServiceAction.Off) {
                             verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
 
@@ -198,7 +199,10 @@ class TransmitService : Service() {
                             }
                             var transmittedPatterns = 0
 
-                            // transmit all patterns
+                            // transmit all patterns according to their priority
+                            // - First pattern in each brand first,
+                            // - Second pattern in each brand after,
+                            // - etc.
                             for (i in 0 until depth) {
                                 for (brand in BrandContainer.allBrands) {
                                     if (cancel.isCanceled) {
@@ -240,6 +244,7 @@ class TransmitService : Service() {
                             throw IllegalStateException()
                         }
                     } else {
+                        // One brand only
                         val brand = BrandContainer.brandByDesignation[request.brandName]
                                 ?: throw IllegalStateException()
 
