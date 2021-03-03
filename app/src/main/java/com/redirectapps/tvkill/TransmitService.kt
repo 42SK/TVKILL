@@ -211,7 +211,7 @@ class TransmitService : Service() {
                                         if (!request.forever) {
                                             status.postValue(TransmitServiceStatus(
                                                     request,
-                                                    TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                                    TransmitServiceProgress(brand.designation, transmittedPatterns++, numOfPatterns)
                                             ))
                                         }
 
@@ -232,7 +232,7 @@ class TransmitService : Service() {
                                 if (!request.forever) {
                                     status.postValue(TransmitServiceStatus(
                                             request,
-                                            TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                            TransmitServiceProgress(brand.designation, transmittedPatterns++, numOfPatterns)
                                     ))
                                 }
 
@@ -324,12 +324,7 @@ class TransmitService : Service() {
                         MainActivity.progressDialog.max = request.progress.max
                         MainActivity.progressDialog.progress = request.progress.current + 1
                         if (verboseInformation)
-                            try {
-                                MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize() + " (%1d/%2d)")
-                            } catch (e: ArrayIndexOutOfBoundsException) {
-                                //There is no obvious reason why this exception should occur, but, according to crash reports from Google Play, it does happen.
-                                e.printStackTrace()
-                            }
+                            MainActivity.progressDialog.setProgressNumberFormat(request.progress.brandName.capitalize() + " (%1d/%2d)")
                     }
                 }
             }
@@ -352,6 +347,12 @@ enum class TransmitServiceAction {
     Off, Mute
 }
 
-data class TransmitServiceProgress(val current: Int, val max: Int)
+/*
+ * Pogress object emitted during iteration on the patterns of all brands
+ * - brandName: Name of the current processed brand (designation)
+ * - current: Number of processed patterns until now
+ * - max: Number of all patterns
+ */
+data class TransmitServiceProgress(val brandName: String, val current: Int, val max: Int)
 
 class TransmitServiceStatus(val request: TransmitServiceSendRequest, val progress: TransmitServiceProgress?)
