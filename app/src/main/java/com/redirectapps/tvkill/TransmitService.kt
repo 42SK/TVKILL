@@ -185,8 +185,6 @@ class TransmitService : Service() {
                     if (request.brandName == null) {
                         // All brands
                         if (request.action == TransmitServiceAction.Off) {
-                            verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
-
                             // check if additional patterns should be transmitted
                             var depth = 1
 
@@ -258,7 +256,10 @@ class TransmitService : Service() {
                 }
 
                 try {
-                    status.postValue(TransmitServiceStatus(request, null))  // inform about this request
+                    // Status on ProgressDialog
+                    verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
+                    // inform about this request
+                    status.postValue(TransmitServiceStatus(request, null))
 
                     if (request.forever) {
                         while (!cancel.isCanceled) {
