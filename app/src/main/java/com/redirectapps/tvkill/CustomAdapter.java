@@ -74,6 +74,10 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
 
         //Set the action of the off-button and adjust the layout if the mute-option is enabled and available
         if (muteEnabled) {
+            if (brandItem.getMute().getFrequency() == 0 || brandItem.getMute().getPatternLength() == 0) {
+                // Do not show MUTE button if no pattern
+                return listItem;
+            }
             //Change the visibility
             individualMUTE.setVisibility(View.VISIBLE);
 

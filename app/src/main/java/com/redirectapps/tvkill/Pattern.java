@@ -56,6 +56,14 @@ public class Pattern {
         this.pattern = Arrays.copyOfRange(ircode, 1, ircode.length);
     }
 
+    public int getFrequency() {
+        return this.frequency;
+    }
+
+    public int getPatternLength() {
+        return this.pattern.length;
+    }
+
 
     /*
      * The following method preforms calculations on the IR-codes in order to make them work on certain devices.
