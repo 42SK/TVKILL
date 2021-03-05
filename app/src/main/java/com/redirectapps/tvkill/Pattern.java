@@ -51,11 +51,6 @@ public class Pattern {
         this.pattern = pattern;
     }
 
-    protected Pattern(int[] ircode) {
-        this.frequency = ircode[0];
-        this.pattern = Arrays.copyOfRange(ircode, 1, ircode.length);
-    }
-
     public int getFrequency() {
         return this.frequency;
     }
