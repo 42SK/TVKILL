@@ -84,7 +84,7 @@ public class Pattern {
             //Samsung devices running on anything lower than Android 5
             if (Build.MANUFACTURER.equalsIgnoreCase("SAMSUNG")) {
                 int lastIdx = Build.VERSION.RELEASE.lastIndexOf(".");
-                int VERSION_MR = Integer.valueOf(Build.VERSION.RELEASE.substring(lastIdx + 1));
+                int VERSION_MR = Integer.parseInt(Build.VERSION.RELEASE.substring(lastIdx + 1));
                 if (VERSION_MR < 3) {
                     // Samsung devices with Android-version before Android 4.4.2
                     //-> no calculations required
