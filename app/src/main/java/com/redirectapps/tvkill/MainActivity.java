@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
     }
 
 
-    //This method initiates the transmission and displays a progress Dialog
+    //This method initiates the transmission and displays a progress Dialog (Off/Mute modes; universal remote mode)
     public static void kill(Context c, final char button) {
         if (isRepetitiveModeRunning()) {
             //Show the repetitiveModeActiveDialog
@@ -213,7 +213,7 @@ public class MainActivity extends Activity {
         return status != null && status.getRequest().getForever();
     }
 
-    //This method is called when the repetitive-button is clicked.
+    //This method is called when the repetitive-button is clicked (Off mode only).
     // It either starts or stops the RepetitiveModeService depending on if it is running or not.
     public void repetitiveMode(View v) {
         if (isRepetitiveModeRunning()) {
