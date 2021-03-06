@@ -121,7 +121,6 @@ public class MainActivity extends Activity {
             try {
                 //Show a progress dialog and transmit all patterns
                 progressDialog = getProgressDialog(c, false);
-                progressDialog.show();
                 transmit = new Thread() {
                     public void run() {
                         switch (button) {
@@ -194,8 +193,10 @@ public class MainActivity extends Activity {
     //This method returns a ProgressDialog
     public static ProgressDialog getProgressDialog(final Context c, boolean singlePattern) {
         if (singlePattern)
+            // 1 brand or 1 pattern: not cancelable
             return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
 
+        // Multiple brands: ability to stop transmission
         ProgressDialog pd = new ProgressDialog(c);
         pd.setProgressStyle(getDefaultSharedPreferences(c).getBoolean("old_dialog", false)
                 ? ProgressDialog.STYLE_SPINNER : ProgressDialog.STYLE_HORIZONTAL);
@@ -204,6 +205,7 @@ public class MainActivity extends Activity {
         pd.setMessage(c.getString(R.string.pd_please_wait));
         pd.setCancelable(true);
         pd.setOnCancelListener(dialogInterface -> TransmitService.Companion.executeRequest(TransmitServiceCancelRequest.INSTANCE, c));
+        pd.show();
         return pd;
     }
 
@@ -307,7 +309,6 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, Preferences.class);
         startActivity(intent);
     }
-
 
     //This method displays a fragment
     void displayFragment(Fragment fragment, String tag) {
