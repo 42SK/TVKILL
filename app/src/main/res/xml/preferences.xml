@@ -16,7 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/category_appearance">
         <CheckBoxPreference
             android:defaultValue="false"
@@ -51,6 +52,16 @@
             android:summary="@string/delay_summary"
             android:title="@string/delay" />
 
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/category_pattern_db">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="custom_pattern_db_checkbox"
+            android:summary="@string/custom_pattern_db_checkbox_summary"
+            android:title="@string/custom_pattern_db_checkbox_title" />
+        <Preference
+            android:key="pattern_db_file"
+            android:title="@string/pattern_db_file_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

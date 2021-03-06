@@ -18,11 +18,16 @@
  */
 package com.redirectapps.tvkill
 
+import android.net.Uri
+import android.preference.PreferenceManager
 import android.util.Log
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.FileNotFoundException
 import java.io.IOException
+import java.io.InputStream
+import java.lang.Exception
 import java.util.*
 
 // Kotlin Singleton
@@ -52,12 +57,37 @@ object BrandContainer {
       2. The alternating on/off pattern in periods of the carrier frequency
     */
 
+    private const val LAST_OPENED_URI_KEY = "last_opened_key"
 
     // Load JSON asset with patterns per brand
     fun loadJSONFromAsset(): String? {
-        var jsonData: String? = null
-        jsonData = try {
-            val stream = MainActivity.getContext().getAssets().open("brand_patterns.json")
+        val jsonData: String? = try {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.getContext())
+            var stream: InputStream
+            // Reload user's custom DB file
+            if (sharedPreferences.getBoolean("custom_pattern_db_checkbox", false) && sharedPreferences.contains(LAST_OPENED_URI_KEY)) {
+                try {
+                    val documentUri = Uri.parse(sharedPreferences.getString(LAST_OPENED_URI_KEY, null))
+                    stream = MainActivity.getContext().contentResolver.openInputStream(documentUri)
+                } catch (e: Exception) {
+                    e.printStackTrace();
+                    when (e) {
+                        // An error occurred: reset related preferences and load default DB
+                        is IllegalArgumentException, is SecurityException, is FileNotFoundException, is NullPointerException -> {
+                            // Reset Uri in prefs
+                            sharedPreferences.edit().remove(LAST_OPENED_URI_KEY).apply()
+                            // Disable custom DB in prefs
+                            sharedPreferences.edit().putBoolean("custom_pattern_db_checkbox", false).apply()
+                            // Fallback
+                            stream = MainActivity.getContext().getAssets().open("brand_patterns.json")
+                        }
+                        else -> throw e
+                    }
+                }
+            } else {
+                // Load default DB
+                stream = MainActivity.getContext().getAssets().open("brand_patterns.json")
+            }
             val size = stream.available()
             val buffer = ByteArray(size)
             stream.read(buffer)
