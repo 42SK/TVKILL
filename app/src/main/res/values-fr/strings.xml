@@ -62,7 +62,7 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">C\'est une télécommande universelle. Vous pouvez éteindre nimporte quelle TV en pointant votre smartphone vers la TV et en pressant le bouton rouge. Lorsque le bouton est pressé, votre smartphone va transmettre une variété de signaux infrarouges de différentes marques vers la TV ce qui va l\'éteindre.</string>
+    <string name="help_universal_mode">Il s\'agit d\'une télécommande universelle. Vous pouvez éteindre n\'importe quel appareil en pointant votre ordiphone vers lui, puis en pressant le bouton rouge. L\'ordiphone va transmettre une variété de signaux infrarouges de diverses marques dans ce but.</string>
     <string name="help_repetitive_mode">Ce mode fonctionne comme le mode universel, sauf que votre smartphone transmettra les signaux infrarouges en boucle. Cela va aussi continuer de transmettre lorsque vous fermez l\'application ou que vous verrouillez l\'écran. Pour arrêter le mode répétitif, pressez simplement le bouton une seconde fois.</string>
     <string name="help_individual_mode">Vous pouvez éteindre des TV de marques spécifiques ici.</string>
     <string name="got_it">D\'accord</string>

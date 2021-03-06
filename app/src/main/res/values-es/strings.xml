@@ -58,7 +58,7 @@
     <string name="stop">PARAR</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">Este es el modo universal. Tu puedes apagar cualquier televisor apuntando tu celular a la TV y presionando el boton rojo. cuando el boton es oprimido, tu celular enviara una variedad de patrones-IR de diferentes marcas al televisor, eso hara que el televisor se apague.</string>
+    <string name="help_universal_mode">Se trata de un mando a distancia universal. Puedes apagar cualquier dispositivo apuntando el smartphone hacia él y pulsando el botón rojo. Para ello, el smartphone transmitirá una serie de señales infrarrojas de varias marcas.</string>
     <string name="help_repetitive_mode">Este modo funciona igual que el modo universal, solamente que el teléfono transmitirá el patron-IR una y otra vez, hasta que presiones el boton. Esto tambien continuara transmitiendo cuando tu cierres la aplicacion o bloquees el telefono. Para parar el modo repetitivo, solo aprieta el boton denuevo.</string>
     <string name="help_individual_mode">Puedes apagar los televisores de marcas específicas aquí.</string>
     <string name="got_it">Lo tengo</string>

@@ -62,7 +62,7 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">Toto je univerzální mód. Namiřte svůj telefon na televizi a stiskněte červené tlačítko. Jakmile stisknete tlačítko, Váš telefon vyšle několik infra-červených signálů pro různé značky, které televizi vypnou</string>
+    <string name="help_universal_mode">Toto je univerzální dálkové ovládání. Libovolné zařízení můžete vypnout nasměrováním smartphonu na něj a stisknutím červeného tlačítka. Za tímto účelem bude smartphone přenášet různé infračervené signály od různých značek.</string>
     <string name="help_repetitive_mode">Tento mód funguje stejně jako univerzální mód, jen váš telefon bude přenášet IR signály pořád dokola jakmile stisknete tlačítko. Bude pokračovat v přenosu když zavřete aplikaci nebo zamknete  obrazovku telefonu. Pro zastavení přenosu, stiskněte tlačítko po druhé.</string>
     <string name="help_individual_mode">Zde můžete vypnout televize jednotlivých značek.</string>
     <string name="got_it">Mám to</string>

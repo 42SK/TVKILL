@@ -64,7 +64,7 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">This is the universal-mode. You can turn off any TV by pointing your phone at the TV and pressing the red button. When the button is pressed, your phone will transmit a variety of IR-patterns from different brands to the TV, which will turn the TV off.</string>
+    <string name="help_universal_mode">It is a universal remote control. You can turn off any device by pointing your smartphone at it and pressing the red button. The smartphone will transmit a variety of infrared signals from various brands for this purpose.</string>
     <string name="help_repetitive_mode">This mode works just like the universal-mode, only that your phone will transmit the IR-patterns over and over again once you have pressed the button. It will also continue to transmit when you close the application or lock your phone\'s screen. To stop the repetitive-mode, just press the button a second time.</string>
     <string name="help_individual_mode">You can turn off TVs from specific brands here.</string>
     <string name="got_it">Got it</string>
