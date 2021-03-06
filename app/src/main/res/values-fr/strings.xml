@@ -75,7 +75,7 @@
     <string name="show_verbose">Informations de transmission supplémentaires</string>
     <string name="show_verbose_summary">Afficher des informations supplémentaires (comme le signal actuellement transmis) dans le pop-up de progression lors de la transmission des signaux.</string>
     <string name="depth">Signaux additionnels</string>
-    <string name="depth_summary">Cette option augmente la probabilité qu\'un appareil soit éteint, mais aussi la durée de la transmission.</string>
+    <string name="depth_summary">Augmente la probabilité qu\'un appareil soit éteint, mais aussi la durée de la transmission. Si désactivé : n\'émet que le premier signal connu pour chaque marque.</string>
     <string name="delay">Délai entre les signaux (en millisecondes)</string>
     <string name="delay_summary">Certains récepteurs interprêtent mal les commandes quand de multiples signaux sont envoyés les uns après les autres. Vous pouvez ajuster le délai entre les différents signaux ici pour éviter toute mauvaise interprétation.</string>
     <string name="show_mute">Afficher le bouton muet (Expérimental)</string>

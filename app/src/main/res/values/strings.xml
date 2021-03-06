@@ -77,7 +77,7 @@
     <string name="show_verbose">Additional progress information</string>
     <string name="show_verbose_summary">Show additional information (such as the pattern currently being transmitted) in the progress dialog when transmitting all patterns.</string>
     <string name="depth">Additional patterns</string>
-    <string name="depth_summary">This option increases the probability that a device is turned off, but also the duration of the transmission.</string>
+    <string name="depth_summary">"Increases the probability that a device is turned off, but also the duration of the transmission. If disabled: only emits the first known signal for each brand. "</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
     <string name="delay_summary">Some receivers misinterpret commands when multiple signals are sent one after the other. You can adjust the delay between different signals here to avoid misinterpretation.</string>
     <string name="show_mute">Show mute-button (Experimental)</string>

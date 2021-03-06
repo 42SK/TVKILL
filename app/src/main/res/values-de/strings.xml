@@ -40,7 +40,7 @@
     <string name="got_it">OK</string>
     <string name="help_individual_mode">Hier können Sie bestimmte Markengeräte ausschalten.</string>
     <string name="depth">Zusätzliche Patterns</string>
-    <string name="depth_summary">Diese Option erhöht die Wahrscheinlichkeit, dass ein Gerät ausgeschaltet wird, aber auch die Dauer der Übertragung.</string>
+    <string name="depth_summary">Erhöht die Wahrscheinlichkeit, dass ein Gerät ausgeschaltet wird, aber auch die Dauer der Übertragung. Wenn deaktiviert: Gibt nur das erste bekannte Signal für jede Marke aus.</string>
     <string name="toast_transmission_completed">Alle Patterns wurden gesendet!</string>
     <string name="toast_transmission_initiated">Patterns werden gesendet…</string>
     <string name="allBrands">Alle Hersteller</string>

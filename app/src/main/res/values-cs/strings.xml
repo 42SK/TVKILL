@@ -75,7 +75,7 @@
     <string name="show_verbose">Přídavné informace o postupu</string>
     <string name="show_verbose_summary">Zobrazit přídavné informace (například vzorec, který se právě přenáší) v dialogu postupu když se přenáší všechny vzorce.</string>
     <string name="depth">Přídavné vzorce signálů</string>
-    <string name="depth_summary">Tato možnost zvyšuje pravděpodobnost vypnutí zařízení, ale také dobu přenosu.</string>
+    <string name="depth_summary">Zvyšuje pravděpodobnost, že je zařízení vypnuto, ale také dobu trvání přenosu. Pokud je zakázáno: vydává pouze první známý signál pro každou značku.</string>
     <string name="delay">Pauza mezi signály (v milisekundách)</string>
     <string name="delay_summary">Některé přijímače nesprávně interpretují příkazy, když je vysíláno více signálů jeden po druhém. Zde můžete nastavit zpoždění mezi různými signály, aby nedošlo k nesprávné interpretaci.</string>
     <string name="show_mute">Zobrazit tlačítko ztlumení (Experimentální)</string>

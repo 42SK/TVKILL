@@ -67,7 +67,7 @@
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>
-    <string name="depth_summary">Esta opción aumenta la probabilidad de que un dispositivo se apague, pero también la duración de la transmisión.</string>
+    <string name="depth_summary">Aumenta la probabilidad de que un dispositivo se apague, pero también la duración de la transmisión. Si está desactivado: solo emite la primera señal conocida para cada marca.</string>
     <string name="delay">Retraso entre patrones (en milisegundos)</string>
     <string name="delay_summary">Algunos receptores malinterpretan los comandos cuando se envían múltiples señales una tras otra. Puede ajustar el retardo entre diferentes señales aquí para evitar malas interpretaciones.</string>
     <string name="show_mute">Mostrar el boton de silenciar (Experimental)</string>
