@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2015 Sebastian Kappes
+ * Copyright (C) 2021 Ysard
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -79,11 +80,22 @@ public class Preferences extends PreferenceActivity {
             }
         });
 
+        // Monitor changes in custom database checkbox
         customDbCheckbox.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Boolean state = (Boolean) newValue;
                 // Switch filepicker status according to the status of its checkbox
-                filePicker.setEnabled((Boolean) newValue);
+                filePicker.setEnabled(state);
+
+                // DB previously selected or uncheck = restart the app/BrandContainer singleton
+                // PS: There is no validity test on this file, this is useless since BrandContainer
+                // will reset checkbox and file fields if it encounters a loading problem.
+                if(!state || sharedPreferences.getString(LAST_OPENED_URI_KEY, null) != null) {
+                    // Set pref manually before restart
+                    sharedPreferences.edit().putBoolean("custom_pattern_db_checkbox", state).apply();
+                    MainActivity.restart();
+                }
                 return true;
             }
         });
@@ -112,6 +124,9 @@ public class Preferences extends PreferenceActivity {
             ).apply();
 
             this.findPreference("pattern_db_file").setSummary(getFileName(documentUri));
+
+            // Restart the app/BrandContainer singleton
+            MainActivity.restart();
         }
     }
 
