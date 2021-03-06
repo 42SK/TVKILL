@@ -44,10 +44,12 @@ public class MainActivity extends Activity {
 
     public static int repetitiveModeBrand;
     public static ProgressDialog progressDialog;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         //Initialize the TabLayout
@@ -319,5 +321,9 @@ public class MainActivity extends Activity {
         stopRepetitiveMode(this);
 
         super.onDestroy();
+    }
+
+    public static Context getContext() {
+        return MainActivity.context;
     }
 }
