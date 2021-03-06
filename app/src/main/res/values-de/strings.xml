@@ -39,8 +39,6 @@
     <string name="help_repetitive_mode">Dieser Modus funktioniert wie die Universal-Fernbedienung, nur dass die IR-Patterns immer wieder gesendet werden. Dein Gerät sendet auch dann Signale an den Fernseher wenn du die App verlässt oder die Bildschirmsperre aktivierst. Drücke den Knopf einfach erneut, um den Unendlich-Modus zu stoppen.</string>
     <string name="got_it">OK</string>
     <string name="help_individual_mode">Hier können Sie bestimmte Markengeräte ausschalten.</string>
-    <string name="pattern_for">Signal für</string>
-    <string name="sent">gesendet</string>
     <string name="depth">Zusätzliche Patterns</string>
     <string name="depth_summary">Diese Option erhöht die Wahrscheinlichkeit, dass ein Gerät ausgeschaltet wird, aber auch die Dauer der Übertragung.</string>
     <string name="toast_transmission_completed">Alle Patterns wurden gesendet!</string>

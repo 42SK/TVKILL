@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
@@ -70,8 +70,6 @@
     <string name="got_it">Got it</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Signal for</string>
-    <string name="sent">sent</string>
 
     <!-- Preference Strings -->
     <string name="category_appearance">Appearance</string>

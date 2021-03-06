@@ -12,7 +12,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
@@ -64,8 +64,6 @@
     <string name="got_it">Lo tengo</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Señal para</string>
-    <string name="sent">Enviado</string>
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>

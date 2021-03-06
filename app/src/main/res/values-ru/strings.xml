@@ -68,8 +68,6 @@
     <string name="got_it">Понял</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Сигнал для</string>
-    <string name="sent">Отправить</string>
 
     <!-- Preference Strings -->
     <string name="category_appearance">Внешний вид</string>

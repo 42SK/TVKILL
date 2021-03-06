@@ -68,8 +68,6 @@
     <string name="got_it">D\'accord</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Signal pour</string>
-    <string name="sent">envoyé</string>
 
     <!-- Preference Strings -->
     <string name="category_appearance">Apparence</string>

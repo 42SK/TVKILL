@@ -68,8 +68,6 @@
     <string name="got_it">Mám to</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Signál pro</string>
-    <string name="sent">posláno</string>
 
     <!-- Preference Strings -->
     <string name="category_appearance">Vzhled</string>
