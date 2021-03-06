@@ -25,7 +25,7 @@ import java.util.Arrays;
 public class Pattern {
 
     private int[] pattern;
-    private int frequency;
+    private final int frequency;
     private boolean converted = false;
 
     //This method converts the remotes pattern, if this has not been done yet, and passes the converted pattern to the initiate-method.

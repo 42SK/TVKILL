@@ -70,7 +70,6 @@ object BrandContainer {
         return jsonData
     }
 
-
     // Get a Pattern object based on the given JSON object
     fun buildPattern(jsonPattern: JSONObject): Pattern {
 
@@ -83,7 +82,6 @@ object BrandContainer {
         }
         return Pattern(frequency, numbers)
     }
-
 
     // Load Brands and their patterns from JSON asset
     @JvmStatic
@@ -106,7 +104,7 @@ object BrandContainer {
                 }
 
                 // Get Mute pattern
-                var mutePattern: Pattern? = null;
+                var mutePattern: Pattern?;
                 if (jsonBrand.has("mute")) {
                     val jsonMutePattern = jsonBrand.getJSONObject("mute")
                     mutePattern = buildPattern(jsonMutePattern)
@@ -126,7 +124,6 @@ object BrandContainer {
         }
         brands.toTypedArray()
     }
-
 
     // Map brands by their names
     val brandByDesignation: Map<String, Brand> by lazy {
