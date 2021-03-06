@@ -56,4 +56,8 @@
     <string name="old_dialog_summary">Verwende die alte kreisförmige Forschrittsanzeige.</string>
     <string name="category_appearance">Aussehen</string>
     <string name="category_transmission">Patterns</string>
+    <string name="pattern_db_file_title">Öffnen einer Musterdatei in JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Benutzerdefinierte Datenbank verwenden</string>
+    <string name="category_pattern_db">Signal-Datenbank</string>
+    <string name="custom_pattern_db_checkbox_summary">Wenn Sie eine solche Datei laden, können Sie Ihre eigenen Signale verwenden. Bitte beachten Sie, dass diese Option einen Neustart der Anwendung erfordert.</string>
 </resources>

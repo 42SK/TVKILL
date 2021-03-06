@@ -73,5 +73,15 @@
     <string name="delay">Retraso entre patrones (en milisegundos)</string>
     <string name="delay_summary">Algunos televisores malinterpretan comandos cuando múltiples señales se envían directamente uno tras otro. Se puede ajustar el retardo entre los patrones individuales para evitar malas interpretaciones.</string>
     <string name="show_mute">Mostrar el boton de silenciar (Experimental)</string>
+    <string name="pattern_db_file_title">Abrir un archivo de señales en JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Utilizar una base de datos personalizada</string>
+    <string name="category_pattern_db">Base de datos de señales</string>
+    <string name="category_appearance">Apariencia</string>
+    <string name="category_transmission">Transmisión de señales</string>
+    <string name="show_verbose">Información adicional sobre la transmisión</string>
+    <string name="show_verbose_summary">Mostrar información adicional (como la señal transmitida actualmente) en la ventana emergente de progreso cuando se transmiten señales.</string>
+    <string name="old_dialog">Pop-up de progresión simplificado</string>
+    <string name="old_dialog_summary">Utilizando la antigua progresión circular emergente</string>
+    <string name="custom_pattern_db_checkbox_summary">La carga de un archivo de este tipo le permitirá utilizar sus propias señales. Tenga en cuenta que esta opción requiere un reinicio de la aplicación.</string>
 
 </resources>

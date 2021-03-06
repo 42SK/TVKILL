@@ -85,5 +85,9 @@
     <string name="show_mute">Show mute-button (Experimental)</string>
     <string name="old_dialog">Simplified progress dialog</string>
     <string name="old_dialog_summary">Use the old circular progress dialog</string>
+    <string name="category_pattern_db">Pattern database</string>
+    <string name="pattern_db_file_title">Open a JSON pattern file</string>
+    <string name="custom_pattern_db_checkbox_title">Use custom database</string>
+    <string name="custom_pattern_db_checkbox_summary">Loading such a file will allow you to use your own signals. Please note that this option requires a restart of the application.</string>
 
 </resources>

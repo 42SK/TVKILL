@@ -83,5 +83,9 @@
     <string name="show_mute">Afficher le bouton muet (Expérimental)</string>
     <string name="old_dialog">Pop-up de progression simplifié</string>
     <string name="old_dialog_summary">Utiliser l\'ancien pop-up de progression circulaire</string>
+    <string name="category_pattern_db">Base de données de signaux</string>
+    <string name="pattern_db_file_title">Ouvrir un fichier au format JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Utiliser une base de données personnalisée</string>
+    <string name="custom_pattern_db_checkbox_summary">Charger un tel fichier vous permettra d\'utiliser vos propres signaux. Veuillez noter que cette option nécessite un redémarrage de l\'application.</string>
 
 </resources>

@@ -83,5 +83,9 @@
     <string name="show_mute">Показать кнопку mute (эксперементальная опция)</string>
     <string name="old_dialog">Упрощённый диалог процесса</string>
     <string name="old_dialog_summary">Использовать старый круговой диалог выполнения</string>
+    <string name="pattern_db_file_title">Открыть файл шаблона в JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Использовать пользовательскую базу данных</string>
+    <string name="category_pattern_db">База данных сигналов</string>
+    <string name="custom_pattern_db_checkbox_summary">Загрузка такого файла позволит Вам использовать собственные сигналы. Обратите внимание, что этот вариант требует перезапуска приложения.</string>
 
 </resources>

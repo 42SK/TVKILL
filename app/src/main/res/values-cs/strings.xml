@@ -83,5 +83,9 @@
     <string name="show_mute">Zobrazit tlačítko ztlumení (Experimentální)</string>
     <string name="old_dialog">Zjednodušený dialog postupu</string>
     <string name="old_dialog_summary">Používat starý kruhový dialog postupu</string>
+    <string name="category_pattern_db">Databáze vzorů</string>
+    <string name="pattern_db_file_title">Otevřete soubor ve formátu JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Použijte vlastní databázi</string>
+    <string name="custom_pattern_db_checkbox_summary">Načtení takového souboru vám umožní použít vaše vlastní signály. Pamatujte, že tato možnost vyžaduje restart aplikace.</string>
 
 </resources>
