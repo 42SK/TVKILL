@@ -32,7 +32,7 @@
     <string name="toast_found">IR blaster Encontrado</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">No IR blaster</string>
-    <string name="blaster_dialog_body">Para poder apagar las TV\'S, Tú teléfono debe tener un receptor de infrarrojos incorporado.</string>
+    <string name="blaster_dialog_body">Para apagar los dispositivos, su teléfono inteligente debe estar equipado con un emisor de infrarrojos incorporado.</string>
     <string name="learn_more">Más Información</string>
     <string name="ok">OK</string>
 
@@ -69,9 +69,9 @@
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>
-    <string name="depth_summary">Esta opcion incrementara la probabilidad que el televisor se apague, pero aumentara la duracion de la transmision</string>
+    <string name="depth_summary">Esta opción aumenta la probabilidad de que un dispositivo se apague, pero también la duración de la transmisión.</string>
     <string name="delay">Retraso entre patrones (en milisegundos)</string>
-    <string name="delay_summary">Algunos televisores malinterpretan comandos cuando múltiples señales se envían directamente uno tras otro. Se puede ajustar el retardo entre los patrones individuales para evitar malas interpretaciones.</string>
+    <string name="delay_summary">Algunos receptores malinterpretan los comandos cuando se envían múltiples señales una tras otra. Puede ajustar el retardo entre diferentes señales aquí para evitar malas interpretaciones.</string>
     <string name="show_mute">Mostrar el boton de silenciar (Experimental)</string>
     <string name="pattern_db_file_title">Abrir un archivo de señales en JSON</string>
     <string name="custom_pattern_db_checkbox_title">Utilizar una base de datos personalizada</string>

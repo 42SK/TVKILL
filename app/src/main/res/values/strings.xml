@@ -36,7 +36,7 @@
     <string name="toast_found">IR blaster found</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">No IR blaster</string>
-    <string name="blaster_dialog_body">In order to turn off TVs, your phone must have a built-in infrared blaster.</string>
+    <string name="blaster_dialog_body">To turn off the devices your smartphone must be equipped with a built-in infrared emitter.</string>
     <string name="learn_more">Learn more</string>
     <string name="ok">OK</string>
     <string name="blaster_dialog_more_blaster_url" translatable="false">https://en.wikipedia.org/wiki/List_of_devices_with_IR_blaster#Smartphones</string>
@@ -66,7 +66,7 @@
     <!-- Help dialogs -->
     <string name="help_universal_mode">It is a universal remote control. You can turn off any device by pointing your smartphone at it and pressing the red button. The smartphone will transmit a variety of infrared signals from various brands for this purpose.</string>
     <string name="help_repetitive_mode">This mode works just like the universal-mode, only that your phone will transmit the IR-patterns over and over again once you have pressed the button. It will also continue to transmit when you close the application or lock your phone\'s screen. To stop the repetitive-mode, just press the button a second time.</string>
-    <string name="help_individual_mode">You can turn off TVs from specific brands here.</string>
+    <string name="help_individual_mode">You can turn off specific brand devices here.</string>
     <string name="got_it">Got it</string>
 
     <!-- transmission information individual-mode -->
@@ -79,9 +79,9 @@
     <string name="show_verbose">Additional progress information</string>
     <string name="show_verbose_summary">Show additional information (such as the pattern currently being transmitted) in the progress dialog when transmitting all patterns.</string>
     <string name="depth">Additional patterns</string>
-    <string name="depth_summary">This option will increase the probability that a TV is turned off, but it also lengthens the duration of the transmission.</string>
+    <string name="depth_summary">This option increases the probability that a device is turned off, but also the duration of the transmission.</string>
     <string name="delay">Delay between patterns (in milliseconds)</string>
-    <string name="delay_summary">Some TVs misinterpret commands when multiple signals are sent directly one after another. You can adjust the delay between the individual patterns here to avoid misinterpretation.</string>
+    <string name="delay_summary">Some receivers misinterpret commands when multiple signals are sent one after the other. You can adjust the delay between different signals here to avoid misinterpretation.</string>
     <string name="show_mute">Show mute-button (Experimental)</string>
     <string name="old_dialog">Simplified progress dialog</string>
     <string name="old_dialog_summary">Use the old circular progress dialog</string>
