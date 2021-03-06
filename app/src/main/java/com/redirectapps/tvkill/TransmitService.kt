@@ -186,8 +186,10 @@ class TransmitService : Service() {
                         // All brands
                         if (request.action == TransmitServiceAction.Off) {
                             // check if additional patterns should be transmitted
+                            // Additional pattern = all patterns in a brand
+                            // If depth = 1 and the option is not checked, only the first pattern
+                            // of each brand is transmitted.
                             var depth = 1
-
                             if (Settings.with(this).additionalPatterns.value!!) {
                                 depth = BrandContainer.allBrands.map { it.patterns.size }.max()!!
                             }
