@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2018 Jonas Lochmann
- * Copyright (C) 2018 Sebastian Kappes
+ * Copyright (C) 2018,2021 Sebastian Kappes
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -248,7 +248,25 @@ class TransmitService : Service() {
                                 ?: throw IllegalStateException()
 
                         when {
-                            request.action == TransmitServiceAction.Off -> brand.kill(this)
+                            request.action == TransmitServiceAction.Off -> {
+                                // This case is more complex since we want to show a progress dialog
+                                var transmittedPatterns = 0
+                                for (i in 0 until brand.patterns.size) {
+                                    if (cancel.isCanceled) {
+                                        break
+                                    }
+                                    if (!request.forever) {
+                                        status.postValue(TransmitServiceStatus(
+                                                request,
+                                                TransmitServiceProgress(brand.designation, transmittedPatterns++, brand.patterns.size)
+                                        ))
+                                    }
+
+                                    brand.patterns[i].send(this)
+                                    Brand.wait(this)
+                                }
+                            }
+
                             request.action == TransmitServiceAction.Mute -> brand.mute(this)
                             else -> throw IllegalStateException()
                         }

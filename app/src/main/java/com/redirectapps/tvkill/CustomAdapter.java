@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Sebastian Kappes
+ * Copyright (C) 2015,2021 Sebastian Kappes
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,13 +61,29 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
             } else {
                 //Show a progress dialog and transmit the brands patterns
                 final Context c = getContext();
-                final ProgressDialog transmittingInfo = MainActivity.getProgressDialog(c, true);
-                Thread transmit = new Thread() {
-                    public void run() {
-                        brandItem.kill(c);
-                        transmittingInfo.dismiss();
-                    }
-                };
+                boolean singlePattern = brandItem.getPatterns().length == 1; /* will we send multiple patterns? */
+                MainActivity.progressDialog = MainActivity.getProgressDialog(c, singlePattern);
+                Thread transmit;
+                if (singlePattern) { /* single pattern -> show a simple progress dialog and transmit pattern normally */
+                    transmit = new Thread() {
+                        public void run() {
+                            brandItem.kill(c);
+                            MainActivity.progressDialog.dismiss();
+                        }
+                    };
+                } else { /* multiple patterns -> show a detailed progress dialog and use the TransmitService */
+                    MainActivity.progressDialog.show();
+                    transmit = new Thread() {
+                        public void run() {
+                            TransmitService.Companion.executeRequest(
+                                    new TransmitServiceSendRequest(
+                                            TransmitServiceAction.Off,
+                                            false,
+                                            brandItem.getDesignation()
+                                    ), c);
+                        }
+                    };
+                }
                 transmit.start();
             }
         });
