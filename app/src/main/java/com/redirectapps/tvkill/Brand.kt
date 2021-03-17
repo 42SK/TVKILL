@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Sebastian Kappes
+ * Copyright (C) 2015,2021 Sebastian Kappes
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,11 @@ package com.redirectapps.tvkill
 import android.content.Context
 import android.preference.PreferenceManager
 
-class Brand(val designation: String, val patterns: Array<Pattern>, val mute: Pattern) {
+class Brand(val designation: String,
+            val patterns: Array<Pattern>,
+            val mute: Pattern,
+            val sendByDefault: Boolean = true) {
+
     // this method transmits all of the brands off-patterns
     fun kill(c: Context) {
         for (r in patterns) {

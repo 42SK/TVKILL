@@ -260,6 +260,7 @@
   {
     "designation": "TV-B-Gone (NA)",
     "comment": "See https://github.com/glaukon-ariston/TV-B-Gone-Codes, https://github.com/shirriff/Arduino-TV-B-Gone",
+    "sendByDefault": false,
     "patterns": [
       {
         "frequency": 38400,
@@ -941,6 +942,7 @@
   {
     "designation": "TV-B-Gone (EU)",
     "comment": "See https://github.com/glaukon-ariston/TV-B-Gone-Codes, https://github.com/shirriff/Arduino-TV-B-Gone",
+    "sendByDefault": false,
     "patterns": [
       {
         "frequency": 35714,

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015-2018 Sebastian Kappes
+ * Copyright (C) 2015-2018,2021 Sebastian Kappes
  * Copyright (C) 2018 Jonas Lochmann
  * Copyright (C) 2021 Ysard
  *
@@ -113,9 +113,18 @@ object BrandContainer {
                     mutePattern = Pattern(0, IntArray(0))
                 }
 
+                // Shall we transmit the brand's pattern by default?
+                val sendByDefault: Boolean;
+                if (jsonBrand.has("sendByDefault")) {
+                    sendByDefault = jsonBrand.getBoolean("sendByDefault")
+                } else {
+                    // the sendByDefault field is optional, default is true
+                    sendByDefault = true
+                }
+
                 // Finally, create Brand object
                 val designation = jsonBrand.getString("designation")
-                brands.add(Brand(designation, offPatterns.toTypedArray(), mutePattern))
+                brands.add(Brand(designation, offPatterns.toTypedArray(), mutePattern, sendByDefault))
             } catch (e: JSONException) {
                 e.printStackTrace()
                 Log.e("TVKILL", "Badly formatted pattern at index" + i.toString())

@@ -187,13 +187,19 @@ class TransmitService : Service() {
                         if (request.action == TransmitServiceAction.Off) {
                             // check if additional patterns should be transmitted
                             var depth = 1
-
-                            if (Settings.with(this).additionalPatterns.value!!) {
+                            val additionalPatterns = Settings.with(this).additionalPatterns.value!!
+                            if (additionalPatterns) {
                                 depth = BrandContainer.allBrands.map { it.patterns.size }.max()!!
                             }
 
                             val numOfPatterns = BrandContainer.allBrands.sumBy {
-                                Math.min(it.patterns.size, depth)
+                                if (additionalPatterns || it.sendByDefault) {
+                                    Math.min(it.patterns.size, depth)
+                                } else {
+                                    /* additional patterns are disabled & the brand is not sent by default
+                                    -> we won't be transmitting any Patterns for this brand */
+                                    0
+                                }
                             }
                             var transmittedPatterns = 0
 
@@ -205,6 +211,11 @@ class TransmitService : Service() {
                                 for (brand in BrandContainer.allBrands) {
                                     if (cancel.isCanceled) {
                                         break
+                                    }
+
+                                    // only transmit the default brands, unless additional patterns are enabled
+                                    if (!additionalPatterns && !brand.sendByDefault) {
+                                        continue
                                     }
 
                                     if (i < brand.patterns.size) {
