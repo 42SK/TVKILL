@@ -1555,7 +1555,7 @@
     ]
   },
   {
-    "designation": "Epson",
+    "designation": "Epson (Projector)",
     "patterns": [
       {
         "comment": "epson T=26.315789us",
