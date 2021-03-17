@@ -258,7 +258,7 @@
     }
   },
   {
-    "designation": "tvBgoneNA",
+    "designation": "TV-B-Gone (NA)",
     "comment": "See https://github.com/glaukon-ariston/TV-B-Gone-Codes, https://github.com/shirriff/Arduino-TV-B-Gone",
     "patterns": [
       {
@@ -939,7 +939,7 @@
     ]
   },
   {
-    "designation": "tvBgoneEU",
+    "designation": "TV-B-Gone (EU)",
     "comment": "See https://github.com/glaukon-ariston/TV-B-Gone-Codes, https://github.com/shirriff/Arduino-TV-B-Gone",
     "patterns": [
       {
