@@ -96,7 +96,7 @@ class TransmitService : Service() {
         super.onCreate()
 
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TransmitService")
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TVKILL:TransmitService")
 
         val cancelIntent = buildIntent(TransmitServiceCancelRequest, this)
         val pendingCancelIntent = PendingIntent.getService(this, PendingIntents.NOTIFICATION_CANCEL, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -183,12 +183,13 @@ class TransmitService : Service() {
             executor.submit {
                 fun execute() {
                     if (request.brandName == null) {
+                        // All brands
                         if (request.action == TransmitServiceAction.Off) {
-                            verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
-
                             // check if additional patterns should be transmitted
+                            // Additional pattern = all patterns in a brand
+                            // If depth = 1 and the option is not checked, only the first pattern
+                            // of each brand is transmitted.
                             var depth = 1
-
                             if (Settings.with(this).additionalPatterns.value!!) {
                                 depth = BrandContainer.allBrands.map { it.patterns.size }.max()!!
                             }
@@ -198,7 +199,10 @@ class TransmitService : Service() {
                             }
                             var transmittedPatterns = 0
 
-                            // transmit all patterns
+                            // transmit all patterns according to their priority
+                            // - First pattern in each brand first,
+                            // - Second pattern in each brand after,
+                            // - etc.
                             for (i in 0 until depth) {
                                 for (brand in BrandContainer.allBrands) {
                                     if (cancel.isCanceled) {
@@ -209,7 +213,7 @@ class TransmitService : Service() {
                                         if (!request.forever) {
                                             status.postValue(TransmitServiceStatus(
                                                     request,
-                                                    TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                                    TransmitServiceProgress(brand.designation, transmittedPatterns++, numOfPatterns)
                                             ))
                                         }
 
@@ -230,16 +234,18 @@ class TransmitService : Service() {
                                 if (!request.forever) {
                                     status.postValue(TransmitServiceStatus(
                                             request,
-                                            TransmitServiceProgress(transmittedPatterns++, numOfPatterns)
+                                            TransmitServiceProgress(brand.designation, transmittedPatterns++, numOfPatterns)
                                     ))
                                 }
 
                                 brand.mute(this)
+                                Brand.wait(this)
                             }
                         } else {
                             throw IllegalStateException()
                         }
                     } else {
+                        // One brand only
                         val brand = BrandContainer.brandByDesignation[request.brandName]
                                 ?: throw IllegalStateException()
 
@@ -252,7 +258,10 @@ class TransmitService : Service() {
                 }
 
                 try {
-                    status.postValue(TransmitServiceStatus(request, null))  // inform about this request
+                    // Status on ProgressDialog
+                    verboseInformation = getDefaultSharedPreferences(this).getBoolean("show_verbose", false)
+                    // inform about this request
+                    status.postValue(TransmitServiceStatus(request, null))
 
                     if (request.forever) {
                         while (!cancel.isCanceled) {
@@ -292,7 +301,7 @@ class TransmitService : Service() {
             return
         }
 
-        val request = status.value
+        val serviceStatus = status.value
         val appRunning = isAppInForeground.value
 
         if (appRunning!!) {
@@ -301,28 +310,23 @@ class TransmitService : Service() {
                 isNotificationVisible = false
             }
         } else {
-            if (request == null)
+            if (serviceStatus == null)
                 return
-            if (request.request.forever) {
+            if (serviceStatus.request.forever) {
                 notificationBuilder.setContentTitle(getString(R.string.mode_running))
                 notificationBuilder.setProgress(100, 0, true)
             } else {
                 notificationBuilder.setContentTitle(getString(R.string.toast_transmission_initiated))
 
-                if (request.progress != null) {
-                    notificationBuilder.setProgress(request.progress.max, request.progress.current, false)
+                if (serviceStatus.progress != null) {
+                    notificationBuilder.setProgress(serviceStatus.progress.max, serviceStatus.progress.current, false)
 
                     //Also update the progress dialog (if present)
                     if (MainActivity.progressDialog != null) {
-                        MainActivity.progressDialog.max = request.progress.max
-                        MainActivity.progressDialog.progress = request.progress.current + 1
+                        MainActivity.progressDialog.max = serviceStatus.progress.max
+                        MainActivity.progressDialog.progress = serviceStatus.progress.current + 1
                         if (verboseInformation)
-                            try {
-                                MainActivity.progressDialog.setProgressNumberFormat(BrandContainer.allBrands[request.progress.current].designation.capitalize() + " (%1d/%2d)")
-                            } catch (e: ArrayIndexOutOfBoundsException) {
-                                //There is no obvious reason why this exception should occur, but, according to crash reports from Google Play, it does happen.
-                                e.printStackTrace()
-                            }
+                            MainActivity.progressDialog.setProgressNumberFormat(serviceStatus.progress.brandName.capitalize() + " (%1d/%2d)")
                     }
                 }
             }
@@ -345,6 +349,12 @@ enum class TransmitServiceAction {
     Off, Mute
 }
 
-data class TransmitServiceProgress(val current: Int, val max: Int)
+/*
+ * Pogress object emitted during iteration on the patterns of all brands
+ * - brandName: Name of the current processed brand (designation)
+ * - current: Number of processed patterns until now
+ * - max: Number of all patterns
+ */
+data class TransmitServiceProgress(val brandName: String, val current: Int, val max: Int)
 
 class TransmitServiceStatus(val request: TransmitServiceSendRequest, val progress: TransmitServiceProgress?)

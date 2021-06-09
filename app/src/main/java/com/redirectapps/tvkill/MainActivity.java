@@ -22,9 +22,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -44,10 +46,12 @@ public class MainActivity extends Activity {
 
     public static int repetitiveModeBrand;
     public static ProgressDialog progressDialog;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         //Initialize the TabLayout
@@ -105,7 +109,7 @@ public class MainActivity extends Activity {
     }
 
 
-    //This method initiates the transmission and displays a progress Dialog
+    //This method initiates the transmission and displays a progress Dialog (Off/Mute modes; universal remote mode)
     public static void kill(Context c, final char button) {
         if (isRepetitiveModeRunning()) {
             //Show the repetitiveModeActiveDialog
@@ -117,7 +121,6 @@ public class MainActivity extends Activity {
             try {
                 //Show a progress dialog and transmit all patterns
                 progressDialog = getProgressDialog(c, false);
-                progressDialog.show();
                 transmit = new Thread() {
                     public void run() {
                         switch (button) {
@@ -190,8 +193,10 @@ public class MainActivity extends Activity {
     //This method returns a ProgressDialog
     public static ProgressDialog getProgressDialog(final Context c, boolean singlePattern) {
         if (singlePattern)
+            // 1 brand or 1 pattern: not cancelable
             return ProgressDialog.show(c, c.getString(R.string.pd_transmission_in_progress), c.getString(R.string.pd_please_wait), true, false);
 
+        // Multiple brands: ability to stop transmission
         ProgressDialog pd = new ProgressDialog(c);
         pd.setProgressStyle(getDefaultSharedPreferences(c).getBoolean("old_dialog", false)
                 ? ProgressDialog.STYLE_SPINNER : ProgressDialog.STYLE_HORIZONTAL);
@@ -200,6 +205,7 @@ public class MainActivity extends Activity {
         pd.setMessage(c.getString(R.string.pd_please_wait));
         pd.setCancelable(true);
         pd.setOnCancelListener(dialogInterface -> TransmitService.Companion.executeRequest(TransmitServiceCancelRequest.INSTANCE, c));
+        pd.show();
         return pd;
     }
 
@@ -209,7 +215,7 @@ public class MainActivity extends Activity {
         return status != null && status.getRequest().getForever();
     }
 
-    //This method is called when the repetitive-button is clicked.
+    //This method is called when the repetitive-button is clicked (Off mode only).
     // It either starts or stops the RepetitiveModeService depending on if it is running or not.
     public void repetitiveMode(View v) {
         if (isRepetitiveModeRunning()) {
@@ -304,7 +310,6 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-
     //This method displays a fragment
     void displayFragment(Fragment fragment, String tag) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -319,5 +324,20 @@ public class MainActivity extends Activity {
         stopRepetitiveMode(this);
 
         super.onDestroy();
+    }
+
+    public static Context getContext() {
+        return MainActivity.context;
+    }
+
+    // Restart the app, its activities and the BrandContainer singleton
+    public static void restart(){
+        Context context = MainActivity.getContext();
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+        ComponentName componentName = intent.getComponent();
+        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+        context.startActivity(mainIntent);
+        Runtime.getRuntime().exit(0);
     }
 }

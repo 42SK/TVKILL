@@ -36,7 +36,7 @@
     <string name="toast_found">IR vysílač nalezen</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">Žádný IR vysílač</string>
-    <string name="blaster_dialog_body">Abyste mohli vypnout TV, váš telefon musí mít integrovaný infračervený vysílač.</string>
+    <string name="blaster_dialog_body">Chcete-li zařízení vypnout, musí být váš smartphone vybaven vestavěným infračerveným zářičem.</string>
     <string name="learn_more">Dozvědět se více</string>
     <string name="ok">OK</string>
 
@@ -62,14 +62,12 @@
     <string name="stop">STOP</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">Toto je univerzální mód. Namiřte svůj telefon na televizi a stiskněte červené tlačítko. Jakmile stisknete tlačítko, Váš telefon vyšle několik infra-červených signálů pro různé značky, které televizi vypnou</string>
+    <string name="help_universal_mode">Toto je univerzální dálkové ovládání. Libovolné zařízení můžete vypnout nasměrováním smartphonu na něj a stisknutím červeného tlačítka. Za tímto účelem bude smartphone přenášet různé infračervené signály od různých značek.</string>
     <string name="help_repetitive_mode">Tento mód funguje stejně jako univerzální mód, jen váš telefon bude přenášet IR signály pořád dokola jakmile stisknete tlačítko. Bude pokračovat v přenosu když zavřete aplikaci nebo zamknete  obrazovku telefonu. Pro zastavení přenosu, stiskněte tlačítko po druhé.</string>
-    <string name="help_individual_mode">Zde můžete vypnout televize jednotlivých značek.</string>
+    <string name="help_individual_mode">Zde můžete vypnout zařízení konkrétní značky.</string>
     <string name="got_it">Mám to</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Signál pro</string>
-    <string name="sent">posláno</string>
 
     <!-- Preference Strings -->
     <string name="category_appearance">Vzhled</string>
@@ -77,11 +75,15 @@
     <string name="show_verbose">Přídavné informace o postupu</string>
     <string name="show_verbose_summary">Zobrazit přídavné informace (například vzorec, který se právě přenáší) v dialogu postupu když se přenáší všechny vzorce.</string>
     <string name="depth">Přídavné vzorce signálů</string>
-    <string name="depth_summary">Tato možnost zvýší pravděpodobnost, že TV bude vypnuta, ale také prodlouží dobu přenosu.</string>
+    <string name="depth_summary">Zvyšuje pravděpodobnost, že je zařízení vypnuto, ale také dobu trvání přenosu. Pokud je zakázáno: vydává pouze první známý signál pro každou značku.</string>
     <string name="delay">Pauza mezi signály (v milisekundách)</string>
-    <string name="delay_summary">Některé televize špatně pochopí signály když se jich pošle více hned za sebou. Můžete změnit pauzu mezi individuálními signály abyste se vyhnuli špatnému pochopení.</string>
+    <string name="delay_summary">Některé přijímače nesprávně interpretují příkazy, když je vysíláno více signálů jeden po druhém. Zde můžete nastavit zpoždění mezi různými signály, aby nedošlo k nesprávné interpretaci.</string>
     <string name="show_mute">Zobrazit tlačítko ztlumení (Experimentální)</string>
     <string name="old_dialog">Zjednodušený dialog postupu</string>
     <string name="old_dialog_summary">Používat starý kruhový dialog postupu</string>
+    <string name="category_pattern_db">Databáze vzorů</string>
+    <string name="pattern_db_file_title">Otevřete soubor ve formátu JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Použijte vlastní databázi</string>
+    <string name="custom_pattern_db_checkbox_summary">Načtení takového souboru vám umožní použít vaše vlastní signály. Pamatujte, že tato možnost vyžaduje restart aplikace.</string>
 
 </resources>

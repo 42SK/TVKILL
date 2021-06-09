@@ -25,6 +25,7 @@ import android.text.TextUtils
 import java.util.*
 import kotlin.collections.HashSet
 
+// Singleton used to bind show_mute, depth, and widget_ids preferences
 class Settings private constructor(context: Context) {
     companion object {
         private var settings: Settings? = null

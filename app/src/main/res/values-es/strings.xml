@@ -12,7 +12,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TV KILL</string>
 
     <!-- Menu -->
@@ -32,7 +32,7 @@
     <string name="toast_found">IR blaster Encontrado</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">No IR blaster</string>
-    <string name="blaster_dialog_body">Para poder apagar las TV\'S, Tú teléfono debe tener un receptor de infrarrojos incorporado.</string>
+    <string name="blaster_dialog_body">Para apagar los dispositivos, su teléfono inteligente debe estar equipado con un emisor de infrarrojos incorporado.</string>
     <string name="learn_more">Más Información</string>
     <string name="ok">OK</string>
 
@@ -58,20 +58,28 @@
     <string name="stop">PARAR</string>
 
     <!-- Help dialogs -->
-    <string name="help_universal_mode">Este es el modo universal. Tu puedes apagar cualquier televisor apuntando tu celular a la TV y presionando el boton rojo. cuando el boton es oprimido, tu celular enviara una variedad de patrones-IR de diferentes marcas al televisor, eso hara que el televisor se apague.</string>
+    <string name="help_universal_mode">Se trata de un mando a distancia universal. Puedes apagar cualquier dispositivo apuntando el smartphone hacia él y pulsando el botón rojo. Para ello, el smartphone transmitirá una serie de señales infrarrojas de varias marcas.</string>
     <string name="help_repetitive_mode">Este modo funciona igual que el modo universal, solamente que el teléfono transmitirá el patron-IR una y otra vez, hasta que presiones el boton. Esto tambien continuara transmitiendo cuando tu cierres la aplicacion o bloquees el telefono. Para parar el modo repetitivo, solo aprieta el boton denuevo.</string>
-    <string name="help_individual_mode">Puedes apagar los televisores de marcas específicas aquí.</string>
+    <string name="help_individual_mode">Puede apagar dispositivos de marcas específicas aquí.</string>
     <string name="got_it">Lo tengo</string>
 
     <!-- transmission information individual-mode -->
-    <string name="pattern_for">Señal para</string>
-    <string name="sent">Enviado</string>
 
     <!-- Preference Strings -->
     <string name="depth">Patrones adicionales</string>
-    <string name="depth_summary">Esta opcion incrementara la probabilidad que el televisor se apague, pero aumentara la duracion de la transmision</string>
+    <string name="depth_summary">Aumenta la probabilidad de que un dispositivo se apague, pero también la duración de la transmisión. Si está desactivado: solo emite la primera señal conocida para cada marca.</string>
     <string name="delay">Retraso entre patrones (en milisegundos)</string>
-    <string name="delay_summary">Algunos televisores malinterpretan comandos cuando múltiples señales se envían directamente uno tras otro. Se puede ajustar el retardo entre los patrones individuales para evitar malas interpretaciones.</string>
+    <string name="delay_summary">Algunos receptores malinterpretan los comandos cuando se envían múltiples señales una tras otra. Puede ajustar el retardo entre diferentes señales aquí para evitar malas interpretaciones.</string>
     <string name="show_mute">Mostrar el boton de silenciar (Experimental)</string>
+    <string name="pattern_db_file_title">Abrir un archivo de señales en JSON</string>
+    <string name="custom_pattern_db_checkbox_title">Utilizar una base de datos personalizada</string>
+    <string name="category_pattern_db">Base de datos de señales</string>
+    <string name="category_appearance">Apariencia</string>
+    <string name="category_transmission">Transmisión de señales</string>
+    <string name="show_verbose">Información adicional sobre la transmisión</string>
+    <string name="show_verbose_summary">Mostrar información adicional (como la señal transmitida actualmente) en la ventana emergente de progreso cuando se transmiten señales.</string>
+    <string name="old_dialog">Pop-up de progresión simplificado</string>
+    <string name="old_dialog_summary">Utilizando la antigua progresión circular emergente</string>
+    <string name="custom_pattern_db_checkbox_summary">La carga de un archivo de este tipo le permitirá utilizar sus propias señales. Tenga en cuenta que esta opción requiere un reinicio de la aplicación.</string>
 
 </resources>
