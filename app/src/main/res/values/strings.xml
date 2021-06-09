@@ -87,5 +87,6 @@
     <string name="pattern_db_file_title">Open a JSON pattern file</string>
     <string name="custom_pattern_db_checkbox_title">Use custom database</string>
     <string name="custom_pattern_db_checkbox_summary">Loading such a file will allow you to use your own signals. Please note that this option requires a restart of the application.</string>
+    <string name="json_not_valid">The chosen file doesn\'t contain JSON data</string>
 
 </resources>
