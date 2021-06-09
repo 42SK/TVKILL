@@ -22,10 +22,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.provider.DocumentsContract;
 import android.provider.OpenableColumns;
+import android.support.v4.provider.DocumentFile;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -56,10 +59,11 @@ public class Preferences extends PreferenceActivity {
         Preference customDbCheckbox = this.findPreference("custom_pattern_db_checkbox");
 
         // Display the user's current db file & set filePicker access
+        Uri documentUri = null;
         if (sharedPreferences.contains(LAST_OPENED_URI_KEY)) {
             try {
                 // Convert Uri to filename
-                Uri documentUri = Uri.parse(sharedPreferences.getString(LAST_OPENED_URI_KEY, null));
+                documentUri = Uri.parse(sharedPreferences.getString(LAST_OPENED_URI_KEY, null));
                 filePicker.setSummary(getFileName(documentUri));
             } catch (NullPointerException e) {
                 e.printStackTrace();
@@ -70,6 +74,7 @@ public class Preferences extends PreferenceActivity {
         filePicker.setEnabled(sharedPreferences.getBoolean("custom_pattern_db_checkbox", false));
 
         // Ability to open a filepicker to choose a database file
+        Uri finalDocumentUri = documentUri;
         filePicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -94,6 +99,13 @@ public class Preferences extends PreferenceActivity {
                  * i.e. file that contains bytes of data.
                  */
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+                if (Build.VERSION.SDK_INT > 25) {
+                    // Set the desired initial location visible to user
+                    // Could be useful on some platforms ?
+                    DocumentFile file = DocumentFile.fromTreeUri(getApplicationContext(), finalDocumentUri);
+                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, file.getUri());
+                }
 
                 startActivityForResult(intent, OPEN_DOCUMENT_REQUEST_CODE);
                 return true;
