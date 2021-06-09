@@ -68,6 +68,8 @@ object BrandContainer {
                 try {
                     val documentUri = Uri.parse(sharedPreferences.getString(LAST_OPENED_URI_KEY, null))
                     stream = MainActivity.getContext().contentResolver.openInputStream(documentUri)
+                    if (stream == null)
+                        throw FileNotFoundException()
                 } catch (e: Exception) {
                     e.printStackTrace();
                     when (e) {
