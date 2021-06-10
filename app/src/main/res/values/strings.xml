@@ -34,6 +34,10 @@
 
     <!-- Blaster Found toast -->
     <string name="toast_found">IR blaster found</string>
+    <!-- USB blaster toasts -->
+    <string name="toast_USB_found">USB IR blaster found</string>
+    <string name="toast_USB_detached">USB IR blaster detached</string>
+    <string name="toast_USB_error">Error during setup of USB IR blaster</string>
     <!-- Not found dialog -->
     <string name="blaster_dialog_title">No IR blaster</string>
     <string name="blaster_dialog_body">To turn off the devices your smartphone must be equipped with a built-in infrared emitter.</string>

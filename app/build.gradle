@@ -12,6 +12,19 @@ android {
         targetSdkVersion 27
         versionCode 24
         versionName "1.5.0"
+
+        externalNativeBuild {
+            ndkBuild {
+                targets "native_wrapper"
+                cppFlags "-std=c++11"
+            }
+        }
+
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -29,6 +42,11 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
+    }
 }
 
 dependencies {
@@ -38,6 +56,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'net.java.dev.jna:jna:5.8.0@aar'
 }
 repositories {
     mavenCentral()

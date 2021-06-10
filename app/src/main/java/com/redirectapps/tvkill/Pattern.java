@@ -18,37 +18,37 @@ package com.redirectapps.tvkill;
 
 import android.content.Context;
 import android.os.Build;
-
 import java.util.Arrays;
 
 
 public class Pattern {
 
-    private int[] pattern;
-    private final int frequency;
+    public int[] pulsePattern;
+    public int[] pattern;
+    public final int frequency;
     private boolean converted = false;
 
     //This method converts the remotes pattern, if this has not been done yet, and passes the converted pattern to the initiate-method.
     public void send(Context c) {
 
         if (!converted) {
-            pattern = convert(pattern, frequency);
+            pattern = convert(pulsePattern, frequency);
             converted = true;
         }
-        initiate(c);
 
+        initiate(c);
     }
 
     //This method initiates the remote's transmission.
     private void initiate(Context c) {
-        Transmitter remote = new Transmitter(frequency, pattern);
+        Transmitter remote = new Transmitter(this);
         remote.transmit(c);
     }
 
 
     protected Pattern(int frequency, int[] pattern) {
         this.frequency = frequency;
-        this.pattern = pattern;
+        this.pulsePattern = pattern;
     }
 
     public int getFrequency() {
@@ -56,7 +56,7 @@ public class Pattern {
     }
 
     public int getPatternLength() {
-        return this.pattern.length;
+        return this.pulsePattern.length;
     }
 
 

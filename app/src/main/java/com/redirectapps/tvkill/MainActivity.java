@@ -21,23 +21,33 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.ConsumerIrManager;
+import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbDeviceConnection;
+import android.hardware.usb.UsbInterface;
+import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.HashMap;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -47,6 +57,73 @@ public class MainActivity extends Activity {
     public static int repetitiveModeBrand;
     public static ProgressDialog progressDialog;
     private static Context context;
+
+    private UsbManager usbManager;
+    private UsbDevice usbIRDevice;
+    private static UsbDeviceConnection usbDeviceConnection;
+    private static final String ACTION_USB_PERMISSION = "com.redirectapps.tvkill.USB_PERMISSION";
+
+    // Load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("native_wrapper");
+    }
+
+    private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
+
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (ACTION_USB_PERMISSION.equals(action)) {
+                synchronized (this) {
+                    UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        if (device != null) {
+                            // Set up device for communication
+                            setupUsbDevice(device);
+                            Toast.makeText(getApplicationContext(), R.string.toast_USB_found, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("USB BroadcastReceiver", "Permission denied");
+                    }
+                }
+            } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+                UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                if (device != null) {
+                    // Set up device for communication
+                    setupUsbDevice(device);
+                    Log.d("USB BroadcastReceiver", "Device attached");
+                    Toast.makeText(getApplicationContext(), R.string.toast_USB_found, Toast.LENGTH_SHORT).show();
+                }
+            } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+                UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                if (device != null && device.equals(usbIRDevice)) {
+                    // Clean up and close communication with the device
+                    // Native side
+                    int ret = nativeWrapper.INSTANCE.close_tiqiaa_wrapper(Transmitter.tiqiaaUsbIr);
+                    // Don't forget to reset the pointer
+                    Transmitter.tiqiaaUsbIr = null;
+                    nativeLog("closed - " + ret);
+
+                    // Java side
+                    UsbInterface intf = usbIRDevice.getInterface(0);
+                    usbDeviceConnection.releaseInterface(intf);
+                    usbDeviceConnection.close();
+                    usbIRDevice = null;
+                    Log.d("USB BroadcastReceiver", "Device closed");
+                    Toast.makeText(getApplicationContext(), R.string.toast_USB_detached, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
+
+    // Called when USB device is connected when an instance of the activity already exists
+    // In other case, the classic enumeration of USB devices is made in onCreate via findUsbDevice()
+    // Relay the  ACTION_USB_DEVICE_ATTACHED action to BroadcastReceiver.
+    @Override
+    protected void onNewIntent(Intent intent) {
+        String action = intent.getAction();
+        usbReceiver.onReceive(getContext(), intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +162,18 @@ public class MainActivity extends Activity {
         //Display the Startup-Fragment
         displayFragment(new UniversalmodeFragment(), "1");
 
-        //Check for the IR-emitter
+        //Init & search connected USB IR device
+        this.usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        boolean foundDevice = findUsbDevice();
+
+        //Check for the built-in IR-emitter
         ConsumerIrManager IR = (ConsumerIrManager) getSystemService(CONSUMER_IR_SERVICE);
         if (IR.hasIrEmitter()) {
             //Inform the user about the presence of his IR-emitter
             Toast.makeText(getApplicationContext(), R.string.toast_found, Toast.LENGTH_SHORT).show();
-        } else {
+            //Inject service in the class attr of Transmitter (in charge of transmission)
+            Transmitter.irManager = IR;
+        } else if (!foundDevice) {
             //Display a Dialog that tells the user to buy a different phone
             AlertDialog alertDialog;
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -108,6 +191,60 @@ public class MainActivity extends Activity {
         }
     }
 
+    // Logging function for USB native interface
+    public void nativeLog(String msg) {
+        Log.i("Libusb", msg);
+    }
+
+    public boolean findUsbDevice() {
+        // Explicitly asking for permission for devices that are already connected
+        // and register attached/detached events for later processing in BroadcastReceiver
+
+        // List devices and find Tiqiaa
+        boolean foundDevice = false;
+        HashMap<String, UsbDevice> deviceList = usbManager.getDeviceList();
+        Log.d("findUsbDevice", "USB devices count = " + deviceList.size());
+        for (UsbDevice usbDevice : deviceList.values()) {
+            // Filter not wanted VID & PID
+            int vendorId = usbDevice.getVendorId();
+            if ((vendorId != 4292 && vendorId != 1118) || usbDevice.getProductId() != 33896)
+                continue;
+            foundDevice = true;
+
+            // Register the broadcast receiver,
+            PendingIntent permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+            IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+            registerReceiver(usbReceiver, filter);
+            // Ask permission
+            usbManager.requestPermission(usbDevice, permissionIntent);
+            // Stop enumeration : we want only 1 device
+            break;
+        }
+        // Also register all detached events
+        IntentFilter filter = new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        registerReceiver(usbReceiver, filter);
+
+        return foundDevice;
+    }
+
+    public void setupUsbDevice(UsbDevice device) {
+
+        if (!usbManager.hasPermission(device))
+            return;
+
+        UsbInterface intf = device.getInterface(0);
+        usbDeviceConnection = usbManager.openDevice(device);
+        // Claims exclusive access
+        usbDeviceConnection.claimInterface(intf, true);
+        // Store device for detached event processing in BroadcastReceiver
+        usbIRDevice = device;
+
+        // Init wrapper and inject it in the class attr of Transmitter (in charge of transmission)
+        Transmitter.tiqiaaUsbIr = nativeWrapper.INSTANCE.init_tiqiaa_wrapper(usbDeviceConnection.getFileDescriptor());
+        if (Transmitter.tiqiaaUsbIr == null) {
+            Toast.makeText(getApplicationContext(), R.string.toast_USB_error, Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //This method initiates the transmission and displays a progress Dialog (Off/Mute modes; universal remote mode)
     public static void kill(Context c, final char button) {

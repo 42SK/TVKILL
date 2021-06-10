@@ -19,20 +19,25 @@ package com.redirectapps.tvkill;
 import android.content.Context;
 import android.hardware.ConsumerIrManager;
 
+import com.sun.jna.Pointer;
+
 
 public class Transmitter {
 
-    int frequency;
-    int[] pattern;
+    private final Pattern pattern;
+    public static Pointer tiqiaaUsbIr;
+    public static ConsumerIrManager irManager;
 
-    Transmitter(int frequency, int[] pattern) {
-        this.frequency = frequency;
+    Transmitter(Pattern pattern) {
         this.pattern = pattern;
     }
 
     public void transmit(Context context) {
-        ConsumerIrManager IR = (ConsumerIrManager) context.getSystemService(Context.CONSUMER_IR_SERVICE);
 
-        IR.transmit(frequency, pattern);
+        if (tiqiaaUsbIr != null) {
+            nativeWrapper.INSTANCE.transmit(tiqiaaUsbIr, pattern.frequency, pattern.pulsePattern, pattern.pulsePattern.length);
+        } else {
+            irManager.transmit(pattern.frequency, pattern.pattern);
+        }
     }
 }
