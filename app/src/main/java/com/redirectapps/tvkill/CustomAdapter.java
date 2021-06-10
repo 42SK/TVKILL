@@ -51,7 +51,7 @@ public class CustomAdapter extends ArrayAdapter<Brand> {
         Button individualOFF = listItem.findViewById(R.id.individualOff);
         Button individualMUTE = listItem.findViewById(R.id.individualMute);
 
-        //Set the brad's name
+        //Set the brand's name
         BrandName.setText(brandItem.getDesignation());
         //Set the action of the off-button
         individualOFF.setOnClickListener(v -> {
