@@ -92,33 +92,34 @@ public class Pattern {
             }
         }
 
-        // 2. Avoid "Non-positive IR slice" error by removing 0 values
         int[] tempIrData = new int[irData.length];
         int j = 0;
         for (int value : irData) {
-            if (value > 0) {
-                tempIrData[j] = value;
-                j++;
+
+            // 2. Avoid "Non-positive IR slice" error by removing 0 values
+            if (value <= 0)
+                continue;
+
+            // 3. Convert the patterns
+            switch (convert) {
+                case 1:
+                    value = value * (1000000 / frequency); // Risk of dividing by zero if frequency is 0
+                    break;
+                case 2:
+                    value = (int) Math.ceil(value * 26.27272727272727);
+                    //converted as suggested by Samsung: http://developer.samsung.com/android/technical-docs/Workaround-to-solve-issues-with-the-ConsumerIrManager-in-Android-version-lower-than-4-4-3-KitKat
+                    break;
+                default:
+                    break;
             }
-        }
-        if (j != irData.length) {
-            irData = Arrays.copyOf(tempIrData, j);
+
+            tempIrData[j] = value;
+            j++;
         }
 
-        // 3. Convert the patterns
-        if (convert != 0) {
-            for (int i = 0; i < irData.length; i++) {
-                switch (convert) {
-                    case 1:
-                        irData[i] = irData[i] * (1000000 / frequency); // Risk of dividing by zero if frequency is 0
-                        break;
-                    case 2:
-                        irData[i] = (int) Math.ceil(irData[i] * 26.27272727272727);
-                        //converted as suggested by Samsung: http://developer.samsung.com/android/technical-docs/Workaround-to-solve-issues-with-the-ConsumerIrManager-in-Android-version-lower-than-4-4-3-KitKat
-                        break;
-                }
-            }
+        if (j != irData.length) {
+            return Arrays.copyOf(tempIrData, j);
         }
-        return irData;
+        return tempIrData;
     }
 }
